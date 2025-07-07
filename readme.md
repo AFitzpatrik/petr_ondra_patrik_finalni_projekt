@@ -1,0 +1,4 @@
+Struktura databáze
+
+
+
