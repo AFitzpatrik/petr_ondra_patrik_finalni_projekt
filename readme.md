@@ -46,43 +46,46 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 STRUKTURA DATABÁZE
 
-- [ ] 1.0 Event
-  - [ ] 1.1 name
-  - [ ] 1.2 type (FK -> Type)
-  - [ ] 1.3 description
-  - [ ] 1.4 start_date_time
-  - [ ] 1.5 end_date_time
-  - [ ] 1.6 event_image
-  - [ ] 1.7 owner_of_event (FK -> User)
-  - [ ] 1.8 location (FK - > Location)
+- [x] 1.0 Event
+  - [x] 1.1 name
+  - [x] 1.2 type (FK -> Type)
+  - [x] 1.3 description
+  - [x] 1.4 start_date
+  - [x] 1.5 start_time
+  - [x] 1.6 end_date
+  - [x] 1.7 end_time
+  - [x] 1.8 event_image
+  - [x] 1.9 owner_of_event (FK -> User)
+  - [x] 1.10 location (FK - > Location)
 
 
-- [ ] 2.0 Location
-  - [ ] 2.1 name
-  - [ ] 2.2 description
-  - [ ] 2.3 address
-  - [ ] 2.4 city (FK -> City)
+- [x] 2.0 Location
+  - [x] 2.1 name
+  - [x] 2.2 description
+  - [x] 2.3 address
+  - [x] 2.4 city (FK -> City)
 
 
-- [ ] 3.0 City
-  - [ ] 3.1 name
-  - [ ] 3.2 country (FK -> Country)
-  - [ ] 3.3 zip code
+- [x] 3.0 City
+  - [x] 3.1 name
+  - [x] 3.2 country (FK -> Country)
+  - [x] 3.3 zip code
 
 
-- [ ] 4.0 Country
-  - [ ] 4.1 name
+- [x] 4.0 Country
+  - [x] 4.1 name
 
 
-- [ ] 5.0 Comment
- - [ ] 5.1 user (FK -> User)
- - [ ] 5.2 event (FK -> Event)
- - [ ] 5.3 content
- - [ ] 5.4 date_time posted
+- [x] 5.0 Comment
+ - [x] 5.1 user (FK -> User)
+ - [x] 5.2 event (FK -> Event)
+ - [x] 5.3 content
+ - [x] 5.4 date posted
+ - [x] 5.5 time posted
 
 
-- [ ] 6.0 Type
-  - [ ] name
+- [x] 6.0 Type
+  - [x] name
 
 
 
