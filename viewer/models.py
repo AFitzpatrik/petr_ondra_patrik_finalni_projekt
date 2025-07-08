@@ -99,10 +99,7 @@ class Comment(models.Model):
     
     def __str__(self):
         return f"Comment by {self.user.username} on {self.event.name}"
-    
+
     def __repr__(self):
-        user_name = self.user.username if self.user else None
-        event_name = self.event.name if self.event else None
-        content_preview = self.content[:50] + "..." if len(self.content) > 50 else self.content
-        return (f"Comment(user={user_name}, event={event_name}, "
-                f"content={content_preview}, date_posted={self.date_posted})")
+        return (f"Comment(event={self.event}, user={self.user}, content={self.content},"
+                f" date_posted={self.date_posted}, time_posted={self.time_posted})")
