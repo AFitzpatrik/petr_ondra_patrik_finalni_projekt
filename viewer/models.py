@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import ForeignKey
+from django.db.models import ForeignKey, DateTimeField
 
 
 class Country(models.Model):
@@ -67,10 +67,8 @@ class Event(models.Model):
     name = models.CharField(max_length=100, unique=True, null=False, blank=False)
     type = models.ForeignKey(Type, on_delete=models.CASCADE, related_name="events")
     description = models.TextField(null=True, blank=True)
-    start_date = models.DateField(null=False, blank=False)
-    end_date = models.DateField(null=False, blank=False)
-    start_time = models.TimeField(null=False, blank=False)
-    end_time = models.TimeField(null=False, blank=False)
+    start_date_time = DateTimeField(null=False, blank=False)
+    end_date_time = DateTimeField(null=False, blank=False)
     event_image = models.ImageField(upload_to='event_images/', null=True, blank=True)
     owner_of_event = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owned_events")
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="events")
@@ -83,7 +81,7 @@ class Event(models.Model):
     
     def __repr__(self):
         return (f"Event(name={self.name}, description={self.description}, "
-                f"start_date={self.start_date}, end_date={self.end_date}, "
+                f"start_date={self.start_date_time}, end_date={self.end_date_time}, "
                 f"location={self.location}, owner_of_event={self.owner_of_event})")
 
 
@@ -91,17 +89,18 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="comments")
     content = models.TextField(null=False, blank=False)
-    date_posted = models.DateField(null=False, blank=False)
-    time_posted = models.TimeField(null=False, blank=False)
+    date_time_posted = models.DateTimeField(auto_now=True)
+    date_time_updated = models.DateTimeField(auto_now=True)
+
     
     class Meta:
-        ordering = ['date_posted', 'time_posted']
+        ordering = ['date_time_posted']
     
     def __str__(self):
         return f"Comment by {self.user.username} on {self.event.name}"
 
     def __repr__(self):
         return (f"Comment(event={self.event}, user={self.user}, content={self.content},"
-                f" date_posted={self.date_posted}, time_posted={self.time_posted})")
+                f" date_posted={self.date_time_posted}, time_updated={self.date_time_updated})")
 
 

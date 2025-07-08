@@ -66,13 +66,11 @@ STRUKTURA DATABÁZE
   - [x] 1.1 name
   - [x] 1.2 type (FK -> Type)
   - [x] 1.3 description
-  - [x] 1.4 start_date
-  - [x] 1.5 start_time
-  - [x] 1.6 end_date
-  - [x] 1.7 end_time
-  - [x] 1.8 event_image
-  - [x] 1.9 owner_of_event (FK -> User)
-  - [x] 1.10 location (FK - > Location)
+  - [x] 1.4 start_date_time
+  - [x] 1.5 end_date_time
+  - [x] 1.6 event_image
+  - [x] 1.7 owner_of_event (FK -> User)
+  - [x] 1.8 location (FK - > Location)
 
 
 - [x] 2.0 Location
@@ -96,8 +94,9 @@ STRUKTURA DATABÁZE
   - [x] 5.1 user (FK -> User)
   - [x] 5.2 event (FK -> Event)
   - [x] 5.3 content
-  - [x] 5.4 date posted
-  - [x] 5.5 time posted
+  - [x] 5.4 date/time posted
+  - [x] 5.5 date/time updated
+  - 
 
 
 - [x] 6.0 Type
