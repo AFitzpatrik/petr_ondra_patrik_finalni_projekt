@@ -77,11 +77,11 @@ STRUKTURA DATABÁZE
 
 
 - [x] 5.0 Comment
- - [x] 5.1 user (FK -> User)
- - [x] 5.2 event (FK -> Event)
- - [x] 5.3 content
- - [x] 5.4 date posted
- - [x] 5.5 time posted
+  - [x] 5.1 user (FK -> User)
+  - [x] 5.2 event (FK -> Event)
+  - [x] 5.3 content
+  - [x] 5.4 date posted
+  - [x] 5.5 time posted
 
 
 - [x] 6.0 Type
