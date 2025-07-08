@@ -103,3 +103,5 @@ class Comment(models.Model):
     def __repr__(self):
         return (f"Comment(event={self.event}, user={self.user}, content={self.content},"
                 f" date_posted={self.date_posted}, time_posted={self.time_posted})")
+
+
