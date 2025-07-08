@@ -74,7 +74,7 @@ class Event(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="events")
     
     class Meta:
-        ordering = ['start_date', 'name']
+        ordering = ['start_date_time', 'name']
     
     def __str__(self):
         return self.name
