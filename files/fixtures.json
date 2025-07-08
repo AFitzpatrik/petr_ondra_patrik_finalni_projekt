@@ -1,0 +1,406 @@
+[
+  {
+    "model": "viewer.country",
+    "pk": 1,
+    "fields": {
+      "name": "Czech Republic"
+    }
+  },
+  {
+    "model": "viewer.country",
+    "pk": 2,
+    "fields": {
+      "name": "France"
+    }
+  },
+  {
+    "model": "viewer.country",
+    "pk": 3,
+    "fields": {
+      "name": "Italy"
+    }
+  },
+  {
+    "model": "viewer.country",
+    "pk": 4,
+    "fields": {
+      "name": "Slovakia"
+    }
+  },
+  {
+    "model": "viewer.country",
+    "pk": 5,
+    "fields": {
+      "name": "Germany"
+    }
+  },
+  {
+    "model": "viewer.country",
+    "pk": 6,
+    "fields": {
+      "name": "Austria"
+    }
+  },
+  {
+    "model": "viewer.country",
+    "pk": 7,
+    "fields": {
+      "name": "Poland"
+    }
+  },
+  {
+    "model": "viewer.country",
+    "pk": 8,
+    "fields": {
+      "name": "Croatia"
+    }
+  },
+  {
+    "model": "viewer.country",
+    "pk": 9,
+    "fields": {
+      "name": "Slovenia"
+    }
+  },
+  {
+    "model": "viewer.country",
+    "pk": 10,
+    "fields": {
+      "name": "Montenegro"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 1,
+    "fields": {
+      "name": "Wienna",
+      "country": 6,
+      "zip_code": "1220"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 2,
+    "fields": {
+      "name": "Zagreb",
+      "country": 8,
+      "zip_code": "10000"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 3,
+    "fields": {
+      "name": "Paris",
+      "country": 2,
+      "zip_code": "75000"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 4,
+    "fields": {
+      "name": "Berlin",
+      "country": 5,
+      "zip_code": "10115"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 5,
+    "fields": {
+      "name": "Roma",
+      "country": 3,
+      "zip_code": "00042"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 6,
+    "fields": {
+      "name": "Podgorica",
+      "country": 10,
+      "zip_code": "81101"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 7,
+    "fields": {
+      "name": "Warszawa",
+      "country": 7,
+      "zip_code": "00-001"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 8,
+    "fields": {
+      "name": "Ljubljana",
+      "country": 9,
+      "zip_code": "1000"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 9,
+    "fields": {
+      "name": "Praha",
+      "country": 1,
+      "zip_code": "10000"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 10,
+    "fields": {
+      "name": "Ostrava",
+      "country": 1,
+      "zip_code": "70800"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 11,
+    "fields": {
+      "name": "Brno",
+      "country": 1,
+      "zip_code": "60200"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 12,
+    "fields": {
+      "name": "Plzeň",
+      "country": 1,
+      "zip_code": "30100"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 13,
+    "fields": {
+      "name": "Bruntál",
+      "country": 1,
+      "zip_code": "79201"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 14,
+    "fields": {
+      "name": "Žilina",
+      "country": 4,
+      "zip_code": "01001"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 15,
+    "fields": {
+      "name": "Bratislava",
+      "country": 4,
+      "zip_code": "81101"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 16,
+    "fields": {
+      "name": "Poprad",
+      "country": 4,
+      "zip_code": "05801"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 17,
+    "fields": {
+      "name": "Košice",
+      "country": 4,
+      "zip_code": "04001"
+    }
+  },
+  {
+    "model": "viewer.city",
+    "pk": 18,
+    "fields": {
+      "name": "Banská Bystrica",
+      "country": 4,
+      "zip_code": "97401"
+    }
+  },
+  {
+    "model": "viewer.location",
+    "pk": 1,
+    "fields": {
+      "name": "Letňany",
+      "description": "Letištní plocha",
+      "address": "Hůlkova 1075/35",
+      "city": 9
+    }
+  },
+  {
+    "model": "viewer.location",
+    "pk": 2,
+    "fields": {
+      "name": "KinoCentrum",
+      "description": "Kino, 2 sály",
+      "address": "Jesenická 1755",
+      "city": 13
+    }
+  },
+  {
+    "model": "viewer.location",
+    "pk": 3,
+    "fields": {
+      "name": "DK Poklad",
+      "description": "Kulturní dům",
+      "address": "Matěje Kopeckého 675",
+      "city": 10
+    }
+  },
+  {
+    "model": "viewer.location",
+    "pk": 4,
+    "fields": {
+      "name": "Stará Tržnica",
+      "description": "Společenský prostor v centru Bratislavy",
+      "address": "Náměstí SNP 25",
+      "city": 15
+    }
+  },
+  {
+    "model": "viewer.location",
+    "pk": 5,
+    "fields": {
+      "name": "Považská Galeria Umenia",
+      "description": "Galerie",
+      "address": "M. R. Štefánika 996",
+      "city": 14
+    }
+  },
+  {
+    "model": "viewer.location",
+    "pk": 6,
+    "fields": {
+      "name": "Kino Amodo",
+      "description": "Kino a letní kino",
+      "address": "Ul. Zurawia 20",
+      "city": 7
+    }
+  },
+  {
+    "model": "viewer.type",
+    "pk": 1,
+    "fields": {
+      "name": "Koncert"
+    }
+  },
+  {
+    "model": "viewer.type",
+    "pk": 2,
+    "fields": {
+      "name": "Divadlo"
+    }
+  },
+  {
+    "model": "viewer.type",
+    "pk": 3,
+    "fields": {
+      "name": "Letní kino"
+    }
+  },
+  {
+    "model": "viewer.type",
+    "pk": 4,
+    "fields": {
+      "name": "Sport"
+    }
+  },
+  {
+    "model": "viewer.type",
+    "pk": 5,
+    "fields": {
+      "name": "Přednáška"
+    }
+  },
+  {
+    "model": "viewer.type",
+    "pk": 6,
+    "fields": {
+      "name": "Výstava"
+    }
+  },
+  {
+    "model": "viewer.event",
+    "pk": 1,
+    "fields": {
+      "name": "Da Vinci",
+      "type": 6,
+      "description": "Výstava obrazů a vynálezů slavného mistra.",
+      "start_date_time": "2025-08-14T16:00:00Z",
+      "end_date_time": "2025-08-19T22:00:00Z",
+      "event_image": "",
+      "owner_of_event": 1,
+      "location": 4
+    }
+  },
+  {
+    "model": "viewer.event",
+    "pk": 2,
+    "fields": {
+      "name": "Mimoni ve filmu",
+      "type": 3,
+      "description": "Repríza oblíbeného animovaného filmu.",
+      "start_date_time": "2025-08-21T20:00:00Z",
+      "end_date_time": "2025-08-21T21:45:00Z",
+      "event_image": "",
+      "owner_of_event": 1,
+      "location": 6
+    }
+  },
+  {
+    "model": "viewer.event",
+    "pk": 3,
+    "fields": {
+      "name": "AC/DC revival",
+      "type": 1,
+      "description": "Napodobenina světoznámé Australské kapely.",
+      "start_date_time": "2025-09-12T21:00:00Z",
+      "end_date_time": "2025-09-12T00:00:00Z",
+      "event_image": "",
+      "owner_of_event": 1,
+      "location": 1
+    }
+  },
+  {
+    "model": "viewer.event",
+    "pk": 4,
+    "fields": {
+      "name": "Syndrom vyhoření",
+      "type": 5,
+      "description": "Jak vyhořet a znova vzplanout.",
+      "start_date_time": "2025-09-08T16:00:00Z",
+      "end_date_time": "2025-09-08T19:00:00Z",
+      "event_image": "",
+      "owner_of_event": 1,
+      "location": 3
+    }
+  },
+  {
+    "model": "viewer.event",
+    "pk": 5,
+    "fields": {
+      "name": "Judo mistrovství ČR",
+      "type": 4,
+      "description": "Mistrovství ČR v Judu pro začátečníky.",
+      "start_date_time": "2025-10-11T08:00:00Z",
+      "end_date_time": "2025-10-12T17:00:00Z",
+      "event_image": "",
+      "owner_of_event": 1,
+      "location": 2
+    }
+  }
+]
