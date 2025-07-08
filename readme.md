@@ -50,6 +50,8 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 - [ ] 10.0 API počasí/mapa
 
 
+- [ ] 11.0 Admin panel
+
 
 
 
