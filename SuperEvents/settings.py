@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'petr_ondra_patrik_finalni_projakt.urls'
+ROOT_URLCONF = 'SuperEvents.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'petr_ondra_patrik_finalni_projakt.wsgi.application'
+WSGI_APPLICATION = 'SuperEvents.wsgi.application'
 
 
 # Database
