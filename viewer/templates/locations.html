@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Seznam lokací
+{% endblock %}
+
+{% block content %}
+    <h1>Seznam míst konání</h1>
+    {% for location in locations %}
+        {{ location }} <br>
+    {% empty %}
+        V databázi není žádná lokace.
+    {% endfor %}
+{% endblock %}
