@@ -1,22 +1,22 @@
 https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44239
 
-- [ ] 1.0 Seznam událostí
+- [ ] 1.0 Seznam událostí - ONDRA
   - [ ] 1.1 Řazení podle nejblížšího data
   - [ ] 1.2 Titulek události, datum, obrázek, prvních 50 znaků z description
 
-- [ ] 2.0 Detail události
--   [ ] 2.1 Název
--   [ ] 2.2 Datum od/do
--   [ ] 2.3 Čas od/do
--   [ ] 2.4 Celý popis události
--   [ ] 2.5 Adresa,lokace
+- [ ] 2.0 Detail události - PATRIK
+-   [x] 2.1 Název
+-   [x] 2.2 Datum od/do
+-   [x] 2.3 Čas od/do
+-   [x] 2.4 Celý popis události
+-   [x] 2.5 Adresa,lokace
 -   [ ] 2.6 Obrázek
 -   [ ] 2.7 Proklik ze seznamu událostí
 
-- [ ] 3.0 Vyhledávání událostí
+- [ ] 3.0 Vyhledávání událostí - PETR
   - [ ] 3.1 Textové pole pro vyhledávání
 
-- [ ] 4.0 Přidávání událostí
+- [ ] 4.0 Přidávání událostí - PATRIK
   - [ ] 4.1 Omezení 'pouze organizátor může přidat událost'
   - [ ] 4.2 Název
   - [ ] 4.3 Datum od/do
@@ -24,11 +24,11 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [ ] 4.5 Vlastník (uživatel, který událost vytvořil)
   - [ ] 4.6 Obrázek události
 
-- [ ] 5.0 Úprava událostí
+- [ ] 5.0 Úprava událostí - PATRIK
   - [ ] 5.1 Úprava (pouze organizátor svojí událost)
   - [ ] 5.2 Mazání (pouze organizátor svojí událost)
 
-- [ ] 6.0 Autentizace
+- [ ] 6.0 Autentizace - PATRIK
   - [ ] 6.1 registrační formulář
   - [ ] 6.2 email
   - [ ] 6.3 user name
@@ -36,13 +36,17 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [ ] 6.5 příjmení
   - [ ] 6.6 role organizátora (vytvořit v admin panelu)
 
-- [ ] 7.0 Autorizace 
+- [ ] 7.0 Autorizace - PATRIK
 
-- [ ] 8.0 Přidávání komentářů
+- [ ] 8.0 Přidávání komentářů - ONDRA
   - [ ] 8.1 Pouze registrovaný uživatel
   - [ ] 8.2 Max 500 znaků?
   - [ ] 8.3 Řazení od nejnovějších
         
+
+
+
+
 
 - [ ] 9.0 Přihlášení na akce
   - [ ] 9.1 Pouze přihlášený uživatel

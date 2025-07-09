@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 
-<html {% if LANGUAGE_CODE %}lang="{{ LANGUAGE_CODE }}" {% endif %}>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
 
 <head>
     <meta charset="utf-8">

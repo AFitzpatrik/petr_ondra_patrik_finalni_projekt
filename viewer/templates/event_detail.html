@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Detail události: {{ event.name }}
+{% endblock %}
+
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header">
+        <h2 class="mb-0">{{ event.name }}</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            {% if event.event_image %}
+            <div class="col-md-4 mb-3">
+                <img src="{{ event.event_image.url }}" class="img-fluid rounded" alt="Obrázek události">
+            </div>
+            {% endif %}
+            <div class="col-md-8">
+                <p><strong>Typ události:</strong> {{ event.type.name }}</p>
+                <p><strong>Popis:</strong> {{ event.description }}</p>
+                <p><strong>Začátek:</strong> {{ event.start_date_time }}</p>
+                <p><strong>Konec:</strong> {{ event.end_date_time }}</p>
+                <p><strong>Vlastník události:</strong> {{ event.owner_of_event.username }}</p>
+                <p><strong>Místo konání:</strong> {{ event.location.name }}</p>
+                <p><strong>Adresa:</strong> {{ event.location.address }}</p>
+                <p><strong>Město:</strong> {{ event.location.city.name }}</p>
+                <p><strong>Stát:</strong> {{ event.location.city.country.name }}</p>
+                <p><strong>Popis:</strong> {{ event.description }} </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="mb-0">Komentáře</h4>
+    </div>
+    <div class="card-body">
+        {% if event.comments.all %}
+            <ul class="list-group list-group-flush">
+            {% for comment in event.comments.all %}
+                <li class="list-group-item">
+                    <strong>{{ comment.user.username }}</strong> <span class="text-muted">({{ comment.date_time_posted }})</span><br>
+                    {{ comment.content }}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>Žádné komentáře.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
