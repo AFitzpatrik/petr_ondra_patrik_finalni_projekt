@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from viewer.views import home, EventsListView, EventDetailView, CitiesListView
+from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +25,6 @@ urlpatterns = [
     path('events/', EventsListView.as_view(), name='events'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
     path('cities/', CitiesListView.as_view(), name='cities'),
+    path('locations/', LocationsListView.as_view(), name='locations'),
 
 ]

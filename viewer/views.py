@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic import DetailView
 
-from viewer.models import Event, City
+from viewer.models import Event, City, Location
 
 
 def home(request):
@@ -24,4 +24,9 @@ class CitiesListView(ListView):
     template_name = 'cities.html'
     model = City
     context_object_name = 'cities'
+
+class LocationsListView(ListView):
+    template_name = 'locations.html'
+    model = Location
+    context_object_name = 'locations'
 
