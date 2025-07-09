@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Seznam akcí
+{% endblock %}
+
+{% block content %}
+    <h1>Seznam akcí</h1>
+    {% for event in events %}
+        {{ event }} <br>
+    {% empty %}
+        V databázi není žádná akce.
+    {% endfor %}
+{% endblock %}
