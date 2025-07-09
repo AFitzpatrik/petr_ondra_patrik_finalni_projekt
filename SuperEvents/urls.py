@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from viewer.views import home, EventsListView, EventDetailView
 
@@ -25,3 +27,7 @@ urlpatterns = [
     path('events/', EventsListView.as_view(), name='events'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
