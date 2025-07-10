@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Přidat událost
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Přidat novou událost</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Uložit</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    flatpickr("input[name='start_date_time']", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true
+    });
+    flatpickr("input[name='end_date_time']", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true
+    });
+</script>
+{% endblock %}

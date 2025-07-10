@@ -16,13 +16,13 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 - [ ] 3.0 Vyhledávání událostí - PETR
   - [ ] 3.1 Textové pole pro vyhledávání
 
-- [ ] 4.0 Přidávání událostí - ONDRA
-  - [ ] 4.1 Omezení 'pouze organizátor může přidat událost'
-  - [ ] 4.2 Název
-  - [ ] 4.3 Datum od/do
-  - [ ] 4.4 Čas od/do
-  - [ ] 4.5 Vlastník (uživatel, který událost vytvořil)
-  - [ ] 4.6 Obrázek události
+- [x] 4.0 Přidávání událostí - ONDRA
+  - [x] 4.1 Omezení 'pouze organizátor může přidat událost'
+  - [x] 4.2 Název
+  - [x] 4.3 Datum od/do
+  - [x] 4.4 Čas od/do
+  - [x] 4.5 Vlastník (uživatel, který událost vytvořil)
+  - [x] 4.6 Obrázek události
 
 - [ ] 5.0 Úprava událostí - PATRIK
   - [ ] 5.1 Úprava (pouze organizátor svojí událost)

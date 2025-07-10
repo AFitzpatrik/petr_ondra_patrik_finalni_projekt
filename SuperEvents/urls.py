@@ -19,17 +19,18 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.auth import views as auth_views
 
-from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView
+from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, EventCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('events/', EventsListView.as_view(), name='events'),
+    path('event/create/', EventCreateView.as_view(), name='event-create'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
     path('cities/', CitiesListView.as_view(), name='cities'),
     path('locations/', LocationsListView.as_view(), name='locations'),
-
 ]
 
 

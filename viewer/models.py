@@ -85,6 +85,18 @@ class Event(models.Model):
                 f"start_date={self.start_date_time}, end_date={self.end_date_time}, "
                 f"location={self.location}, owner_of_event={self.owner_of_event})")
 
+    def save(self, *args, **kwargs):   # metoda pro zmenšení obrázku
+        super().save(*args, **kwargs)
+
+        if self.event_image:
+            from PIL import Image
+            image_path = self.event_image.path
+            img = Image.open(image_path)
+
+            max_size = (1200, 800)  # max velikost v pixelech
+            img.thumbnail(max_size)
+            img.save(image_path)
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
