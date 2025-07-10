@@ -1,14 +1,52 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Seznam akcí
 {% endblock %}
 
+
+
 {% block content %}
-    <h1>Seznam akcí</h1>
-    {% for event in events %}
-        {{ event }} <br>
-    {% empty %}
-        V databázi není žádná akce.
-    {% endfor %}
+    <div class="container">
+        <h1 class="mb-4">Seznam událostí</h1>
+        
+        {% if events %}
+            <div class="row">
+                {% for event in events %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100">
+                            <a href="{% url 'event-detail' event.pk %}" class="text-decoration-none">
+                                {% if event.event_image %}
+                                    <img src="{{ event.event_image.url }}" class="card-img-top" alt="Obrázek události" style="height: 200px; object-fit: cover; cursor: pointer;">
+                                {% else %}
+                                    <img src="{% static 'images/placeholder.png' %}" class="card-img-top" alt="Placeholder obrázek" style="height: 200px; object-fit: cover; cursor: pointer;">
+                                {% endif %}
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{% url 'event-detail' event.pk %}" style="cursor: pointer;">{{ event.name }}</a>
+                                </h5>
+                                <p class="card-text">
+                                    <strong>Typ:</strong> {{ event.type.name }}<br>
+                                    <strong>Datum:</strong> {{ event.start_date_time|date:"d.m.Y H:i" }}<br>
+                                    <strong>Místo:</strong> {{ event.location.name }}, {{ event.location.city.name }}
+                                </p>
+                                {% if event.description %}
+                                    <p class="card-text">
+                                        <small class="text-muted">{{ event.description|truncatechars:50 }}</small>
+                                    </p>
+                                {% endif %}
+                                <a href="{% url 'event-detail' event.pk %}" class="btn btn-primary">Zobrazit detail</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                V databázi není žádná akce.
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

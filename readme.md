@@ -1,8 +1,8 @@
 https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44239
 
-- [ ] 1.0 Seznam událostí - ONDRA
-  - [ ] 1.1 Řazení podle nejblížšího data
-  - [ ] 1.2 Titulek události, datum, obrázek, prvních 50 znaků z description
+- [x] 1.0 Seznam událostí - ONDRA/PATRIK
+  - [x] 1.1 Řazení podle nejblížšího data
+  - [x] 1.2 Titulek události, datum, obrázek, prvních 50 znaků z description
 
 - [ ] 2.0 Detail události - PATRIK
 -   [x] 2.1 Název
