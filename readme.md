@@ -29,14 +29,21 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [ ] 5.2 Mazání (pouze organizátor svojí událost)
 
 - [ ] 6.0 Autentizace - PATRIK
-  - [ ] 6.1 registrační formulář
-  - [ ] 6.2 email
-  - [ ] 6.3 user name
-  - [ ] 6.4 jméno
-  - [ ] 6.5 příjmení
-  - [ ] 6.6 role organizátora (vytvořit v admin panelu)
+  - [x] 6.1 registrační formulář - REGISTRACE
+    - [x] 6.1.1  email
+    - [x] 6.1.2  user name
+    - [x] 6.1.3  jméno
+    - [x] 6.1.4  příjmení
+  - [x] 6.2 přihlašovací formulář - PŘIHLÁŠENÍ
+  - [x] 6.3 Zobrazení přihlášeného uživatele
+    - [ ] 6.3.1 Dropdown menu
+    - [ ] 6.3.2 Změna hesla
+    - [ ] 6.3.3 Můj profil
+
 
 - [ ] 7.0 Autorizace - PATRIK
+  -[ ] 7.1 role organizátora (vytvořit v admin panelu)
+
 
 - [ ] 8.0 Přidávání komentářů - ONDRA
   - [ ] 8.1 Pouze registrovaný uživatel

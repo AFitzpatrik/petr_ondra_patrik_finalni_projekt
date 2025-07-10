@@ -14,6 +14,19 @@
                 <a class="nav-item nav-link active" href="{% url 'cities' %}">Města</a>
                 <a class="nav-item nav-link active" href="{% url 'locations' %}">Místa konání</a>
             </div>
+            <div class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <span class="navbar-text text-light">
+                        Vítej, {{ user.first_name|default:user.username }}!
+                    </span>
+                    <a class="nav-item btn btn-danger mx-1 rounded" href="{% url 'logout' %}">Odhlásit</a>
+
+
+                {% else %}
+                    <a class="nav-item btn btn-success mx-1" href="{% url 'signup' %}">Registrace</a>
+                    <a class="nav-item btn btn-success mx-1" href="{% url 'login' %}?next={{ request.path }}">Přihlášení</a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </nav>
