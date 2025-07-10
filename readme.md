@@ -10,8 +10,8 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 -   [x] 2.3 Čas od/do
 -   [x] 2.4 Celý popis události
 -   [x] 2.5 Adresa,lokace
--   [ ] 2.6 Obrázek
--   [ ] 2.7 Proklik ze seznamu událostí
+-   [x] 2.6 Obrázek
+-   [x] 2.7 Proklik ze seznamu událostí
 
 - [ ] 3.0 Vyhledávání událostí - PETR
   - [ ] 3.1 Textové pole pro vyhledávání
