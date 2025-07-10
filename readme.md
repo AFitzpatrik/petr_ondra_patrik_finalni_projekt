@@ -4,7 +4,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [x] 1.1 Řazení podle nejblížšího data
   - [x] 1.2 Titulek události, datum, obrázek, prvních 50 znaků z description
 
-- [ ] 2.0 Detail události - PATRIK
+- [x] 2.0 Detail události - PATRIK
 -   [x] 2.1 Název
 -   [x] 2.2 Datum od/do
 -   [x] 2.3 Čas od/do
@@ -16,7 +16,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 - [ ] 3.0 Vyhledávání událostí - PETR
   - [ ] 3.1 Textové pole pro vyhledávání
 
-- [ ] 4.0 Přidávání událostí - PATRIK
+- [ ] 4.0 Přidávání událostí - ONDRA
   - [ ] 4.1 Omezení 'pouze organizátor může přidat událost'
   - [ ] 4.2 Název
   - [ ] 4.3 Datum od/do
