@@ -38,7 +38,8 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [x] 6.3 Zobrazení přihlášeného uživatele
     - [x] 6.3.1 Dropdown menu
     - [ ] 6.3.2 Změna hesla
-    - [ ] 6.3.3 Můj profil page
+    - [ ] 6.3.3 Nastavení
+    - [ ] 6.3.4 Můj profil page
   - [x] 6.4 Registration success page
     - [x] 6.5 Proklik na login
   - [x] 6.5 Logout success page
