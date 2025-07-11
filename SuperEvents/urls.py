@@ -33,7 +33,7 @@ urlpatterns = [
     path('locations/', LocationsListView.as_view(), name='locations'),
 
     path('accounts/signup/', SignUpView.as_view(), name='signup'),
-    path('accounts/login/', LoginView.as_view(template_name='form.html'), name='login'),
+    path('accounts/login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('accounts/logout/', UserLogoutView.as_view(), name='logout'),
 
 ]

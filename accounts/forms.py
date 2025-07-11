@@ -30,7 +30,6 @@ class SignUpForm(UserCreationForm):
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Přidání Bootstrap tříd do všech fieldů
         for field_name, field in self.fields.items():
             if hasattr(field.widget, 'attrs'):
                 field.widget.attrs.update({'class': 'form-control'})
