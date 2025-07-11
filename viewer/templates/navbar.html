@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container fixed">
-        <a class="navbar-brand" href="/">SuperEvents</a>
+        <a class="navbar-brand" href="{% url 'home' %}">SuperEvents</a>
         <button
                 class="navbar-toggler" type="button"
                 data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -13,15 +13,41 @@
                 <a class="nav-item nav-link active" href="{% url 'events' %}">Akce</a>
                 <a class="nav-item nav-link active" href="{% url 'cities' %}">Města</a>
                 <a class="nav-item nav-link active" href="{% url 'locations' %}">Místa konání</a>
+
             </div>
+
+            <div class="navbar-nav">
+                <div class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown">API</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Počasí</a>
+                        <a class="dropdown-item" href="#">Mapa</a>
+                    </div>
+                </div>
+            </div>
+
             <div class="navbar-nav ml-auto">
+                <div class="search-div">
+                    <form method="post" action="/search/">
+                        {% csrf_token %}
+                        <input type="text" id="search" name="search" placeholder="🔎 Hledej...">
+                    </form>
+                </div>
+            </div>
+
+            <div class="navbar-nav ml-auto text-white d-flex align-items-center">
                 {% if user.is_authenticated %}
-                    <span class="navbar-text text-light">
-                        Vítej, {{ user.first_name|default:user.username }}!
-                    </span>
-                    <a class="nav-item btn btn-danger mx-1 rounded" href="{% url 'logout' %}">Odhlásit</a>
-
-
+                    <a class="btn btn-success mx-1" href="#">➕ Přidat událost</a>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown">
+                            Ahoj, {{ user.first_name|default:user.username }}!
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="#">Můj profil</a>
+                            <a class="dropdown-item" href="#">Nastavení</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Odhlásit</a>
+                        </div>
+                    </div>
                 {% else %}
                     <a class="nav-item btn btn-success mx-1" href="{% url 'signup' %}">Registrace</a>
                     <a class="nav-item btn btn-success mx-1" href="{% url 'login' %}?next={{ request.path }}">Přihlášení</a>
