@@ -139,7 +139,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Authentication settings
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/accounts/login_success/'
 LOGIN_URL = '/accounts/login/'
 
 LOGOUT_REDIRECT_URL = '/'

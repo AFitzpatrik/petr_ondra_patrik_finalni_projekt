@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from accounts.views import SignUpView, UserLogoutView, RegistrationSuccessView, LogoutSuccessView
+from accounts.views import SignUpView, UserLogoutView, RegistrationSuccessView, LogoutSuccessView, LoginSuccessView
 from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView
 
 urlpatterns = [
@@ -35,6 +35,7 @@ urlpatterns = [
     path('accounts/signup/', SignUpView.as_view(), name='signup'),
     path('accounts/registration_success/', RegistrationSuccessView.as_view(), name='registration_success'),
     path('accounts/login/', LoginView.as_view(template_name='login.html'), name='login'),
+    path('accounts/login_success/', LoginSuccessView.as_view(), name='login_success'),
     path('accounts/logout/', UserLogoutView.as_view(), name='logout'),
     path('accounts/logout_success/', LogoutSuccessView.as_view(), name='logout_success'),
 

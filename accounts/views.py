@@ -13,6 +13,9 @@ class UserLogoutView(View):
         return redirect('logout_success')
         #return redirect(request.META.get('HTTP_REFERER', '/'))  #zůstat na stejné stránce
 
+class LogoutSuccessView(TemplateView):
+    template_name = 'logout_success.html'
+
 
 class SignUpView(CreateView):
     template_name = 'registration.html'
@@ -26,5 +29,10 @@ class SignUpView(CreateView):
 class RegistrationSuccessView(TemplateView):
     template_name = 'registration_success.html'
 
-class LogoutSuccessView(TemplateView):
-    template_name = 'logout_success.html'
+
+class LoginSuccessView(TemplateView):
+    template_name = 'login_success.html'
+
+
+
+

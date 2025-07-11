@@ -42,6 +42,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [x] 6.4 Registration success page
     - [x] 6.5 Proklik na login
   - [x] 6.5 Logout success page
+  - [x] 6.6 Login success page
 
 
 - [ ] 7.0 Autorizace - PATRIK
