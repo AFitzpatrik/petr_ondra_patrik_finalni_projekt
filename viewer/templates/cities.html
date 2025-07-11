@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Seznam měst
+{% endblock %}
+
+{% block content %}
+    <h1>Seznam měst</h1>
+    {% for city in cities %}
+        {{ city }} <br>
+    {% empty %}
+        V databázi není žádné město.
+    {% endfor %}
+{% endblock %}

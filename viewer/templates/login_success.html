@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Přihlášení úspěšné | Super Events
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-12 col-md-8 col-lg-5">
+        <div class="card shadow rounded text-center p-4">
+            <div class="card-body">
+                <h1 class="card-title text-primary mb-3">Ahoj, {{ user.first_name|default:user.username }}!</h1>
+                <p class="card-text mb-4">Vítej zpět!👋🏼</p>
+                <a href="#" class="btn btn-primary btn-lg w-100">Můj profil</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

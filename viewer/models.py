@@ -78,7 +78,7 @@ class Event(models.Model):
         ordering = ['start_date_time', 'name']
     
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.start_date_time.strftime('%d.%m.%Y')})"
     
     def __repr__(self):
         return (f"Event(name={self.name}, description={self.description}, "

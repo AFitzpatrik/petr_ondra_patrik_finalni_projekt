@@ -1,22 +1,22 @@
 https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44239
 
-- [ ] 1.0 Seznam událostí - ONDRA
-  - [ ] 1.1 Řazení podle nejblížšího data
-  - [ ] 1.2 Titulek události, datum, obrázek, prvních 50 znaků z description
+- [x] 1.0 Seznam událostí - ONDRA/PATRIK
+  - [x] 1.1 Řazení podle nejblížšího data
+  - [x] 1.2 Titulek události, datum, obrázek, prvních 50 znaků z description
 
-- [ ] 2.0 Detail události - PATRIK
+- [x] 2.0 Detail události - PATRIK
 -   [x] 2.1 Název
 -   [x] 2.2 Datum od/do
 -   [x] 2.3 Čas od/do
 -   [x] 2.4 Celý popis události
 -   [x] 2.5 Adresa,lokace
--   [ ] 2.6 Obrázek
--   [ ] 2.7 Proklik ze seznamu událostí
+-   [x] 2.6 Obrázek
+-   [x] 2.7 Proklik ze seznamu událostí
 
 - [ ] 3.0 Vyhledávání událostí - PETR
   - [ ] 3.1 Textové pole pro vyhledávání
 
-- [ ] 4.0 Přidávání událostí - PATRIK
+- [ ] 4.0 Přidávání událostí - ONDRA
   - [ ] 4.1 Omezení 'pouze organizátor může přidat událost'
   - [ ] 4.2 Název
   - [ ] 4.3 Datum od/do
@@ -29,14 +29,25 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [ ] 5.2 Mazání (pouze organizátor svojí událost)
 
 - [ ] 6.0 Autentizace - PATRIK
-  - [ ] 6.1 registrační formulář
-  - [ ] 6.2 email
-  - [ ] 6.3 user name
-  - [ ] 6.4 jméno
-  - [ ] 6.5 příjmení
-  - [ ] 6.6 role organizátora (vytvořit v admin panelu)
+  - [x] 6.1 registrační formulář - REGISTRACE
+    - [x] 6.1.1  email
+    - [x] 6.1.2  user name
+    - [x] 6.1.3  jméno
+    - [x] 6.1.4  příjmení
+  - [x] 6.2 přihlašovací formulář - PŘIHLÁŠENÍ
+  - [x] 6.3 Zobrazení přihlášeného uživatele
+    - [x] 6.3.1 Dropdown menu
+    - [ ] 6.3.2 Změna hesla
+    - [ ] 6.3.3 Můj profil page
+  - [x] 6.4 Registration success page
+    - [x] 6.5 Proklik na login
+  - [x] 6.5 Logout success page
+  - [x] 6.6 Login success page
+
 
 - [ ] 7.0 Autorizace - PATRIK
+  -[ ] 7.1 role organizátora (vytvořit v admin panelu)
+
 
 - [ ] 8.0 Přidávání komentářů - ONDRA
   - [ ] 8.1 Pouze registrovaný uživatel

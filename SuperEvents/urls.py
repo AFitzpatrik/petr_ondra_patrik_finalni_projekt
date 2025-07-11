@@ -15,13 +15,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from viewer.views import home, EventsListView, EventDetailView
+from accounts.views import SignUpView, UserLogoutView, RegistrationSuccessView, LogoutSuccessView, LoginSuccessView
+from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('events/', EventsListView.as_view(), name='events'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
+    path('cities/', CitiesListView.as_view(), name='cities'),
+    path('locations/', LocationsListView.as_view(), name='locations'),
+
+    path('accounts/signup/', SignUpView.as_view(), name='signup'),
+    path('accounts/registration_success/', RegistrationSuccessView.as_view(), name='registration_success'),
+    path('accounts/login/', LoginView.as_view(template_name='login.html'), name='login'),
+    path('accounts/login_success/', LoginSuccessView.as_view(), name='login_success'),
+    path('accounts/logout/', UserLogoutView.as_view(), name='logout'),
+    path('accounts/logout_success/', LogoutSuccessView.as_view(), name='logout_success'),
+
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += staticfiles_urlpatterns()
