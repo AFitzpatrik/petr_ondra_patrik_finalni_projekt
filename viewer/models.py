@@ -85,6 +85,12 @@ class Event(models.Model):
                 f"start_date={self.start_date_time}, end_date={self.end_date_time}, "
                 f"location={self.location}, owner_of_event={self.owner_of_event})")
 
+    def get_start_date_cz_format(self):
+        return self.start_date_time.strftime('%d.%m.%Y, %H:%M')
+
+    def get_end_date_cz_format(self):
+        return self.end_date_time.strftime('%d.%m.%Y, %H:%M')
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
