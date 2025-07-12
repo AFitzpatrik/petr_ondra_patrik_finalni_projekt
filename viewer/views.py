@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from django.views.generic import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from viewer.models import Event, City, Location
 from .forms import EventForm
@@ -31,7 +32,7 @@ class LocationsListView(ListView):
     model = Location
     context_object_name = 'locations'
 
-class EventCreateView(CreateView):
+class EventCreateView(LoginRequiredMixin,CreateView):
     model = Event
     form_class = EventForm
     template_name = 'event_form.html'
