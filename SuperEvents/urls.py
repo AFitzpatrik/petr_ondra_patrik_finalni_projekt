@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth import views as auth_views
 
-from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, EventCreateView
+from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, EventCreateView, event_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,6 +31,7 @@ urlpatterns = [
     path('event/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
     path('cities/', CitiesListView.as_view(), name='cities'),
     path('locations/', LocationsListView.as_view(), name='locations'),
+    path('event/<int:pk>/', event_detail, name='event-detail'),
 ]
 
 

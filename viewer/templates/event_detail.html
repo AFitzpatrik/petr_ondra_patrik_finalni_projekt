@@ -50,4 +50,22 @@
         {% endif %}
     </div>
 </div>
+
+{% if user.is_authenticated %}
+<div class="card mt-4">
+    <div class="card-header">
+        <h5>Přidat komentář</h5>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" class="btn btn-primary">Odeslat</button>
+        </form>
+    </div>
+</div>
+{% else %}
+<p class="mt-4"><a href="{% url 'login' %}">Přihlas se</a>, pokud chceš přidat komentář.</p>
+{% endif %}
+
 {% endblock %}
