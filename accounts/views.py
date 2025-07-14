@@ -34,5 +34,9 @@ class LoginSuccessView(TemplateView):
     template_name = 'login_success.html'
 
 
+# PasswordChangeView byl odstraněn
+
+
+
 
 
