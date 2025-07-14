@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView
+from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +29,7 @@ urlpatterns = [
     path('event/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
     path('cities/', CitiesListView.as_view(), name='cities'),
     path('locations/', LocationsListView.as_view(), name='locations'),
+    path('search/', search, name='search'),
 
 ]
 

@@ -14,6 +14,13 @@
                 <a class="nav-item nav-link active" href="{% url 'cities' %}">Města</a>
                 <a class="nav-item nav-link active" href="{% url 'locations' %}">Místa konání</a>
             </div>
+
+            <form class="d-flex" method="get" action="{% url 'search' %}">
+                <input class="form-control me-2" type="search" name="search" placeholder="Hledat..." aria-label="Hledat">
+                <button class="btn btn-outline-success" type="submit">🔍</button>
+            </form>
+
         </div>
     </div>
 </nav>
+
