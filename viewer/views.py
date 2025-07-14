@@ -1,6 +1,7 @@
+from django.http import HttpResponseForbidden
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.utils.timezone import now
 from django.views.generic import ListView
 from django.views.generic import DetailView
@@ -44,6 +45,26 @@ class LocationsListView(ListView):
     template_name = 'locations.html'
     model = Location
     context_object_name = 'locations'
+
+
+class EventUpdateView(UpdateView):
+    model = Event
+    template_name = 'event_detail.html'
+    form_class = EventForm
+
+    def get_success_url(self):
+        return reverse("event-detail", kwargs={"pk": self.object.pk})
+
+    def form_invalid(self, form):
+        print('Formulář není validní')
+        return super().form_invalid(form)
+
+    def dispatch(self, request, *args, **kwargs):
+        # Kontrola zda může organizátor upravovat tuto událost
+        obj = self.get_object()
+        if obj.owner_of_event != request.user:
+            return HttpResponseForbidden("Nemáte oprávnění upravit tuto událost.")
+        return super().dispatch(request, *args, **kwargs)
 
 class EventCreateView(LoginRequiredMixin,CreateView):
     model = Event

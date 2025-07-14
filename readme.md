@@ -20,7 +20,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 
 - [x] 4.0 Přidávání událostí - ONDRA
-  - [x] 4.1 Omezení 'pouze organizátor může přidat událost'
+  - [ ] 4.1 Omezení 'pouze organizátor může přidat událost'
   - [x] 4.2 Název
   - [x] 4.3 Datum od/do
   - [x] 4.4 Čas od/do
