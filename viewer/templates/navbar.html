@@ -26,16 +26,11 @@
                 </div>
             </div>
 
-            <!-- První verze navbaru, odstranit?
-<div class="navbar-nav ml-auto">
-    <div class="search-div">
-        <form method="post" action="/search/">
-            {% csrf_token %}
-            <input type="text" id="search" name="search" placeholder="🔎 Hledej...">
-        </form>
-    </div>
-</div>
--->
+             <form class="d-flex" method="get" action="{% url 'search' %}">
+                <input class="form-control me-2" type="search" name="search" placeholder="Hledat..." aria-label="Hledat">
+                <button class="btn btn-outline-success" type="submit">🔍</button>
+            </form>
+
 
             <div class="navbar-nav ml-auto text-white d-flex align-items-center">
                 {% if user.is_authenticated %}
@@ -57,10 +52,7 @@
                 {% endif %}
             </div>
 
-            <form class="d-flex" method="get" action="{% url 'search' %}">
-                <input class="form-control me-2" type="search" name="search" placeholder="Hledat..." aria-label="Hledat">
-                <button class="btn btn-outline-success" type="submit">🔍</button>
-            </form>
+
 
         </div>
     </div>
