@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Odhlášení
+{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+        <h2>Byl jste úspěšně odhlášen.</h2>
+        <a class="btn btn-primary mt-3" href="{% url 'home' %}">Zpět na hlavní stránku</a>
+    </div>
+{% endblock %}
