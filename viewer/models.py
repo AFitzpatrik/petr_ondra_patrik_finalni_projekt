@@ -97,6 +97,12 @@ class Event(models.Model):
             img.thumbnail(max_size)
             img.save(image_path)
 
+    def get_start_date_cz_format(self):
+        return self.start_date_time.strftime('%d.%m.%Y, %H:%M')
+
+    def get_end_date_cz_format(self):
+        return self.end_date_time.strftime('%d.%m.%Y, %H:%M')
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")

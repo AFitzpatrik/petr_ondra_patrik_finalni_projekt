@@ -18,8 +18,8 @@
             {% endif %}
             <div class="col-md-8">
                 <p><strong>Typ události:</strong> {{ event.type.name }}</p>
-                <p><strong>Začátek:</strong> {{ event.start_date_time }}</p>
-                <p><strong>Konec:</strong> {{ event.end_date_time }}</p>
+                <p><strong>Začátek:</strong> {{ event.get_start_date_cz_format }}</p>
+                <p><strong>Konec:</strong> {{ event.get_end_date_cz_format }}</p>
                 <p><strong>Vlastník události:</strong> {{ event.owner_of_event.username }}</p>
                 <p><strong>Místo konání:</strong> {{ event.location.name }}</p>
                 <p><strong>Adresa:</strong> {{ event.location.address }}</p>
