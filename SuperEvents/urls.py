@@ -24,7 +24,6 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 from accounts.views import SignUpView, UserLogoutView, RegistrationSuccessView, LogoutSuccessView, LoginSuccessView
-from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView
 from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, search
 
 urlpatterns = [

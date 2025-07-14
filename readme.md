@@ -4,6 +4,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [x] 1.1 Řazení podle nejblížšího data
   - [x] 1.2 Titulek události, datum, obrázek, prvních 50 znaků z description
 
+
 - [x] 2.0 Detail události - PATRIK
 -   [x] 2.1 Název
 -   [x] 2.2 Datum od/do
@@ -13,8 +14,10 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 -   [x] 2.6 Obrázek
 -   [x] 2.7 Proklik ze seznamu událostí
 
+
 - [ ] 3.0 Vyhledávání událostí - PETR
   - [ ] 3.1 Textové pole pro vyhledávání
+
 
 - [x] 4.0 Přidávání událostí - ONDRA
   - [x] 4.1 Omezení 'pouze organizátor může přidat událost'
@@ -24,9 +27,11 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [x] 4.5 Vlastník (uživatel, který událost vytvořil)
   - [x] 4.6 Obrázek události
 
+
 - [ ] 5.0 Úprava událostí - PATRIK
   - [ ] 5.1 Úprava (pouze organizátor svojí událost)
   - [ ] 5.2 Mazání (pouze organizátor svojí událost)
+
 
 - [ ] 6.0 Autentizace - PATRIK
   - [x] 6.1 registrační formulář - REGISTRACE
@@ -51,22 +56,30 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 
 - [ ] 8.0 Přidávání komentářů - ONDRA
-  - [ ] 8.1 Pouze registrovaný uživatel
+  - [x] 8.1 Pouze registrovaný uživatel
   - [ ] 8.2 Max 500 znaků?
   - [ ] 8.3 Řazení od nejnovějších
-        
+
+
+- [ ] 9.0 Seznam míst  - ONDRA
+  - [ ] 9.1 Proklik na události v dánem místě
+
+
+- [ ] 10.0 Seznam měst  - ONDRA
+  - [ ] 10.1 Proklik na události v dánem městě
+
+
+- [ ] 11.0 Přihlášení na akci
+  - [ ] 11.1 Pouze přihlášený uživatel
+  - [ ] 12.1 Událost se přidá uživateli do MOJE UDÁLOSTI
+
+
+- [ ] 12.0 API počasí/mapa - PETR
 
 
 
 
-
-- [ ] 9.0 Přihlášení na akce
-  - [ ] 9.1 Pouze přihlášený uživatel
-
-- [ ] 10.0 API počasí/mapa
-
-
-- [ ] 11.0 Admin panel
+- [ ] 13.0 Admin panel - KDYŽ BUDE ČAS
 
 
 
