@@ -26,14 +26,16 @@
                 </div>
             </div>
 
-            <div class="navbar-nav ml-auto">
-                <div class="search-div">
-                    <form method="post" action="/search/">
-                        {% csrf_token %}
-                        <input type="text" id="search" name="search" placeholder="🔎 Hledej...">
-                    </form>
-                </div>
-            </div>
+            <!-- První verze navbaru, odstranit?
+<div class="navbar-nav ml-auto">
+    <div class="search-div">
+        <form method="post" action="/search/">
+            {% csrf_token %}
+            <input type="text" id="search" name="search" placeholder="🔎 Hledej...">
+        </form>
+    </div>
+</div>
+-->
 
             <div class="navbar-nav ml-auto text-white d-flex align-items-center">
                 {% if user.is_authenticated %}
