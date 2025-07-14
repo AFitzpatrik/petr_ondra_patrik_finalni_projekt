@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Vyhledávání '{{ search }}'
+{% endblock %}
+
+{% block content %}
+    <h1>Výsledky vyhledávání dotazu '{{ search }}'</h1>
+    <form method="get" action="{% url 'search' %}">
+        <input type="text" name="search" value="{{ search }}" placeholder="Hledat...">
+        <select name="filter">
+            <option value="all" {% if filter == "all" %}selected{% endif %}>Vše</option>
+            <option value="future" {% if filter == "future" %}selected{% endif %}>Budoucí</option>
+            <option value="active_future" {% if filter == "active_future" %}selected{% endif %}>Probíhající a budoucí
+            </option>
+        </select>
+        <button type="submit">Hledat</button>
+    </form>
+
+    <hr>
+
+    <div class="container">
+        <h1 class="mb-4">Vyhledané události</h1>
+
+        {% if events %}
+            <div class="row">
+                {% for event in events %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100">
+                            <a href="{% url 'event-detail' event.pk %}" class="text-decoration-none">
+                                {% if event.event_image %}
+                                    <img src="{{ event.event_image.url }}" class="card-img-top" alt="Obrázek události"
+                                         style="height: 200px; object-fit: cover; cursor: pointer;">
+                                {% else %}
+                                    <img src="{% static 'images/placeholder.png' %}" class="card-img-top"
+                                         alt="Placeholder obrázek"
+                                         style="height: 200px; object-fit: cover; cursor: pointer;">
+                                {% endif %}
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{% url 'event-detail' event.pk %}"
+                                       style="cursor: pointer;">{{ event.name }}</a>
+                                </h5>
+                                <p class="card-text">
+                                    <strong>Typ:</strong> {{ event.type.name }}<br>
+                                    <strong>Datum:</strong> {{ event.start_date_time|date:"d.m.Y H:i" }}<br>
+                                    <strong>Místo:</strong> {{ event.location.name }}, {{ event.location.city.name }}
+                                </p>
+                                {% if event.description %}
+                                    <p class="card-text">
+                                        <small class="text-muted">{{ event.description|truncatechars:50 }}</small>
+                                    </p>
+                                {% endif %}
+                                <a href="{% url 'event-detail' event.pk %}" class="btn btn-primary">Zobrazit detail</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                V databázi není žádná akce.
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
