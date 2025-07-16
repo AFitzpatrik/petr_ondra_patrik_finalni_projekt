@@ -65,20 +65,16 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [ ] 8.3 Řazení od nejnovějších
 
 
-- [ ] 9.0 Seznam míst  - ONDRA
-  - [ ] 9.1 Proklik na události v dánem místě
+- [ ] 9.0 Seznam měst  - ONDRA
+  - [ ] 9.1 Proklik na události v dánem městě
 
 
-- [ ] 10.0 Seznam měst  - ONDRA
-  - [ ] 10.1 Proklik na události v dánem městě
+- [ ] 10.0 Přihlášení na akci
+  - [ ] 10.1 Pouze přihlášený uživatel
+  - [ ] 10.2 Událost se přidá uživateli do MOJE UDÁLOSTI
 
 
-- [ ] 11.0 Přihlášení na akci
-  - [ ] 11.1 Pouze přihlášený uživatel
-  - [ ] 12.1 Událost se přidá uživateli do MOJE UDÁLOSTI
-
-
-- [ ] 12.0 API počasí/mapa - PETR
+- [ ] 11.0 API počasí/mapa - PETR
 
 
 
