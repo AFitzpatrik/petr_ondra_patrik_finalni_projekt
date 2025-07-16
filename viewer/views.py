@@ -5,7 +5,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.utils.timezone import now
 from django.views.generic import ListView
 from django.views.generic import DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from .forms import CommentForm
 from viewer.models import Event, Comment
@@ -47,11 +47,12 @@ class LocationsListView(ListView):
     context_object_name = 'locations'
 
 
-class EventCreateView(LoginRequiredMixin,CreateView):
+class EventCreateView(PermissionRequiredMixin,CreateView):
     model = Event
     form_class = EventForm
     template_name = 'event_form.html'
     success_url = reverse_lazy('events')
+    permission_required = 'viewer.add_event'
 
     def form_valid(self, form):
         form.instance.owner_of_event = self.request.user
@@ -81,7 +82,7 @@ def event_detail(request, pk):
         'form': form,
     })
 
-class EventUpdateView(LoginRequiredMixin, UpdateView):
+class EventUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'event_update_form.html'
     model = Event
     form_class = EventForm
@@ -94,10 +95,12 @@ class EventUpdateView(LoginRequiredMixin, UpdateView):
         print('Formulář není validní')
         return super().form_invalid(form)
     
-class EventDeleteView(DeleteView):
+class EventDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'event_delete_form.html'
     model = Event
     success_url = reverse_lazy('events')
+    permission_required = 'viewer.delete_event'
+
 
 class EventDetailView(DetailView):
     model = Event

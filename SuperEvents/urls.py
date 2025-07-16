@@ -25,15 +25,15 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from accounts.views import SignUpView, UserLogoutView, RegistrationSuccessView, LogoutSuccessView, LoginSuccessView
 from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, search, \
-    EventUpdateView, EventDeleteView
+    EventUpdateView, EventDeleteView, EventCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('events/', EventsListView.as_view(), name='events'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='event_detail'),
+    path('event/create/', EventCreateView.as_view(), name='event_create'),
     path('event/<int:pk>/update/', EventUpdateView.as_view(), name='event_update'),
-    #DETELE EVENT
     path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event_delete'),
     path('cities/', CitiesListView.as_view(), name='cities'),
     path('locations/', LocationsListView.as_view(), name='locations'),

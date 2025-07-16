@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}404 - Stránka nenalezena{% endblock %}
+{% block content %}
+    <div class="text-center">
+        <h1 class="display-1">404</h1>
+        <h2 class="mb-4">Stránka nenalezena</h2>
+        <p class="lead">Stránka neexistuje nebo byla přesunuta.</p>
+        <a href="{% url 'home' %}" class="btn btn-primary mt-3">Zpět na hlavní stránku</a>
+    </div>
+{% endblock %} 
