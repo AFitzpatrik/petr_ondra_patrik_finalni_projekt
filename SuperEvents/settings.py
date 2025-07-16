@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_dump_load_utf8',
+    'rest_framework',
 
+    'api',
     'viewer',
     'accounts',
 ]
