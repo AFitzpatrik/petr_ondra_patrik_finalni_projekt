@@ -44,7 +44,7 @@ class GetWeatherForCityTests(TestCase):
         self.assertIsNone(result)
 
     @patch('viewer.api_weather.requests.get')
-    def test_get_weather_for_city_invali_json(self, mock_get):
+    def test_get_weather_for_city_invalid_json(self, mock_get):
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = {
