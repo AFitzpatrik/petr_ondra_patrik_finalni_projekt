@@ -24,7 +24,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 from accounts.views import SignUpView, UserLogoutView, RegistrationSuccessView, LogoutSuccessView, LoginSuccessView
-from api.views import Events
+from api.views import Events, AllEvents, FilteredEvents
 from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, EventCreateView, search
 
 urlpatterns = [
@@ -49,7 +49,9 @@ urlpatterns = [
     path('accounts/password_reset/done/', PasswordResetDoneView.as_view(template_name='password_reset_done.html'), name='password_reset_done'),
     path('accounts/', include('django.contrib.auth.urls')),
 
-    path('api/events/', Events.as_view(), name='api_events'),
+    path('api/events/', Events.as_view(), name='events'),
+    path('api/all_events/', AllEvents.as_view(), name='all_events'),
+    path('api/filtered_events/', FilteredEvents.as_view(), name='filtered_events'),
 ]
 
 
