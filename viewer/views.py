@@ -22,7 +22,7 @@ class EventsListView(ListView):
     model = Event
     context_object_name = 'events'
 
-
+"""
 class EventDetailView(DetailView): #Eventdetail
     model = Event
     template_name = 'event_detail.html'
@@ -34,7 +34,7 @@ class EventDetailView(DetailView): #Eventdetail
         weather = get_weather_for_city(city_name)
         context['weather'] = weather
         return context
-
+"""
 class CitiesListView(ListView):
     template_name = 'cities.html'
     model = City
@@ -86,6 +86,9 @@ class EventDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        city_name = self.object.location.city.name
+        weather = get_weather_for_city(city_name)
+        context['weather'] = weather
         context['comment_form'] = CommentForm()
         return context
 

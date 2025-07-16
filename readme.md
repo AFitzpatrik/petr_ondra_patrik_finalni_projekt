@@ -15,8 +15,8 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 -   [x] 2.7 Proklik ze seznamu událostí
 
 
-- [ ] 3.0 Vyhledávání událostí - PETR
-  - [ ] 3.1 Textové pole pro vyhledávání
+- [x] 3.0 Vyhledávání událostí - PETR
+  - [x] 3.1 Textové pole pro vyhledávání
 
 
 - [x] 4.0 Přidávání událostí - ONDRA
@@ -74,11 +74,12 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 - [ ] 11.0 Přihlášení na akci
   - [ ] 11.1 Pouze přihlášený uživatel
-  - [ ] 12.1 Událost se přidá uživateli do MOJE UDÁLOSTI
+  - [ ] 11.1 Událost se přidá uživateli do MOJE UDÁLOSTI
 
 
-- [ ] 12.0 API počasí/mapa - PETR
-
+- [ ] 12.0 API cizí - PETR
+-   [x] 12.1.Počasí
+-   [ ] 12.2 Mapa
 
 
 
