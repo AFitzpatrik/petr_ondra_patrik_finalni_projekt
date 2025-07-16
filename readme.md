@@ -31,9 +31,9 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 - [ ] 5.0 Úprava událostí - PATRIK
   - [x] 5.1 Úprava 
     - [X] 5.1.1 Pouze PŘIHLÁŠENÝ UŽIVATEL
-    - [ ] 5.1.2 Pouze ORGANIZÁTOR
+    - [x] 5.1.2 Pouze ORGANIZÁTOR
   - [x] 5.2 Mazání 
-    - [ ] 5.2.1 Pouze ORGANIZÁTORA
+    - [x] 5.2.1 Pouze ORGANIZÁTORA
     - [ ] 5.2.2 Pouze ORGANIZÁTOR který je VLASTNÍK
 
 
@@ -56,8 +56,8 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 
 - [ ] 7.0 Autorizace - PATRIK
-  -[ ] 7.1 role organizátora (vytvořit v admin panelu)
-    - [ ] 7.1.1 organizátor může PŘIDAT/ZMĚNIT EVENT
+  -[x] 7.1 role organizátora (vytvořit v admin panelu)
+    - [x] 7.1.1 organizátor může PŘIDAT/ZMĚNIT EVENT
     - [ ] 7.1.2 organizátor může PŘIDAT/ZMĚNIT CITY
     - [ ] 7.1.3 organizátor může PŘIDAT/ZMĚNIT COUNTRY
     - [ ] 7.1.4 organizátor může PŘIDAT/ZMĚNIT LOCATION
