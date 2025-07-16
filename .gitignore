@@ -4,3 +4,4 @@
 /.env
 /viewer/migrations
 /accounts/migrations
+/api/migrations/
