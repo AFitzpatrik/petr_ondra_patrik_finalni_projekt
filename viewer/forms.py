@@ -16,9 +16,15 @@ class EventForm(forms.ModelForm):
             'location',
         ]
         widgets = {
-            'start_date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-            'end_date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'start_date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
+            'end_date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in ['start_date_time', 'end_date_time']:
+            if self.instance and getattr(self.instance, field):
+                self.fields[field].initial = getattr(self.instance, field).strftime('%Y-%m-%dT%H:%M')
 
 class CommentForm(forms.ModelForm):
     class Meta:
