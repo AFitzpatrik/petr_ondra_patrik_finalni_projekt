@@ -84,8 +84,9 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 
 - [ ] 13.0 Admin panel - KDYŽ BUDE ČAS
-
-
+    [ ] 12.1 Počasí
+    [ ] 12.2 Mapa
+    [ ] 12.3 Rest API
 
 
 
