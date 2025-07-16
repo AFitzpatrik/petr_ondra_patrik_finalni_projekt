@@ -30,8 +30,9 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 - [ ] 5.0 Úprava událostí - PATRIK
   - [x] 5.1 Úprava 
-    - [ ] 5.1.1 Pouze ORGANIZÁTOR
-  - [ ] 5.2 Mazání 
+    - [X] 5.1.1 Pouze PŘIHLÁŠENÝ UŽIVATEL
+    - [ ] 5.1.2 Pouze ORGANIZÁTOR
+  - [x] 5.2 Mazání 
     - [ ] 5.2.1 Pouze ORGANIZÁTORA
     - [ ] 5.2.2 Pouze ORGANIZÁTOR který je VLASTNÍK
 
