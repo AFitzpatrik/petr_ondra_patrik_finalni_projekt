@@ -7,7 +7,7 @@
 {% block content %}
     <h1>Seznam měst</h1>
     {% for city in cities %}
-        {{ city }} <br>
+       {{ city.name }} – {{ city.event_count }} událostí<br>
     {% empty %}
         V databázi není žádné město.
     {% endfor %}

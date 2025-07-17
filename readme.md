@@ -120,6 +120,7 @@ STRUKTURA DATABÁZE
   - [x] 3.1 name
   - [x] 3.2 country (FK -> Country)
   - [x] 3.3 zip code
+  - [x] 3.4 number of events
 
 
 - [x] 4.0 Country

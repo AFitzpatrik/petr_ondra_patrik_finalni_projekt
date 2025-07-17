@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from .forms import CommentForm
 from viewer.models import Event, Comment
+from django.db.models import Count
 
 from viewer.api_weather import get_weather_for_city
 from viewer.models import Event, City, Location
@@ -39,6 +40,10 @@ class CitiesListView(ListView):
     template_name = 'cities.html'
     model = City
     context_object_name = 'cities'
+
+    def get_queryset(self):
+        return City.objects.annotate(event_count=Count('locations__events'))
+
 
 class LocationsListView(ListView):
     template_name = 'locations.html'
