@@ -49,7 +49,7 @@ urlpatterns = [
     path('accounts/password_reset/done/', PasswordResetDoneView.as_view(template_name='password_reset_done.html'), name='password_reset_done'),
     path('accounts/', include('django.contrib.auth.urls')),
 
-    path('api/events/', Events.as_view(), name='events'),
+    path('api/events/', Events.as_view(), name='api_events'),
     path('api/all_events/', AllEvents.as_view(), name='all_events'),
     path('api/filtered_events/', FilteredEvents.as_view(), name='filtered_events'),
 ]
