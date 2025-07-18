@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -82,6 +83,7 @@ def event_detail(request, pk):
         'form': form,
     })
 
+
 class EventUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'event_update_form.html'
     model = Event
@@ -94,7 +96,8 @@ class EventUpdateView(PermissionRequiredMixin, UpdateView):
     def form_invalid(self, form):
         print('Formulář není validní')
         return super().form_invalid(form)
-    
+
+
 class EventDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'event_delete_form.html'
     model = Event
@@ -129,6 +132,7 @@ class EventDetailView(DetailView):
         context['comment_form'] = form
         return self.render_to_response(context)
 
+
 def search(request):
     search = request.GET.get('search', '').strip()
     filter_type = request.GET.get('filter', 'all')
@@ -149,6 +153,12 @@ def search(request):
         'filter': filter_type
     }
     return render(request, 'search.html', context)
+
+
+class ProfileDetailView(DetailView):
+    model = User
+    template_name = 'profile_detail.html'
+    context_object_name = 'profile'
 
 
 

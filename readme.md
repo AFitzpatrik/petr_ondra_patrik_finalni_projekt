@@ -37,7 +37,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
     - [ ] 5.2.2 Pouze ORGANIZÁTOR který je VLASTNÍK
 
 
-- [ ] 6.0 Autentizace - PATRIK
+- [x] 6.0 Autentizace - PATRIK
   - [x] 6.1 registrační formulář - REGISTRACE
     - [x] 6.1.1  email
     - [x] 6.1.2  user name
@@ -48,7 +48,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
     - [x] 6.3.1 Dropdown menu
     - [x] 6.3.2 Změna hesla
     - [x] 6.3.3 Reset hesla
-    - [ ] 6.3.4 Můj profil page
+    - [x] 6.3.4 Můj profil page
   - [x] 6.4 Registration success page
     - [x] 6.5 Proklik na login
   - [x] 6.5 Logout success page
@@ -76,7 +76,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 - [ ] 10.0 Přihlášení na akci
   - [ ] 10.1 Pouze přihlášený uživatel
-  - [ ] 10.2 Událost se přidá uživateli do MOJE UDÁLOSTI
+  - [ ] 10.2 Událost se přidá uživateli do PŘIHLÁŠENÉ UDÁLOSTI v profilu (nebo udělat další tab v dropdown menu)
 
 
 - [ ] 11.0 API počasí/mapa - PETR
