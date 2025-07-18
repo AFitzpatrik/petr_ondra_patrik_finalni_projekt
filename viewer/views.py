@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
@@ -6,7 +7,7 @@ from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
-from .forms import CommentForm
+from .forms import CommentForm, CityForm
 from viewer.models import Event, Comment
 
 from viewer.api_weather import get_weather_for_city
@@ -108,6 +109,18 @@ class EventDetailView(DetailView):
         context = self.get_context_data()
         context['comment_form'] = form
         return self.render_to_response(context)
+
+
+class CityCreateView(CreateView):
+    model = City
+    form_class = CityForm
+    template_name='city_form.html'
+    success_url = reverse_lazy('cities')
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Formulář nebyl správně vyplněn.')
+        return super().form_invalid(form)
+
 
 def search(request):
     search = request.GET.get('search', '').strip()

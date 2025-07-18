@@ -80,14 +80,16 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 - [ ] 12.0 API cizí - PETR
 -   [x] 12.1.Počasí
 -   [ ] 12.2 Mapa
+-   [x] 12.3 Rest API
 
-
-
-- [ ] 13.0 Admin panel - KDYŽ BUDE ČAS
-    [ ] 12.1 Počasí
-    [ ] 12.2 Mapa
-    [ ] 12.3 Rest API
-
+- [ ] 13.0 Přidávání Míst, Měst, Typu
+  - [ ] 13.1 Type
+  - [ ] 13.2 Location
+  - [ ] 13.3 City
+  - [ ] 13.4 Country
+  
+- [ ] 14.0 Admin panel - KDYŽ BUDE ČAS
+    
 
 
 
