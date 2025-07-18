@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Profil uživatele: {{ profile.username }}
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-12 col-md-10 col-lg-8">
+        <div class="card shadow rounded p-4">
+            <div class="card-body">
+                <h2 class="card-title text-primary mb-4 text-center">Profil uživatele: {{ profile.username }}</h2>
+                <div class="container">
+                    <div class="row mb-3">
+                        <div class="col-md-6 d-flex justify-content-between">
+                            <span class="font-weight-bold">Uživatelské jméno:</span>
+                            <span>{{ profile.username }}</span>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-between">
+                            <span class="font-weight-bold">Email:</span>
+                            <span>{{ profile.email }}</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6 d-flex justify-content-between">
+                            <span class="font-weight-bold">Jméno:</span>
+                            <span>{{ profile.first_name }}</span>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-between">
+                            <span class="font-weight-bold">Příjmení:</span>
+                            <span>{{ profile.last_name }}</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6 d-flex justify-content-between">
+                            <span class="font-weight-bold">Datum registrace:</span>
+                            <span>{{ profile.date_joined|date:"d.m.Y" }}</span>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-between">
+                            <span class="font-weight-bold">Poslední přihlášení:</span>
+                            <span>{% if profile.last_login %}{{ profile.last_login|date:"d.m.Y H:i" }}{% else %}-{% endif %}</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Nutno dodělat v models tabulky pro users a dodělat přihlašování na události a organizované události -->
+                {% if perms.viewer.add_event %}
+                <div class="text-center mt-4">
+                    <a href="{% url 'events' %}" class="btn btn-primary">Organizované události</a>
+                    <a href="{% url 'events' %}" class="btn btn-primary">Přihlášené události</a>
+                </div>
+                {% else %}
+                <div class="text-center mt-4">
+                    <a href="{% url 'events' %}" class="btn btn-primary">Přihlášené události</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

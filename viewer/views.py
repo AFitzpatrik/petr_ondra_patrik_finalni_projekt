@@ -1,10 +1,12 @@
+from django.contrib.auth.models import User
+from django.http import HttpResponseForbidden
 from django.shortcuts import render
-from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.utils.timezone import now
 from django.views.generic import ListView
 from django.views.generic import DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from .forms import CommentForm
 from viewer.models import Event, Comment
@@ -45,11 +47,13 @@ class LocationsListView(ListView):
     model = Location
     context_object_name = 'locations'
 
-class EventCreateView(LoginRequiredMixin,CreateView):
+
+class EventCreateView(PermissionRequiredMixin,CreateView):
     model = Event
     form_class = EventForm
     template_name = 'event_form.html'
     success_url = reverse_lazy('events')
+    permission_required = 'viewer.add_event'
 
     def form_valid(self, form):
         form.instance.owner_of_event = self.request.user
@@ -67,7 +71,7 @@ def event_detail(request, pk):
                 comment.event = event
                 comment.user = request.user
                 comment.save()
-                return redirect('event-detail', pk=event.pk)
+                return redirect('event_detail', pk=event.pk)
         else:
             return redirect('login')
     else:
@@ -78,6 +82,28 @@ def event_detail(request, pk):
         'comments': comments,
         'form': form,
     })
+
+
+class EventUpdateView(PermissionRequiredMixin, UpdateView):
+    template_name = 'event_update_form.html'
+    model = Event
+    form_class = EventForm
+    permission_required = 'viewer.change_event'
+
+    def get_success_url(self):
+        return reverse("event_detail", kwargs={"pk": self.object.pk})
+
+    def form_invalid(self, form):
+        print('Formulář není validní')
+        return super().form_invalid(form)
+
+
+class EventDeleteView(PermissionRequiredMixin, DeleteView):
+    template_name = 'event_delete_form.html'
+    model = Event
+    success_url = reverse_lazy('events')
+    permission_required = 'viewer.delete_event'
+
 
 class EventDetailView(DetailView):
     model = Event
@@ -103,11 +129,12 @@ class EventDetailView(DetailView):
             comment.event = self.object
             comment.user = request.user
             comment.save()
-            return redirect('event-detail', pk=self.object.pk)
+            return redirect('event_detail', pk=self.object.pk)
 
         context = self.get_context_data()
         context['comment_form'] = form
         return self.render_to_response(context)
+
 
 def search(request):
     search = request.GET.get('search', '').strip()
@@ -129,6 +156,12 @@ def search(request):
         'filter': filter_type
     }
     return render(request, 'search.html', context)
+
+
+class ProfileDetailView(DetailView):
+    model = User
+    template_name = 'profile_detail.html'
+    context_object_name = 'profile'
 
 
 

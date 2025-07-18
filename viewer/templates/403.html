@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}403 - Přístup zakázán{% endblock %}
+{% block content %}
+    <div class="text-center">
+        <h1 class="display-1">403</h1>
+        <h2 class="mb-4">Přístup zakázán</h2>
+        <p class="lead">Nemáte oprávnění pro zobrazení této stránky.</p>
+        <a href="{% url 'home' %}" class="btn btn-primary mt-3">Zpět na hlavní stránku</a>
+    </div>
+{% endblock %} 

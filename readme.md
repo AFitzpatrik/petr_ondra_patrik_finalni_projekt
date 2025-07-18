@@ -29,14 +29,15 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 
 - [ ] 5.0 Úprava událostí - PATRIK
-  - [ ] 5.1 Úprava 
-    - [ ] 5.1.1 Pouze ORGANIZÁTOR
-  - [ ] 5.2 Mazání 
-    - [ ] 5.2.1 Pouze ORGANIZÁTORA
+  - [x] 5.1 Úprava 
+    - [X] 5.1.1 Pouze PŘIHLÁŠENÝ UŽIVATEL
+    - [x] 5.1.2 Pouze ORGANIZÁTOR
+  - [x] 5.2 Mazání 
+    - [x] 5.2.1 Pouze ORGANIZÁTORA
     - [ ] 5.2.2 Pouze ORGANIZÁTOR který je VLASTNÍK
 
 
-- [ ] 6.0 Autentizace - PATRIK
+- [x] 6.0 Autentizace - PATRIK
   - [x] 6.1 registrační formulář - REGISTRACE
     - [x] 6.1.1  email
     - [x] 6.1.2  user name
@@ -47,7 +48,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
     - [x] 6.3.1 Dropdown menu
     - [x] 6.3.2 Změna hesla
     - [x] 6.3.3 Reset hesla
-    - [ ] 6.3.4 Můj profil page
+    - [x] 6.3.4 Můj profil page
   - [x] 6.4 Registration success page
     - [x] 6.5 Proklik na login
   - [x] 6.5 Logout success page
@@ -55,7 +56,12 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 
 - [ ] 7.0 Autorizace - PATRIK
-  -[ ] 7.1 role organizátora (vytvořit v admin panelu)
+  -[x] 7.1 role organizátora (vytvořit v admin panelu)
+    - [x] 7.1.1 organizátor může PŘIDAT/ZMĚNIT EVENT
+    - [ ] 7.1.2 organizátor může PŘIDAT/ZMĚNIT CITY
+    - [ ] 7.1.3 organizátor může PŘIDAT/ZMĚNIT COUNTRY
+    - [ ] 7.1.4 organizátor může PŘIDAT/ZMĚNIT LOCATION
+    - [ ] 7.1.5 organizátor může PŘIDAT/ZMĚNIT TYPE
 
 
 - [ ] 8.0 Přidávání komentářů - ONDRA
@@ -84,9 +90,9 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 
 - [ ] 13.0 Admin panel - KDYŽ BUDE ČAS
-    [ ] 12.1 Počasí
+    [x] 12.1 Počasí
     [ ] 12.2 Mapa
-    [ ] 12.3 Rest API
+    [x] 12.3 Rest API
 
 
 

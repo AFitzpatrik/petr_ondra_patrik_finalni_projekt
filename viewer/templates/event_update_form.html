@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Úprava události
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center mb-0">Upravit událost</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                <h5>Opravte následující chyby:</h5>
+                                {{ form.errors }}
+                            </div>
+                        {% endif %}
+                        {% for field in form.visible_fields %}
+                            {% if field.name == 'start_date_time' %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="{{ form.start_date_time.id_for_label }}">{{ form.start_date_time.label }}</label>
+                                            {{ form.start_date_time }}
+                                            {% if form.start_date_time.errors %}
+                                                <div class="invalid-feedback d-block">
+                                                    {{ form.start_date_time.errors }}
+                                                </div>
+                                            {% endif %}
+                                            {% if form.start_date_time.help_text %}
+                                                <small class="form-text text-muted">{{ form.start_date_time.help_text }}</small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="{{ form.end_date_time.id_for_label }}">{{ form.end_date_time.label }}</label>
+                                            {{ form.end_date_time }}
+                                            {% if form.end_date_time.errors %}
+                                                <div class="invalid-feedback d-block">
+                                                    {{ form.end_date_time.errors }}
+                                                </div>
+                                            {% endif %}
+                                            {% if form.end_date_time.help_text %}
+                                                <small class="form-text text-muted">{{ form.end_date_time.help_text }}</small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif field.name != 'end_date_time' %}
+                                <div class="form-group mb-3">
+                                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ field.errors }}
+                                        </div>
+                                    {% endif %}
+                                    {% if field.help_text %}
+                                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">Uložit změny</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    flatpickr("input[name='start_date_time']", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true
+    });
+    flatpickr("input[name='end_date_time']", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true
+    });
+</script>
+{% endblock %} 

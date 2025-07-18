@@ -36,26 +36,36 @@
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-header">
-            <h4 class="mb-0">Komentáře</h4>
-        </div>
-        <div class="card-body">
-            {% if event.comments.all %}
-                <ul class="list-group list-group-flush">
-                    {% for comment in event.comments.all %}
-                        <li class="list-group-item">
-                            <strong>{{ comment.user.username }}</strong> <span
-                                class="text-muted">({{ comment.date_time_posted }})</span><br>
-                            {{ comment.content }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>Žádné komentáře.</p>
-            {% endif %}
-        </div>
+
+<div class="d-flex justify-content-end mb-4">
+    {% if perms.viewer.change_event %}
+    <a href="{% url 'event_update' event.pk %}" class="btn btn-primary mr-2">Upravit</a>
+    {% endif %}
+    {% if perms.viewer.delete_event %}
+    <a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">Vymazat</a>
+    {% endif %}
+</div>
+
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="mb-0">Komentáře</h4>
     </div>
+    <div class="card-body">
+        {% if event.comments.all %}
+            <ul class="list-group list-group-flush">
+            {% for comment in event.comments.all %}
+                <li class="list-group-item">
+                    <strong>{{ comment.user.username }}</strong> <span class="text-muted">({{ comment.date_time_posted }})</span><br>
+                    {{ comment.content }}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>Žádné komentáře.</p>
+        {% endif %}
+    </div>
+</div>
 
     {% if user.is_authenticated %}
         <div class="card mt-4">

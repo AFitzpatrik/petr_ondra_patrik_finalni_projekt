@@ -16,7 +16,7 @@
                 {% for event in events %}
                     <div class="col-md-6 col-lg-4 mb-4">
                         <div class="card h-100">
-                            <a href="{% url 'event-detail' event.pk %}" class="text-decoration-none">
+                            <a href="{% url 'event_detail' event.pk %}" class="text-decoration-none">
                                 {% if event.event_image %}
                                     <img src="{{ event.event_image.url }}" class="card-img-top" alt="Obrázek události" style="height: 200px; object-fit: cover; cursor: pointer;">
                                 {% else %}
@@ -25,7 +25,7 @@
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a href="{% url 'event-detail' event.pk %}" style="cursor: pointer;">{{ event.name }}</a>
+                                    <a href="{% url 'event_detail' event.pk %}" style="cursor: pointer;">{{ event.name }}</a>
                                 </h5>
                                 <p class="card-text">
                                     <strong>Typ:</strong> {{ event.type.name }}<br>
@@ -37,7 +37,7 @@
                                         <small class="text-muted">{{ event.description|truncatechars:50 }}</small>
                                     </p>
                                 {% endif %}
-                                <a href="{% url 'event-detail' event.pk %}" class="btn btn-primary">Zobrazit detail</a>
+                                <a href="{% url 'event_detail' event.pk %}" class="btn btn-primary">Zobrazit detail</a>
                             </div>
                         </div>
                     </div>

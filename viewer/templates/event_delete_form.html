@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Potvrzení smazání události
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-12 col-md-8 col-lg-5">
+        <div class="card shadow rounded text-center p-4">
+            <div class="card-body">
+                <h2 class="card-title text-danger mb-3">Opravdu chcete smazat tuto událost? Tato akce je nevratná.</h2>
+                <p class="mb-4"><strong>{{ object.name }}</strong></p>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-lg mr-2">ANO, smazat</button>
+                    <a href="{% url 'event_detail' object.pk %}" class="btn btn-secondary btn-lg">NE, zpět</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

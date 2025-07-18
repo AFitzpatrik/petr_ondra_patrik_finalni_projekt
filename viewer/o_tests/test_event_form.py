@@ -20,13 +20,13 @@ class EventCreateViewTest(TestCase):
         self.test_image_path = os.path.join(os.path.dirname(__file__), 'media', 'test_image.jpg')
 
     def test_redirect_if_not_logged_in(self):
-        response = self.client.get(reverse('event-create'))
+        response = self.client.get(reverse('event_create'))
         self.assertNotEqual(response.status_code, 200)
-        self.assertRedirects(response, f"/accounts/login/?next={reverse('event-create')}")
+        self.assertRedirects(response, f"/accounts/login/?next={reverse('event_create')}")
 
     def test_logged_in_user_can_create_event(self):
         self.client.login(username='testuser', password='password')
-        response = self.client.post(reverse('event-create'), {
+        response = self.client.post(reverse('event_create'), {
             'name': 'Test Událost',
             'type': self.event_type.id,
             'description': 'Popis události',
@@ -52,7 +52,7 @@ class EventCreateViewTest(TestCase):
                 'location': self.location.id,
                 'event_image': img,
             }
-            response = self.client.post(reverse('event-create'), form_data, follow=True)
+            response = self.client.post(reverse('event_create'), form_data, follow=True)
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(Event.objects.filter(name='Test Událost').exists())
@@ -73,7 +73,7 @@ class EventCreateViewTest(TestCase):
                 'location': self.location.id,
                 'event_image': img,
             }
-            self.client.post(reverse('event-create'), form_data)
+            self.client.post(reverse('event_create'), form_data)
 
         event = Event.objects.get(name='Událost s obrázkem')
         image_path = event.event_image.path
