@@ -29,7 +29,7 @@ class CommentTests(TestCase):
 
     def test_anonymous_user_cannot_post_comment(self):
         response = self.client.post(
-            reverse('event-detail', args=[self.event.id]),
+            reverse('event_detail', args=[self.event.id]),
             {'content': 'Těším se!'}
         )
         self.assertNotEqual(response.status_code, 200)
@@ -38,7 +38,7 @@ class CommentTests(TestCase):
     def test_logged_in_user_can_post_comment(self):
         self.client.login(username='testuser', password='password')
         response = self.client.post(
-            reverse('event-detail', args=[self.event.id]),
+            reverse('event_detail', args=[self.event.id]),
             {'content': 'Super akce!'},
             follow=True
         )
@@ -48,7 +48,7 @@ class CommentTests(TestCase):
     def test_comment_saves_correctly_to_database(self):
         self.client.login(username='testuser', password='password')
         self.client.post(
-            reverse('event-detail', args=[self.event.id]),
+            reverse('event_detail', args=[self.event.id]),
             {'content': 'Už se těším!'}
         )
 
