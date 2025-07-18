@@ -70,26 +70,36 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [ ] 8.3 Řazení od nejnovějších
 
 
-- [ ] 9.0 Seznam míst  - ONDRA
-  - [ ] 9.1 Proklik na události v dánem místě
+- [ ] 9.0 Seznam měst  - ONDRA
+  - [ ] 9.1 Proklik na události v dánem městě
 
 
-- [ ] 10.0 Seznam měst  - ONDRA
-  - [ ] 10.1 Proklik na události v dánem městě
+- [ ] 10.0 Přihlášení na akci
+  - [ ] 10.1 Pouze přihlášený uživatel
+  - [ ] 10.2 Událost se přidá uživateli do PŘIHLÁŠENÉ UDÁLOSTI v profilu (nebo udělat další tab v dropdown menu)
 
 
-- [ ] 11.0 Přihlášení na akci
-  - [ ] 11.1 Pouze přihlášený uživatel
-  - [ ] 11.1 Událost se přidá uživateli do MOJE UDÁLOSTI
+- [x] 11.0 API počasí - PETR
+
+- [x] 12.0 Přidat Error stránky
+  - [x] 12.1 - Error 403 Forbidden
+  - [x] 12.2 - Error 404 Not found
 
 
-- [ ] 12.0 API cizí - PETR
+- [ ] 13.0 Přidávání Míst, Měst, Typu
+  - [ ] 13.1 Type
+  - [ ] 13.2 Location
+  - [ ] 13.3 City
+  - [ ] 14.3 Country
+
+
+
+- [ ] 14.0 API cizí - PETR
 -   [x] 12.1.Počasí
 -   [ ] 12.2 Mapa
 
 
-
-- [ ] 13.0 Admin panel - KDYŽ BUDE ČAS
+- [ ] 15.0 Admin panel - KDYŽ BUDE ČAS
     [x] 12.1 Počasí
     [ ] 12.2 Mapa
     [x] 12.3 Rest API
