@@ -45,7 +45,7 @@ class RegistrationTest(TestCase):
             'email': 'neplatnyemail'
         })
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Zadejte platnou e-mailovou adresu.")
+        self.assertContains(response, "Vložte platnou e-mailovou adresu.")
 
     def test_registration_missing_required_field(self):
         response = self.client.post(reverse('signup'), {
@@ -55,5 +55,5 @@ class RegistrationTest(TestCase):
             'email': 'uzivatel4@uzivatel.cz'
         })
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Toto pole je třeba vyplnit.")
+        self.assertContains(response, "Toto pole je vyžadováno.")
         
