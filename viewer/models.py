@@ -104,6 +104,10 @@ class Event(models.Model):
     def get_end_date_cz_format(self):
         return self.end_date_time.strftime('%d.%m.%Y, %H:%M')
 
+    @property
+    def available_spots(self):
+        return self.capacity - self.reservations.count()
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")

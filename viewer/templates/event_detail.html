@@ -31,41 +31,61 @@
                     <p><strong>Město:</strong> {{ event.location.city.name }}</p>
                     <p><strong>Stát:</strong> {{ event.location.city.country.name }}</p>
                     <p><strong>Popis:</strong> {{ event.description }} </p>
+
+                    <hr>
+                    <p><strong>Kapacita:</strong> {{ event.capacity }}</p>
+                    <p><strong>Volných míst:</strong> {{ event.available_spots }}</p>
+
+                    {% if user.is_authenticated %}
+                        {% if has_reservation %}
+                            <form method="post" action="{% url 'cancel_reservation' event.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-warning mt-2">Zrušit rezervaci</button>
+                            </form>
+                        {% elif event.available_spots > 0 %}
+                            <form method="post" action="{% url 'make_reservation' event.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success mt-2">Rezervovat místo</button>
+                            </form>
+                        {% else %}
+                            <p class="text-danger"><strong>Událost je plně obsazena.</strong></p>
+                        {% endif %}
+                    {% else %}
+                        <p><a href="{% url 'login' %}">Přihlas se</a>, abys mohl rezervovat nebo zrušit rezervaci.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 
-
-<div class="d-flex justify-content-end mb-4">
-    {% if perms.viewer.change_event %}
-    <a href="{% url 'event_update' event.pk %}" class="btn btn-primary mr-2">Upravit</a>
-    {% endif %}
-    {% if perms.viewer.delete_event %}
-    <a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">Vymazat</a>
-    {% endif %}
-</div>
-
-
-<div class="card">
-    <div class="card-header">
-        <h4 class="mb-0">Komentáře</h4>
-    </div>
-    <div class="card-body">
-        {% if event.comments.all %}
-            <ul class="list-group list-group-flush">
-            {% for comment in event.comments.all %}
-                <li class="list-group-item">
-                    <strong>{{ comment.user.username }}</strong> <span class="text-muted">({{ comment.date_time_posted }})</span><br>
-                    {{ comment.content }}
-                </li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>Žádné komentáře.</p>
+    <div class="d-flex justify-content-end mb-4">
+        {% if perms.viewer.change_event %}
+        <a href="{% url 'event_update' event.pk %}" class="btn btn-primary mr-2">Upravit</a>
+        {% endif %}
+        {% if perms.viewer.delete_event %}
+        <a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">Vymazat</a>
         {% endif %}
     </div>
-</div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="mb-0">Komentáře</h4>
+        </div>
+        <div class="card-body">
+            {% if event.comments.all %}
+                <ul class="list-group list-group-flush">
+                {% for comment in event.comments.all %}
+                    <li class="list-group-item">
+                        <strong>{{ comment.user.username }}</strong> <span class="text-muted">({{ comment.date_time_posted }})</span><br>
+                        {{ comment.content }}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>Žádné komentáře.</p>
+            {% endif %}
+        </div>
+    </div>
 
     {% if user.is_authenticated %}
         <div class="card mt-4">
