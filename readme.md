@@ -90,7 +90,8 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [ ] 13.1 Type
   - [ ] 13.2 Location
   - [ ] 13.3 City
-  - [ ] 14.3 Country
+  - [ ] 14.3 Country 
+    - UDĚLAT SKRZ VYSKAKOVACÍ OKNO JAKO V DJANGO ADMINU
 
 
 
