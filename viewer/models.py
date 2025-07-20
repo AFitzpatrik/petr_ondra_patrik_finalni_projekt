@@ -73,6 +73,7 @@ class Event(models.Model):
     event_image = models.ImageField(upload_to='event_images/', null=True, blank=True)
     owner_of_event = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owned_events")
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="events")
+    capacity = models.PositiveIntegerField(default=0)
     
     class Meta:
         ordering = ['start_date_time', 'name']
@@ -123,3 +124,17 @@ class Comment(models.Model):
                 f" date_posted={self.date_time_posted}, time_updated={self.date_time_updated})")
 
 
+class Reservation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reservations")
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="reservations")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'event')  # pouze jedna rezervace na událost pro jednoho uživatele
+        ordering = ['created_at']
+
+    def __str__(self):
+        return f"{self.user.username} rezervace na {self.event.name}"
+
+    def __repr__(self):
+        return f"Reservation(user={self.user}, event={self.event}, created_at={self.created_at})"
