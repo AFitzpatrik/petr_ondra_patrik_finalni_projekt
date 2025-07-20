@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 
 from .forms import CommentForm, EventForm
-from viewer.models import Event, Comment, City, Location, Reservation
+from viewer.models import Event, Comment, City, Location, Reservation, Type
 from viewer.api_weather import get_weather_for_city
 from django.db.models import Count
 
@@ -197,3 +197,18 @@ def cancel_reservation(request, event_id):
         messages.info(request, "Nemáš rezervaci na tuto událost.")
 
     return redirect('event_detail', pk=event_id)
+
+class TypeCreateView(PermissionRequiredMixin, CreateView):
+    model = Type
+    fields = ['name']
+    template_name = 'type_form.html'
+    success_url = reverse_lazy('event_create')
+    permission_required = 'viewer.add_type'
+
+
+class LocationCreateView(PermissionRequiredMixin, CreateView):
+    model = Location
+    fields = ['name', 'address', 'city']
+    template_name = 'location_form.html'
+    success_url = reverse_lazy('event_create')
+    permission_required = 'viewer.add_location'

@@ -26,7 +26,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from accounts.views import SignUpView, UserLogoutView, RegistrationSuccessView, LogoutSuccessView, LoginSuccessView
 from api.views import Events, AllEvents, FilteredEvents
 from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, search, \
-    EventUpdateView, EventDeleteView, EventCreateView, ProfileDetailView, make_reservation, cancel_reservation
+    EventUpdateView, EventDeleteView, EventCreateView, ProfileDetailView, make_reservation, cancel_reservation, \
+    TypeCreateView, LocationCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,6 +37,8 @@ urlpatterns = [
     path('event/<int:event_id>/reserve/', make_reservation, name='make_reservation'),
     path('event/<int:event_id>/cancel/', cancel_reservation, name='cancel_reservation'),
     path('event/create/', EventCreateView.as_view(), name='event_create'),
+    path('type/create/', TypeCreateView.as_view(), name='type_create'),
+    path('location/create/', LocationCreateView.as_view(), name='location_create'),
     path('event/<int:pk>/update/', EventUpdateView.as_view(), name='event_update'),
     path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event_delete'),
     path('cities/', CitiesListView.as_view(), name='cities'),

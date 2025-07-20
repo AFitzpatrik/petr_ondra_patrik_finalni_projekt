@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Přidat nový typ{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Přidat nový typ události</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Název typu:</label>
+            {{ form.name }}
+        </div>
+        <button type="submit" class="btn btn-primary">Uložit</button>
+        <a href="{% url 'event_create' %}" class="btn btn-secondary ml-2">Zpět na událost</a>
+    </form>
+</div>
+{% endblock %}
