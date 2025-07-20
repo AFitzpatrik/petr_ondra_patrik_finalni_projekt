@@ -30,7 +30,7 @@ from viewer.views import home, EventsListView, EventDetailView, CitiesListView, 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),
+    path('', EventsListView.as_view(), name='home'),
     path('events/', EventsListView.as_view(), name='events'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='event_detail'),
     path('event/create/', EventCreateView.as_view(), name='event_create'),
