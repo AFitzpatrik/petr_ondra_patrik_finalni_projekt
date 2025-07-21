@@ -11,24 +11,28 @@
     <div class="container">
         <h1 class="mb-4">Události</h1>
 
-        <form method="get" class="row mb-4">
-            <div class="col-md-3">
-                <input type="text" name="city" class="form-control" placeholder="Město" value="{{ city }}">
+        <form method="get" class="row mb-4 g-1 align-items-end">
+            <div class="col">
+                <label for="filter-city" class="form-label mb-1">Město</label>
+                <input type="text" id="filter-city" name="city" class="form-control form-control-sm" placeholder="Město" value="{{ city }}">
             </div>
-            <div class="col-md-3">
-                <input type="text" name="type" class="form-control" placeholder="Typ události" value="{{ type }}">
+            <div class="col">
+                <label for="filter-type" class="form-label mb-1">Typ události</label>
+                <input type="text" id="filter-type" name="type" class="form-control form-control-sm" placeholder="Typ události" value="{{ type }}">
             </div>
-            <div class="col-md-2">
-                <input type="date" name="start_date" class="form-control" value="{{ start_date }}">
+            <div class="col">
+                <label for="filter-start-date" class="form-label mb-1">Od</label>
+                <input type="date" id="filter-start-date" name="start_date" class="form-control form-control-sm" value="{{ start_date }}">
             </div>
-            <div class="col-md-2">
-                <input type="date" name="end_date" class="form-control" value="{{ end_date }}">
+            <div class="col">
+                <label for="filter-end-date" class="form-label mb-1">Do</label>
+                <input type="date" id="filter-end-date" name="end_date" class="form-control form-control-sm" value="{{ end_date }}">
             </div>
-            <div class="col-md-1">
-                <button type="submit" class="btn btn-primary w-100">Filtrovat</button>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary btn-sm">Filtrovat</button>
             </div>
-            <div class="cal-md-1">
-                <a href="{% url 'events' %}" class="btn btn-outline-secondary w 100">Zrušit filtr</a>
+            <div class="col-auto">
+                <a href="{% url 'events' %}" class="btn btn-outline-secondary btn-sm">Zrušit filtr</a>
             </div>
         </form>
 
