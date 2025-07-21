@@ -88,7 +88,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [x] typ
   - [x] město
 
-- [ ] 14.0 Stránkování eventů - PATRIK
+- [x] 14.0 Stránkování eventů - PATRIK
 
 
 - [ ] 15.0 Přehled organizátora o události - ONDRA
