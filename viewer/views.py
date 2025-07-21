@@ -125,6 +125,12 @@ class EventUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = EventForm
     permission_required = 'viewer.change_event'
 
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.owner_of_event != request.user:
+            return HttpResponseForbidden('Nemáte oprávnění upravovat tuto událost.')
+        return super().dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse("event_detail", kwargs={"pk": self.object.pk})
 
@@ -138,6 +144,12 @@ class EventDeleteView(PermissionRequiredMixin, DeleteView):
     model = Event
     success_url = reverse_lazy('events')
     permission_required = 'viewer.delete_event'
+
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.owner_of_event != request.user:
+            return HttpResponseForbidden('Nemáte oprávnění mazat tuto událost.')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class EventDetailView(DetailView):
