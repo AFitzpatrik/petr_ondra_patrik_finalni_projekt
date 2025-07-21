@@ -1,6 +1,10 @@
+{% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container fixed">
-        <a class="navbar-brand" href="{% url 'home' %}">SuperEvents</a>
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'LOGO.png' %}" alt="SuperEvents logo" style="height:48px; width:auto; vertical-align:middle; margin-right:8px;">
+           
+        </a>
         <button
                 class="navbar-toggler" type="button"
                 data-toggle="collapse" data-target="#navbarNavAltMarkup"
