@@ -30,6 +30,42 @@ class EventsListView(ListView):
     model = Event
     context_object_name = 'events'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        city = self.request.GET.get('city')
+        type = self.request.GET.get('type')
+        start_date = self.request.GET.get('start_date')
+        end_date = self.request.GET.get('end_date')
+
+        if city:
+            queryset = queryset.filter(location__city__name__icontains=city)
+
+        if type:
+            queryset = queryset.filter(type__name__icontains=type)
+
+        if start_date:
+            queryset = queryset.filter(start_date_time__date__gte=start_date)
+
+        if end_date:
+            queryset = queryset.filter(end_date_time__date__lte=end_date)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['city'] = self.request.GET.get('city', '')
+        context['type'] = self.request.GET.get('type', '')
+        context['start_date'] = self.request.GET.get('start_date', '')
+        context['end_date'] = self.request.GET.get('end_date', '')
+        return context
+
+
+
+
+
+
+
+
 
 class CitiesListView(ListView):
     template_name = 'cities.html'

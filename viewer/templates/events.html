@@ -10,7 +10,28 @@
 {% block content %}
     <div class="container">
         <h1 class="mb-4">Události</h1>
-        
+
+        <form method="get" class="row mb-4">
+            <div class="col-md-3">
+                <input type="text" name="city" class="form-control" placeholder="Město" value="{{ city }}">
+            </div>
+            <div class="col-md-3">
+                <input type="text" name="type" class="form-control" placeholder="Typ události" value="{{ type }}">
+            </div>
+            <div class="col-md-2">
+                <input type="date" name="start_date" class="form-control" value="{{ start_date }}">
+            </div>
+            <div class="col-md-2">
+                <input type="date" name="end_date" class="form-control" value="{{ end_date }}">
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary w-100">Filtrovat</button>
+            </div>
+            <div class="cal-md-1">
+                <a href="{% url 'events' %}" class="btn btn-outline-secondary w 100">Zrušit filtr</a>
+            </div>
+        </form>
+
         {% if events %}
             <div class="row">
                 {% for event in events %}

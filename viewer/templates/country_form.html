@@ -10,7 +10,7 @@
 
 {% block content %}
 <div class="container">
-
+    {% comment %}
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }} alert-dismissable fade show" role="alert">
@@ -19,6 +19,7 @@
             </div>
         {% endfor %}
     {% endif %}
+    {% endcomment %}
 
     <h2 class="mb-4">
         {% if form.instance.pk %}
