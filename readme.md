@@ -70,7 +70,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [ ] 8.3 Řazení od nejnovějších
 
 
-- [ ] 9.0 Seznam měst  - ONDRA
+- [x] 9.0 Seznam měst  - ONDRA
   - [ ] 9.1 Proklik na události v dánem městě
 
 

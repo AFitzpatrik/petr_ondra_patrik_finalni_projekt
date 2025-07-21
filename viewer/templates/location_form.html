@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Přidat novou lokaci{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Přidat novou lokaci</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Název lokace:</label>
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.address.id_for_label }}">Adresa:</label>
+            {{ form.address }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.city.id_for_label }}">Město:</label>
+            {{ form.city }}
+        </div>
+        <button type="submit" class="btn btn-primary">Uložit</button>
+        <a href="{% url 'event_create' %}" class="btn btn-secondary ml-2">Zpět na událost</a>
+    </form>
+</div>
+{% endblock %}

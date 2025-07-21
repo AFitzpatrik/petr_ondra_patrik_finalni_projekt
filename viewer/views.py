@@ -2,19 +2,18 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.utils.timezone import now
-from django.views.generic import ListView
-from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
-from .forms import CommentForm
-from viewer.models import Event, Comment
+from django.contrib import messages
+
+from .forms import CommentForm, EventForm
+from viewer.models import Event, Comment, City, Location, Reservation, Type
+from viewer.api_weather import get_weather_for_city
 from django.db.models import Count
 
-from viewer.api_weather import get_weather_for_city
-from viewer.models import Event, City, Location
-from .forms import EventForm
 
 def home(request):
     return render(request, 'home.html')
@@ -25,19 +24,7 @@ class EventsListView(ListView):
     model = Event
     context_object_name = 'events'
 
-"""
-class EventDetailView(DetailView): #Eventdetail
-    model = Event
-    template_name = 'event_detail.html'
-    context_object_name = 'event'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        city_name = self.object.location.city.name
-        weather = get_weather_for_city(city_name)
-        context['weather'] = weather
-        return context
-"""
 class CitiesListView(ListView):
     template_name = 'cities.html'
     model = City
@@ -53,7 +40,7 @@ class LocationsListView(ListView):
     context_object_name = 'locations'
 
 
-class EventCreateView(PermissionRequiredMixin,CreateView):
+class EventCreateView(PermissionRequiredMixin, CreateView):
     model = Event
     form_class = EventForm
     template_name = 'event_form.html'
@@ -63,6 +50,7 @@ class EventCreateView(PermissionRequiredMixin,CreateView):
     def form_valid(self, form):
         form.instance.owner_of_event = self.request.user
         return super().form_valid(form)
+
 
 def event_detail(request, pk):
     event = get_object_or_404(Event, pk=pk)
@@ -121,6 +109,14 @@ class EventDetailView(DetailView):
         weather = get_weather_for_city(city_name)
         context['weather'] = weather
         context['comment_form'] = CommentForm()
+
+        if self.request.user.is_authenticated:
+            has_reservation = self.object.reservations.filter(user=self.request.user).exists()
+        else:
+            has_reservation = False
+
+        context['has_reservation'] = has_reservation
+
         return context
 
     def post(self, request, *args, **kwargs):
@@ -168,5 +164,51 @@ class ProfileDetailView(DetailView):
     template_name = 'profile_detail.html'
     context_object_name = 'profile'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+        context['reservations'] = Reservation.objects.filter(user=user)
+        return context
+
+@login_required
+def make_reservation(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+
+    if event.available_spots <= 0:
+        messages.error(request, "Událost je plně obsazena.")
+    else:
+        reservation, created = Reservation.objects.get_or_create(user=request.user, event=event)
+        if created:
+            messages.success(request, "Rezervace byla úspěšně vytvořena.")
+        else:
+            messages.info(request, "Už máš rezervaci na tuto událost.")
+
+    return redirect('event_detail', pk=event_id)
+
+@login_required
+def cancel_reservation(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    reservation = Reservation.objects.filter(user=request.user, event=event).first()
+
+    if reservation:
+        reservation.delete()
+        messages.success(request, "Rezervace byla zrušena.")
+    else:
+        messages.info(request, "Nemáš rezervaci na tuto událost.")
+
+    return redirect('event_detail', pk=event_id)
+
+class TypeCreateView(PermissionRequiredMixin, CreateView):
+    model = Type
+    fields = ['name']
+    template_name = 'type_form.html'
+    success_url = reverse_lazy('event_create')
+    permission_required = 'viewer.add_type'
 
 
+class LocationCreateView(PermissionRequiredMixin, CreateView):
+    model = Location
+    fields = ['name', 'address', 'city']
+    template_name = 'location_form.html'
+    success_url = reverse_lazy('event_create')
+    permission_required = 'viewer.add_location'

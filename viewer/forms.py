@@ -14,10 +14,14 @@ class EventForm(forms.ModelForm):
             'end_date_time',
             'event_image',
             'location',
+            'capacity',
         ]
         widgets = {
             'start_date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
             'end_date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
+        }
+        labels = {
+        'capacity': 'Počet míst',
         }
 
     def __init__(self, *args, **kwargs):

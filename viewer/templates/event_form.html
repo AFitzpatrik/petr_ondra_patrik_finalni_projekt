@@ -20,7 +20,7 @@
                 <div class="input-group">
                     {{ form.type }}
                     <div class="input-group-append">
-                        <a href="#" class="btn btn-outline-primary btn-sm ml-2">➕</a>
+                        <a href="{% url 'type_create' %}" class="btn btn-outline-primary btn-sm ml-2">➕ Přidat typ</a>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 <div class="input-group">
                     {{ form.location }}
                     <div class="input-group-append">
-                        <a href="#" class="btn btn-outline-primary btn-sm ml-2">➕</a>
+                        <a href="{% url 'location_create' %}" class="btn btn-outline-primary btn-sm ml-2">➕ Přidat lokaci</a>
                     </div>
                 </div>
             </div>
