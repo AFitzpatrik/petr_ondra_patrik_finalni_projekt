@@ -28,13 +28,13 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [x] 4.6 Obrázek události
 
 
-- [ ] 5.0 Úprava událostí - PATRIK
+- [x] 5.0 Úprava událostí - PATRIK
   - [x] 5.1 Úprava 
     - [X] 5.1.1 Pouze PŘIHLÁŠENÝ UŽIVATEL
     - [x] 5.1.2 Pouze ORGANIZÁTOR
   - [x] 5.2 Mazání 
     - [x] 5.2.1 Pouze ORGANIZÁTORA
-    - [ ] 5.2.2 Pouze ORGANIZÁTOR který je VLASTNÍK  !!! PRIORITA 1
+    - [x] 5.2.2 Pouze ORGANIZÁTOR který je VLASTNÍK  !!! PRIORITA 1
 
 
 - [x] 6.0 Autentizace - PATRIK
@@ -83,10 +83,10 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 -   [ ] 12.2 Mapa
 
 
-- [ ] 13.0 Filtr eventů - PETR
-  - [ ] od/do
-  - [ ] typ
-  - [ ] město
+- [x] 13.0 Filtr eventů - PETR
+  - [x] od/do
+  - [x] typ
+  - [x] město
 
 - [ ] 14.0 Stránkování eventů - PATRIK
 
