@@ -34,7 +34,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
     - [x] 5.1.2 Pouze ORGANIZÁTOR
   - [x] 5.2 Mazání 
     - [x] 5.2.1 Pouze ORGANIZÁTORA
-    - [ ] 5.2.2 Pouze ORGANIZÁTOR který je VLASTNÍK
+    - [ ] 5.2.2 Pouze ORGANIZÁTOR který je VLASTNÍK  !!! PRIORITA 1
 
 
 - [x] 6.0 Autentizace - PATRIK
@@ -55,27 +55,27 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [x] 6.6 Login success page
 
 
-- [ ] 7.0 Autorizace - PATRIK
-  -[ ] 7.1 role organizátora (vytvořit v admin panelu)
+- [x] 7.0 Autorizace - PATRIK
+  -[x] 7.1 role organizátora (vytvořit v admin panelu)
 
 
-- [ ] 8.0 Přidávání komentářů - ONDRA
+- [x] 8.0 Přidávání komentářů - ONDRA
   - [x] 8.1 Pouze registrovaný uživatel
-  - [ ] 8.2 Max 500 znaků?
-  - [ ] 8.3 Řazení od nejnovějších
+  - [x] 8.2 Max 500 znaků?
+  - [x] 8.3 Řazení od nejnovějších
 
 
 - [ ] 9.0 Seznam míst  - ONDRA
   - [ ] 9.1 Proklik na události v dánem místě
 
-
 - [ ] 10.0 Seznam měst  - ONDRA
   - [ ] 10.1 Proklik na události v dánem městě
 
 
-- [ ] 11.0 Přihlášení na akci
-  - [ ] 11.1 Pouze přihlášený uživatel
-  - [ ] 11.1 Událost se přidá uživateli do MOJE UDÁLOSTI
+- [x] 11.0 Přihlášení na akci
+  - [x] 11.1 Pouze přihlášený uživatel
+  - [x] 11.1 Událost se přidá uživateli do MOJE UDÁLOSTI
+      - KDYŽ BUDE ČAS UDĚLAT SÓLO STRÁNKY S FILTREM
 
 
 - [ ] 12.0 API cizí - PETR
@@ -83,8 +83,22 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 -   [ ] 12.2 Mapa
 
 
+- [ ] 13.0 Filtr eventů - PETR
+  - [ ] od/do
+  - [ ] typ
+  - [ ] město
 
-- [ ] 13.0 Admin panel - KDYŽ BUDE ČAS
+- [ ] 14.0 Stránkování eventů - PATRIK
+
+
+- [ ] 15.0 Přehled organizátora o události - ONDRA
+  - [ ] účastníci
+
+
+
+
+
+- [ ] 17.0 Admin panel - KDYŽ BUDE ČAS
     [ ] 12.1 Počasí
     [ ] 12.2 Mapa
     [ ] 12.3 Rest API
