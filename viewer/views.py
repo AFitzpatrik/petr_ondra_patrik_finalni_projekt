@@ -29,6 +29,7 @@ class EventsListView(ListView):
     template_name = 'events.html'
     model = Event
     context_object_name = 'events'
+    paginate_by = 9
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -71,9 +72,6 @@ class CitiesListView(ListView):
     template_name = 'cities.html'
     model = City
     context_object_name = 'cities'
-
-    def get_queryset(self):
-        return City.objects.annotate(event_count=Count('locations__events'))
 
 
 class LocationsListView(ListView):
