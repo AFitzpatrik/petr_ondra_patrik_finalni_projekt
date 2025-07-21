@@ -1,18 +1,24 @@
 from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
+from django.contrib import messages
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.utils.timezone import now
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
+from .forms import CommentForm, CityModelForm, CountryModelForm
+from viewer.models import Event, Comment, Country
 
 from .forms import CommentForm, EventForm
 from viewer.models import Event, Comment, City, Location, Reservation, Type
 from viewer.api_weather import get_weather_for_city
 from django.db.models import Count
+
 
 
 def home(request):
@@ -135,6 +141,49 @@ class EventDetailView(DetailView):
         context = self.get_context_data()
         context['comment_form'] = form
         return self.render_to_response(context)
+
+
+
+class CountryListView(ListView):
+    template_name = 'countries.html'
+    model = Country
+    context_object_name = 'countries'
+
+
+class CountryCreateView(CreateView):
+    model = Country
+    form_class = CountryModelForm
+    template_name = 'country_form.html'
+    success_url = reverse_lazy('countries')
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Formulář nebyl správně vyplněn.')
+        return super().form_invalid(form)
+
+
+class CountryUpdateView(UpdateView):
+    model = Country
+    form_class = CountryModelForm
+    template_name = 'country_form.html'
+    success_url = reverse_lazy('countries')
+
+
+class CityCreateView(CreateView):
+    model = City
+    form_class = CityModelForm
+    template_name = 'city_form.html'
+    success_url = reverse_lazy('cities')
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Formulář nebyl správně vyplněn.')
+        return super().form_invalid(form)
+
+
+class CityUpdateView(UpdateView):
+    model = City
+    form_class = CityModelForm
+    template_name = 'city_form.html'
+    success_url = reverse_lazy('cities')
 
 
 def search(request):

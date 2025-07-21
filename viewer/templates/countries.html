@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Seznam zemí
+{% endblock %}
+
+{% block content %}
+    <
+        <h1>Seznam států</h1>
+    <div class="mb-3">
+        <a href="{% url 'country_create' %}" class="btn btn-primary">Přidat stát</a>
+    </div>
+    <ul>
+        {% for country in countries %}
+            <li>
+                {{ country.name }}
+                <a href="{% url 'country_update' country.id %}">📝</a>
+                {% comment %}<a href="{% url 'country_delete' country.id %}" class="btn btn-sm btn-outline-danger ms-1">Smazat</a>{% endcomment %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

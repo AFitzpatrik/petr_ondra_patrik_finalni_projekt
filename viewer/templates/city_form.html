@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Přidat město
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissable fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zavřít">Zavřít</button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <h2 class="mb-4">Přidat nové město</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {%  if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                    <div>{{ error }}</div>
+                {% endfor%}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Zavřít"></button>
+            </div>
+        {% endif %}
+
+        {% for field in form %}
+            <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <div class="form-text small">{{ field.help_text }}</div>
+                {% endif %}
+                {%  for error in field.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Uložit město</button>
+    </form>
+</div>
+{% endblock %}

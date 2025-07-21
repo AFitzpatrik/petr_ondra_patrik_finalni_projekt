@@ -56,12 +56,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 
 - [ ] 7.0 Autorizace - PATRIK
-  -[x] 7.1 role organizátora (vytvořit v admin panelu)
-    - [x] 7.1.1 organizátor může PŘIDAT/ZMĚNIT EVENT
-    - [ ] 7.1.2 organizátor může PŘIDAT/ZMĚNIT CITY
-    - [ ] 7.1.3 organizátor může PŘIDAT/ZMĚNIT COUNTRY
-    - [ ] 7.1.4 organizátor může PŘIDAT/ZMĚNIT LOCATION
-    - [ ] 7.1.5 organizátor může PŘIDAT/ZMĚNIT TYPE
+  -[ ] 7.1 role organizátora (vytvořit v admin panelu)
 
 
 - [ ] 8.0 Přidávání komentářů - ONDRA
@@ -70,40 +65,29 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
   - [ ] 8.3 Řazení od nejnovějších
 
 
-- [x] 9.0 Seznam měst  - ONDRA
-  - [ ] 9.1 Proklik na události v dánem městě
+- [ ] 9.0 Seznam míst  - ONDRA
+  - [ ] 9.1 Proklik na události v dánem místě
 
 
-- [ ] 10.0 Přihlášení na akci
-  - [ ] 10.1 Pouze přihlášený uživatel
-  - [ ] 10.2 Událost se přidá uživateli do PŘIHLÁŠENÉ UDÁLOSTI v profilu (nebo udělat další tab v dropdown menu)
+- [ ] 10.0 Seznam měst  - ONDRA
+  - [ ] 10.1 Proklik na události v dánem městě
 
 
-- [x] 11.0 API počasí - PETR
-
-- [x] 12.0 Přidat Error stránky
-  - [x] 12.1 - Error 403 Forbidden
-  - [x] 12.2 - Error 404 Not found
+- [ ] 11.0 Přihlášení na akci
+  - [ ] 11.1 Pouze přihlášený uživatel
+  - [ ] 11.1 Událost se přidá uživateli do MOJE UDÁLOSTI
 
 
-- [ ] 13.0 Přidávání Míst, Měst, Typu
-  - [ ] 13.1 Type
-  - [ ] 13.2 Location
-  - [ ] 13.3 City
-  - [ ] 14.3 Country 
-    - UDĚLAT SKRZ VYSKAKOVACÍ OKNO JAKO V DJANGO ADMINU
-
-
-
-- [ ] 14.0 API cizí - PETR
+- [ ] 12.0 API cizí - PETR
 -   [x] 12.1.Počasí
 -   [ ] 12.2 Mapa
 
 
-- [ ] 15.0 Admin panel - KDYŽ BUDE ČAS
-    [x] 12.1 Počasí
+
+- [ ] 13.0 Admin panel - KDYŽ BUDE ČAS
+    [ ] 12.1 Počasí
     [ ] 12.2 Mapa
-    [x] 12.3 Rest API
+    [ ] 12.3 Rest API
 
 
 
@@ -137,7 +121,6 @@ STRUKTURA DATABÁZE
   - [x] 3.1 name
   - [x] 3.2 country (FK -> Country)
   - [x] 3.3 zip code
-  - [x] 3.4 number of events
 
 
 - [x] 4.0 Country
