@@ -6,6 +6,7 @@
 
 {% block content %}
     <h1>Seznam měst</h1>
+    <a href="{% url 'city_create' %}" class="btn btn-primary">Přidat město</a><br>
     {% for city in cities %}
         {{ city }} <br>
     {% empty %}

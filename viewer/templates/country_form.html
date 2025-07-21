@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Přidat město
+   {% if form.instance.id %}
+        Upravit stát
+    {% else %}
+        Přidat stát
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -16,7 +20,13 @@
         {% endfor %}
     {% endif %}
 
-    <h2 class="mb-4">Přidat nové město</h2>
+    <h2 class="mb-4">
+        {% if form.instance.pk %}
+            Upravit stát
+        {% else %}
+            Přidat stát
+        {% endif %}
+    </h2>
 
     <form method="post">
         {% csrf_token %}
@@ -43,7 +53,7 @@
             </div>
         {% endfor %}
 
-        <button type="submit" class="btn btn-primary">Uložit město</button>
+        <button type="submit" class="btn btn-primary">Uložit stát</button>
     </form>
 </div>
 {% endblock %}

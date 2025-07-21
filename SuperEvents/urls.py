@@ -26,7 +26,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from accounts.views import SignUpView, UserLogoutView, RegistrationSuccessView, LogoutSuccessView, LoginSuccessView
 from api.views import Events, AllEvents, FilteredEvents
 from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, EventCreateView, \
-    search, CityCreateView
+    search, CityCreateView, CountryCreateView, CountryListView, CountryUpdateView, CityUpdateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,6 +36,10 @@ urlpatterns = [
     path('event/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
     path('cities/', CitiesListView.as_view(), name='cities'),
     path('city/create/', CityCreateView.as_view(), name='city_create'),
+    path('city/<int:pk>/update/', CityUpdateView.as_view(), name='city_update'),
+    path('countries/', CountryListView.as_view(), name='countries'),
+    path('country/create/', CountryCreateView.as_view(), name='country_create'),
+    path('country/<int:pk>/update/', CountryUpdateView.as_view(), name='country_update'),
     path('locations/', LocationsListView.as_view(), name='locations'),
     path('search/', search, name='search'),
 

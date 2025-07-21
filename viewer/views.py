@@ -1,18 +1,19 @@
 from django.contrib import messages
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.utils.timezone import now
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
-from .forms import CommentForm, CityForm
-from viewer.models import Event, Comment
+from .forms import CommentForm, CityModelForm, CountryModelForm
+from viewer.models import Event, Comment, Country
 
 from viewer.api_weather import get_weather_for_city
 from viewer.models import Event, City, Location
 from .forms import EventForm
+
 
 def home(request):
     return render(request, 'home.html')
@@ -22,6 +23,7 @@ class EventsListView(ListView):
     template_name = 'events.html'
     model = Event
     context_object_name = 'events'
+
 
 """
 class EventDetailView(DetailView): #Eventdetail
@@ -36,17 +38,21 @@ class EventDetailView(DetailView): #Eventdetail
         context['weather'] = weather
         return context
 """
+
+
 class CitiesListView(ListView):
     template_name = 'cities.html'
     model = City
     context_object_name = 'cities'
+
 
 class LocationsListView(ListView):
     template_name = 'locations.html'
     model = Location
     context_object_name = 'locations'
 
-class EventCreateView(LoginRequiredMixin,CreateView):
+
+class EventCreateView(LoginRequiredMixin, CreateView):
     model = Event
     form_class = EventForm
     template_name = 'event_form.html'
@@ -55,6 +61,7 @@ class EventCreateView(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         form.instance.owner_of_event = self.request.user
         return super().form_valid(form)
+
 
 def event_detail(request, pk):
     event = get_object_or_404(Event, pk=pk)
@@ -79,6 +86,7 @@ def event_detail(request, pk):
         'comments': comments,
         'form': form,
     })
+
 
 class EventDetailView(DetailView):
     model = Event
@@ -111,15 +119,46 @@ class EventDetailView(DetailView):
         return self.render_to_response(context)
 
 
+class CountryListView(ListView):
+    template_name = 'countries.html'
+    model = Country
+    context_object_name = 'countries'
+
+
+class CountryCreateView(CreateView):
+    model = Country
+    form_class = CountryModelForm
+    template_name = 'country_form.html'
+    success_url = reverse_lazy('countries')
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Formulář nebyl správně vyplněn.')
+        return super().form_invalid(form)
+
+
+class CountryUpdateView(UpdateView):
+    model = Country
+    form_class = CountryModelForm
+    template_name = 'country_form.html'
+    success_url = reverse_lazy('countries')
+
+
 class CityCreateView(CreateView):
     model = City
-    form_class = CityForm
-    template_name='city_form.html'
+    form_class = CityModelForm
+    template_name = 'city_form.html'
     success_url = reverse_lazy('cities')
 
     def form_invalid(self, form):
         messages.error(self.request, 'Formulář nebyl správně vyplněn.')
         return super().form_invalid(form)
+
+
+class CityUpdateView(UpdateView):
+    model = City
+    form_class = CityModelForm
+    template_name = 'city_form.html'
+    success_url = reverse_lazy('cities')
 
 
 def search(request):
@@ -142,6 +181,3 @@ def search(request):
         'filter': filter_type
     }
     return render(request, 'search.html', context)
-
-
-

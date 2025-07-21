@@ -8,22 +8,25 @@ from django import forms
 from .models import Comment
 
 
-class CountryForm(forms.ModelForm):
+class CountryModelForm(forms.ModelForm):
     class Meta:
         model = Country
-        fields = ['name']
+        fields = '__all__'
+
         labels = {
-            'name': 'Název státu',
+            'name': 'Název země',
         }
         help_texts = {
-            'name': 'Zadej název státu'
-        }
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'name': 'Zadej název země'
         }
 
 
-class CityForm(forms.ModelForm):
+    def clean_name(self):
+        initial = self.cleaned_data['name']
+        return initial.capitalize()
+
+
+class CityModelForm(forms.ModelForm):
     class Meta:
         model = City
         fields = ['name', 'country', 'zip_code']
@@ -44,6 +47,7 @@ class CityForm(forms.ModelForm):
         }
 
     def clean_zip_code(self):
+        print("⚠️ clean_zip_code SE VOLÁ")
         zip_code = self.cleaned_data.get('zip_code', '').replace(' ', '').strip()
         if not re.fullmatch(r'\d{4,5}', zip_code):
             raise ValidationError('PSČ musí obsahovat 4 nebo pět čísel bez mezer a pomlček')
