@@ -30,18 +30,43 @@
             </div>
         {% endif %}
 
-        {% for field in form %}
-            <div class="mb-3">
-                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                {{ field }}
-                {% if field.help_text %}
-                    <div class="form-text small">{{ field.help_text }}</div>
-                {% endif %}
-                {%  for error in field.errors %}
-                    <div class="text-danger small">{{ error }}</div>
-                {% endfor %}
+        <div class="mb-3">
+            <label for="{{ form.name.id_for_label }}" class="form-label">{{ form.name.label }}</label>
+            <br>
+            {{ form.name }}
+            {% if form.name.help_text %}
+                <div class="form-text small">{{ form.name.help_text }}</div>
+            {% endif %}
+            {% for error in form.name.errors %}
+                <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.country.id_for_label }}" class="form-label">{{ form.country.label }}</label>
+            <div class="input-group">
+                {{ form.country }}
+                <div class="input-group-append">
+                    <a href="{% url 'country_create' %}" class="btn btn-outline-primary btn-sm ml-2">➕ Přidat stát</a>
+                </div>
             </div>
-        {% endfor %}
+            {% if form.country.help_text %}
+                <div class="form-text small">{{ form.country.help_text }}</div>
+            {% endif %}
+            {% for error in form.country.errors %}
+                <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.zip_code.id_for_label }}" class="form-label">{{ form.zip_code.label }}</label>
+            <br>
+            {{ form.zip_code }}
+            {% if form.zip_code.help_text %}
+                <div class="form-text small">{{ form.zip_code.help_text }}</div>
+            {% endif %}
+            {% for error in form.zip_code.errors %}
+                <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+        </div>
 
         <button type="submit" class="btn btn-primary">Uložit město</button>
     </form>
