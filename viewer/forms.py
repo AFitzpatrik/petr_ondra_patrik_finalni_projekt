@@ -32,7 +32,7 @@ class CityModelForm(forms.ModelForm):
         fields = ['name', 'country', 'zip_code']
         labels = {
             'name': 'Město',
-            'country': 'Stát',
+            'country': 'Země',
             'zip_code': 'PSČ'
         }
         help_texts = {
