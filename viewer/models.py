@@ -43,6 +43,7 @@ class Location(models.Model):
     
     class Meta:
         ordering = ['city__name', 'name']
+        unique_together = ('name', 'address')
     
     def __str__(self):
         return self.name
