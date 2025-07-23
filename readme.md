@@ -78,7 +78,7 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
       - KDYŽ BUDE ČAS UDĚLAT SÓLO STRÁNKY S FILTREM
 
 
-- [ ] 12.0 API cizí - PETR
+- [x] 12.0 API cizí - PETR
 -   [x] 12.1.Počasí
 -   [ ] 12.2 Mapa
 
@@ -98,14 +98,15 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 
 
-- [ ] 17.0 Admin panel - KDYŽ BUDE ČAS
-    [ ] 12.1 Počasí
-    [ ] 12.2 Mapa
-    [ ] 12.3 Rest API
+- [x] 17.0 Admin panel - PETR
+-   [x] 12.1 Počasí
+-   [ ] 12.2 Mapa
+-   [x] 12.3 Rest API
 
 
-
-
+- [x] 18.0 Země - PETR
+  - [ ] Události v zemi
+  - [ ] Údaje o zemi z API
 
 
 
