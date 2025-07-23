@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import ForeignKey, DateTimeField
+from django.core.exceptions import ValidationError
 
 
 class Country(models.Model):
@@ -42,6 +43,7 @@ class Location(models.Model):
     
     class Meta:
         ordering = ['city__name', 'name']
+        unique_together = ('name', 'address')
     
     def __str__(self):
         return self.name
@@ -142,3 +144,11 @@ class Reservation(models.Model):
 
     def __repr__(self):
         return f"Reservation(user={self.user}, event={self.event}, created_at={self.created_at})"
+
+    def clean(self):
+        if self.event.available_spots <= 0:
+            raise ValidationError("Událost je plně obsazena.")
+
+    def save(self, *args, **kwargs):
+        self.full_clean()  # spustí clean() před uložením
+        super().save(*args, **kwargs)
