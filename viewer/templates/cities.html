@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load custom_filters %}  {# bod c: načtení vlastních filtrů #}
+{% load custom_filters %}
 
 {% block title %}
     Seznam měst
@@ -9,7 +9,7 @@
     <h1>Seznam měst</h1>
     <a href="{% url 'city_create' %}" class="btn btn-primary">Přidat město</a><br>
     {% for city in cities %}
-       {{ city.name }} – {{ city.event_count }} {{ city.event_count|sklonuj_udalost }}<br>  {# bod d #}
+        {{ city.name }} – {{ city|event_count_for_city }} {{ city|event_count_for_city|sklonuj_udalost }}<br>
     {% empty %}
         V databázi není žádné město.
     {% endfor %}
