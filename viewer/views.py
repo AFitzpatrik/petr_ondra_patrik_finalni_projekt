@@ -2,23 +2,16 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
 from django.contrib import messages
 from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.utils.timezone import now
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
-from django.contrib import messages
-from .forms import CommentForm, CityModelForm, CountryModelForm
-from viewer.models import Event, Comment, Country
-
-from .forms import CommentForm, EventForm
-from viewer.models import Event, Comment, City, Location, Reservation, Type
+from .forms import CommentForm, CityModelForm, CountryModelForm, EventForm, TypeModelForm, LocationModelForm
+from viewer.models import Event, Comment, Country, City, Location, Reservation, Type
 from viewer.api_weather import get_weather_for_city
 from django.db.models import Count
-
 
 
 def home(request):
@@ -58,13 +51,6 @@ class EventsListView(ListView):
         context['start_date'] = self.request.GET.get('start_date', '')
         context['end_date'] = self.request.GET.get('end_date', '')
         return context
-
-
-
-
-
-
-
 
 
 class CitiesListView(ListView):
@@ -191,7 +177,6 @@ class EventDetailView(DetailView):
         return self.render_to_response(context)
 
 
-
 class CountryListView(ListView):
     template_name = 'countries.html'
     model = Country
@@ -267,6 +252,7 @@ class ProfileDetailView(DetailView):
         context['reservations'] = Reservation.objects.filter(user=user)
         return context
 
+
 @login_required
 def make_reservation(request, event_id):
     event = get_object_or_404(Event, id=event_id)
@@ -282,6 +268,7 @@ def make_reservation(request, event_id):
 
     return redirect('event_detail', pk=event_id)
 
+
 @login_required
 def cancel_reservation(request, event_id):
     event = get_object_or_404(Event, id=event_id)
@@ -295,9 +282,33 @@ def cancel_reservation(request, event_id):
 
     return redirect('event_detail', pk=event_id)
 
+
 class TypeCreateView(PermissionRequiredMixin, CreateView):
     model = Type
-    fields = ['name']
+    form_class = TypeModelForm
+    template_name = 'type_form.html'
+    success_url = reverse_lazy('event_create')
+    permission_required = 'viewer.add_type'
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Název typu je neplatný nebo již existuje.')
+        return super().form_invalid(form)
+
+
+class LocationCreateView(PermissionRequiredMixin, CreateView):
+    model = Location
+    form_class = LocationModelForm
+    template_name = 'location_form.html'
+    success_url = reverse_lazy('event_create')
+    permission_required = 'viewer.add_location'
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Místo s tímto názvem a adresou už existuje nebo nejsou vyplněna všechna pole.')
+        return super().form_invalid(form)
+
+class TypeCreateView(PermissionRequiredMixin, CreateView):
+    model = Type
+    form_class = TypeModelForm
     template_name = 'type_form.html'
     success_url = reverse_lazy('event_create')
     permission_required = 'viewer.add_type'
@@ -305,7 +316,7 @@ class TypeCreateView(PermissionRequiredMixin, CreateView):
 
 class LocationCreateView(PermissionRequiredMixin, CreateView):
     model = Location
-    fields = ['name', 'address', 'city']
+    form_class = LocationModelForm
     template_name = 'location_form.html'
     success_url = reverse_lazy('event_create')
     permission_required = 'viewer.add_location'

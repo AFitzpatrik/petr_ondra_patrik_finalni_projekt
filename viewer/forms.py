@@ -1,25 +1,15 @@
 import re
-
 from django import forms
 from django.core.exceptions import ValidationError
-
-from .models import Event, Country, City
-from django import forms
-from .models import Comment
+from .models import Event, Country, City, Comment, Type, Location
 
 
 class CountryModelForm(forms.ModelForm):
     class Meta:
         model = Country
         fields = '__all__'
-
-        labels = {
-            'name': 'Název země',
-        }
-        help_texts = {
-            'name': 'Zadej název země'
-        }
-
+        labels = {'name': 'Název země'}
+        help_texts = {'name': 'Zadej název země'}
 
     def clean_name(self):
         initial = self.cleaned_data['name']
@@ -47,7 +37,6 @@ class CityModelForm(forms.ModelForm):
         }
 
     def clean_zip_code(self):
-        print("⚠️ clean_zip_code SE VOLÁ")
         zip_code = self.cleaned_data.get('zip_code', '').replace(' ', '').strip()
         if not re.fullmatch(r'\d{4,5}', zip_code):
             raise ValidationError('PSČ musí obsahovat 4 nebo pět čísel bez mezer a pomlček')
@@ -72,6 +61,47 @@ class CityModelForm(forms.ModelForm):
         return cleaned_data
 
 
+class TypeModelForm(forms.ModelForm):
+    class Meta:
+        model = Type
+        fields = ['name']
+        labels = {'name': 'Název typu'}
+
+    def clean_name(self):
+        name = self.cleaned_data['name'].strip()
+        if Type.objects.filter(name__iexact=name).exclude(pk=self.instance.pk).exists():
+            raise ValidationError("Type with this Name already exists.")
+        return name
+
+
+class LocationModelForm(forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ['name', 'address', 'city']
+        labels = {
+            'name': 'Název místa',
+            'address': 'Adresa',
+            'city': 'Město'
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        name = cleaned_data.get('name', '').strip()
+        address = cleaned_data.get('address', '').strip()
+        city = cleaned_data.get('city')
+
+        if name and address and city:
+            exists = Location.objects.filter(
+                name__iexact=name,
+                address__iexact=address,
+                city=city
+            ).exclude(pk=self.instance.pk).exists()
+
+            if exists:
+                raise ValidationError("Location with this Name and Address already exists.")
+        return cleaned_data
+
+
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
@@ -90,7 +120,7 @@ class EventForm(forms.ModelForm):
             'end_date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
         }
         labels = {
-        'capacity': 'Počet míst',
+            'capacity': 'Počet míst',
         }
 
     def __init__(self, *args, **kwargs):
@@ -110,3 +140,6 @@ class CommentForm(forms.ModelForm):
         labels = {
             'content': '',
         }
+
+from .forms import TypeModelForm, LocationModelForm
+

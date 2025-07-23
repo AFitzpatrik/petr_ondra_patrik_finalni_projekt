@@ -25,7 +25,8 @@ class ExtendedFormTests(TestCase):
         Type.objects.create(name="Výstava")
         response = self.client.post(reverse("type_create"), {"name": "Výstava"})
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, "form", "name", ["Type with this Name already exists."])
+        form = response.context["form"]
+        self.assertFormError(form, "name", ["Type with this Name already exists."])
 
     def test_add_type_without_permission(self):
         self.client.logout()
@@ -54,7 +55,9 @@ class ExtendedFormTests(TestCase):
         }
         response = self.client.post(reverse("location_create"), data)
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, "form", None, ["Location with this Name and Address already exists."])
+        form = response.context["form"]
+        non_field_errors = form.non_field_errors()
+        self.assertIn("Location with this Name and Address already exists.", non_field_errors)
 
     def test_add_location_without_permission(self):
         self.client.logout()
