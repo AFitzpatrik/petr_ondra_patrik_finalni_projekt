@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
+
 
 {% block title %}
     Seznam zemí
@@ -13,8 +15,18 @@
     <ul>
         {% for country in countries %}
             <li>
-                {{ country.name }}
-                <a href="{% url 'country_update' country.id %}">📝</a>
+                <a href="{% url 'country_detail' country.id %}">
+                    <strong>{{ country.name }}</strong>
+                </a>
+                <a href="{% url 'country_update' country.id %}" class="ms-2 text-decoration-none" title="Upravit">📝</a>
+
+                <ul class="mt-1">
+                    <li>
+                        <a href="{% url 'events' %}?country_name={{ country.name|urlencode }}">
+                            Počet akcí ve státě: {{ country.event_count }} {{ country.event_count|sklonuj_udalost }}
+                        </a>
+                    </li>
+                </ul>
                 {% comment %}<a href="{% url 'country_delete' country.id %}" class="btn btn-sm btn-outline-danger ms-1">Smazat</a>{% endcomment %}
             </li>
         {% endfor %}

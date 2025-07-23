@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404, redirect
 from .forms import CommentForm, CityModelForm, CountryModelForm, EventForm, TypeModelForm, LocationModelForm
 from viewer.models import Event, Comment, Country, City, Location, Reservation, Type
 from viewer.api_weather import get_weather_for_city
+from viewer.api_country import get_country_info
 from django.db.models import Count
 
 
@@ -30,6 +31,7 @@ class EventsListView(ListView):
         type = self.request.GET.get('type')
         start_date = self.request.GET.get('start_date')
         end_date = self.request.GET.get('end_date')
+        country_name = self.request.GET.get('country_name')
 
         if city:
             queryset = queryset.filter(location__city__name__icontains=city)
@@ -43,6 +45,9 @@ class EventsListView(ListView):
         if end_date:
             queryset = queryset.filter(end_date_time__date__lte=end_date)
 
+        if country_name:
+            queryset = queryset.filter(location__city__country__name__iexact=country_name)
+
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -51,6 +56,7 @@ class EventsListView(ListView):
         context['type'] = self.request.GET.get('type', '')
         context['start_date'] = self.request.GET.get('start_date', '')
         context['end_date'] = self.request.GET.get('end_date', '')
+        context['country_name'] = self.request.GET.get('country_name', '')
         return context
 
 
@@ -114,7 +120,8 @@ class EventUpdateView(PermissionRequiredMixin, UpdateView):
         if obj.owner_of_event != request.user and not request.user.is_superuser:
             return HttpResponseForbidden('Nemáte oprávnění upravovat tuto událost.')
         return super().dispatch(request, *args, **kwargs)
-    #pouze vlastník události nebo admin může upravovat událost
+
+    # pouze vlastník události nebo admin může upravovat událost
 
     def get_success_url(self):
         return reverse("event_detail", kwargs={"pk": self.object.pk})
@@ -135,7 +142,7 @@ class EventDeleteView(PermissionRequiredMixin, DeleteView):
         if obj.owner_of_event != request.user and not request.user.is_superuser:
             return HttpResponseForbidden('Nemáte oprávnění mazat tuto událost.')
         return super().dispatch(request, *args, **kwargs)
-    #pouze vlastník události nebo admin může mazat událost
+    # pouze vlastník události nebo admin může mazat událost
 
 
 class EventDetailView(DetailView):
@@ -181,6 +188,22 @@ class CountryListView(ListView):
     template_name = 'countries.html'
     model = Country
     context_object_name = 'countries'
+
+    def get_queryset(self):
+        return Country.objects.annotate(
+            event_count=Count('cities__locations__events', distinct=True)
+        )
+
+
+class CountryDetailView(DetailView):
+    template_name = 'country_detail.html'
+    model = Country
+    context_object_name = 'country'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['api_data'] = get_country_info(self.object.name)
+        return context
 
 
 class CountryCreateView(CreateView):

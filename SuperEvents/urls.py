@@ -27,7 +27,7 @@ from accounts.views import SignUpView, UserLogoutView, RegistrationSuccessView, 
 from api.views import Events, AllEvents, FilteredEvents
 from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, search, \
     EventUpdateView, EventDeleteView, EventCreateView, ProfileDetailView, make_reservation, cancel_reservation, \
-    TypeCreateView, LocationCreateView
+    TypeCreateView, LocationCreateView, CountryDetailView
 from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, EventCreateView, \
     search, CityCreateView, CountryCreateView, CountryListView, CountryUpdateView, CityUpdateView, TypeCreateView, \
     LocationCreateView
@@ -50,6 +50,7 @@ urlpatterns = [
     path('city/create/', CityCreateView.as_view(), name='city_create'),
     path('city/<int:pk>/update/', CityUpdateView.as_view(), name='city_update'),
     path('countries/', CountryListView.as_view(), name='countries'),
+    path('country/<int:pk>/', CountryDetailView.as_view(), name='country_detail'),
     path('country/create/', CountryCreateView.as_view(), name='country_create'),
     path('country/<int:pk>/update/', CountryUpdateView.as_view(), name='country_update'),
     path('locations/', LocationsListView.as_view(), name='locations'),
