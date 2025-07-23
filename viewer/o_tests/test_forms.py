@@ -2,6 +2,9 @@ from django.test import TestCase
 from django.contrib.auth.models import User, Permission
 from viewer.models import Type, City, Country, Location
 from django.urls import reverse
+from viewer.forms import EventForm
+from django.utils import timezone
+from datetime import timedelta
 
 
 class ExtendedFormTests(TestCase):
@@ -9,12 +12,23 @@ class ExtendedFormTests(TestCase):
         self.admin_user = User.objects.create_user(username="adminuser", password="pass")
         self.admin_user.user_permissions.add(
             Permission.objects.get(codename="add_type"),
-            Permission.objects.get(codename="add_location")
+            Permission.objects.get(codename="add_location"),
+            Permission.objects.get(codename="add_event")
         )
         self.client.login(username="adminuser", password="pass")
 
         self.country = Country.objects.create(name="Testland")
         self.city = City.objects.create(name="Test City", country=self.country)
+
+        # Založení lokace přes POST (kvůli UNIQUE constraintu)
+        self.client.post(reverse("location_create"), {
+            "name": "Sál A",
+            "address": "Hlavní 123",
+            "city": self.city.id,
+        })
+
+        # Získání referencované lokace pro další testy
+        self.location = Location.objects.get(name="Sál A", address="Hlavní 123")
 
     def test_add_type_with_permission(self):
         response = self.client.post(reverse("type_create"), {"name": "Výstava"})
@@ -30,7 +44,7 @@ class ExtendedFormTests(TestCase):
 
     def test_add_type_without_permission(self):
         self.client.logout()
-        user = User.objects.create_user(username="bezprava", password="pass")
+        User.objects.create_user(username="bezprava", password="pass")
         self.client.login(username="bezprava", password="pass")
 
         response = self.client.post(reverse("type_create"), {"name": "Přednáška"})
@@ -38,16 +52,15 @@ class ExtendedFormTests(TestCase):
 
     def test_add_location_with_permission(self):
         data = {
-            "name": "Sál A",
-            "address": "Hlavní 123",
+            "name": "Sál B",
+            "address": "Vedlejší 789",
             "city": self.city.id,
         }
         response = self.client.post(reverse("location_create"), data)
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(Location.objects.filter(name="Sál A", address="Hlavní 123").exists())
+        self.assertTrue(Location.objects.filter(name="Sál B", address="Vedlejší 789").exists())
 
     def test_add_location_with_duplicate_name(self):
-        Location.objects.create(name="Sál A", address="Hlavní 123", city=self.city)
         data = {
             "name": "Sál A",
             "address": "Hlavní 123",
@@ -61,7 +74,7 @@ class ExtendedFormTests(TestCase):
 
     def test_add_location_without_permission(self):
         self.client.logout()
-        user = User.objects.create_user(username="bezpravalokace", password="pass")
+        User.objects.create_user(username="bezpravalokace", password="pass")
         self.client.login(username="bezpravalokace", password="pass")
 
         data = {
@@ -71,3 +84,20 @@ class ExtendedFormTests(TestCase):
         }
         response = self.client.post(reverse("location_create"), data)
         self.assertEqual(response.status_code, 403)
+
+    def test_event_form_end_before_start(self):
+        start = timezone.now()
+        end = start - timedelta(hours=1)
+        form_data = {
+            'name': 'Test Událost',
+            'type': Type.objects.create(name="Workshop").id,
+            'description': 'Test popis',
+            'start_date_time': start.strftime('%Y-%m-%dT%H:%M'),
+            'end_date_time': end.strftime('%Y-%m-%dT%H:%M'),
+            'event_image': '',
+            'location': self.location.id,
+            'capacity': 10,
+        }
+        form = EventForm(data=form_data)
+        self.assertFalse(form.is_valid())
+        self.assertIn("Konec události nemůže být dříve než začátek.", form.non_field_errors())

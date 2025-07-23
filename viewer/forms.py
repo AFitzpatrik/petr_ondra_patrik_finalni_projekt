@@ -129,6 +129,13 @@ class EventForm(forms.ModelForm):
             if self.instance and getattr(self.instance, field):
                 self.fields[field].initial = getattr(self.instance, field).strftime('%Y-%m-%dT%H:%M')
 
+    def clean(self):
+        cleaned_data = super().clean()
+        start = cleaned_data.get('start_date_time')
+        end = cleaned_data.get('end_date_time')
+        if start and end and end < start:
+            self.add_error(None, "Konec události nemůže být dříve než začátek.")
+        return cleaned_data
 
 class CommentForm(forms.ModelForm):
     class Meta:
