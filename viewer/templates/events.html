@@ -9,7 +9,9 @@
 
 {% block content %}
     <div class="container">
-        <h1 class="mb-4">Události</h1>
+        <h1 class="mb-4">
+            Události{% if country_name %} ve státě <span class="text-primary">{{ country_name }}</span>{% endif %}
+        </h1>
 
         <form method="get" class="row mb-4 g-1 align-items-end">
             <div class="col">
