@@ -3,6 +3,10 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 class LoginTest(TestCase):
+
+    def setUp(self):
+        print(f'Spouští se test: {self._testMethodName}')
+
     @classmethod
     def setUpTestData(cls):
         User.objects.create_user(username='logintest', password='passwordtest')

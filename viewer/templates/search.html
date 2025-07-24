@@ -7,15 +7,14 @@
 
 {% block content %}
     <h1>Výsledky vyhledávání dotazu '{{ search }}'</h1>
-    <form method="get" action="{% url 'search' %}">
-        <input type="text" name="search" value="{{ search }}" placeholder="Hledat...">
-        <select name="filter">
+    <form method="get" action="{% url 'search' %}" class="d-flex mb-3" style="max-width: 600px;">
+        <input type="text" name="search" value="{{ search }}" placeholder="Hledat..." class="form-control mr-2" style="min-width: 0;">
+        <select name="filter" class="form-control mr-2" style="min-width: 0;">
             <option value="all" {% if filter == "all" %}selected{% endif %}>Vše</option>
             <option value="future" {% if filter == "future" %}selected{% endif %}>Budoucí</option>
-            <option value="active_future" {% if filter == "active_future" %}selected{% endif %}>Probíhající a budoucí
-            </option>
+            <option value="active_future" {% if filter == "active_future" %}selected{% endif %}>Probíhající a budoucí</option>
         </select>
-        <button type="submit">Hledat</button>
+        <button type="submit" class="btn btn-primary">Hledat</button>
     </form>
 
     <hr>
@@ -59,6 +58,33 @@
                     </div>
                 {% endfor %}
             </div>
+            {% if is_paginated %}
+            <nav aria-label="Stránkování">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?search={{ search }}&filter={{ filter }}&page={{ page_obj.previous_page_number }}">&laquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                    {% endif %}
+                    {% for num in paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                            <li class="page-item"><a class="page-link" href="?search={{ search }}&filter={{ filter }}&page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?search={{ search }}&filter={{ filter }}&page={{ page_obj.next_page_number }}">&raquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
         {% else %}
             <div class="alert alert-info">
                 V databázi není žádná akce.
