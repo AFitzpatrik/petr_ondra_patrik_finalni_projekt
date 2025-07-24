@@ -39,7 +39,7 @@ class CityModelForm(forms.ModelForm):
     def clean_zip_code(self):
         zip_code = self.cleaned_data.get('zip_code', '').replace(' ', '').strip()
         if not re.fullmatch(r'\d{4,5}', zip_code):
-            raise ValidationError('PSČ musí obsahovat 4 nebo pět čísel bez mezer a pomlček')
+            raise ValidationError('PSČ musí obsahovat 4 nebo pět čísel bez mezer a pomlček.')
         return zip_code
 
     def clean(self):
@@ -56,7 +56,7 @@ class CityModelForm(forms.ModelForm):
             ).exclude(pk=self.instance.pk).exists()
 
             if exists:
-                raise ValidationError('Město s tímhle názvem a PSČ již v tomto státě existuje')
+                raise ValidationError('Město s tímhle názvem a PSČ již v tomto státě existuje.')
 
         return cleaned_data
 
