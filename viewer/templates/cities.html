@@ -7,7 +7,9 @@
 
 {% block content %}
     <h1>Seznam měst</h1>
+    {% if user.is_authenticated %}
     <a href="{% url 'city_create' %}" class="btn btn-primary">Přidat město</a><br>
+    {% endif %}
     {% for city in cities %}
         {{ city.name }} – {{ city|event_count_for_city }} {{ city|event_count_for_city|sklonuj_udalost }}<br>
     {% empty %}

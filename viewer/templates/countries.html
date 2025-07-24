@@ -10,7 +10,9 @@
 
         <h1>Seznam států</h1>
     <div class="mb-3">
+        {% if user.is_authenticated %}
         <a href="{% url 'country_create' %}" class="btn btn-primary">Přidat stát</a>
+        {% endif %}
     </div>
     <ul>
         {% for country in countries %}
@@ -18,7 +20,9 @@
                 <a href="{% url 'country_detail' country.id %}">
                     <strong>{{ country.name }}</strong>
                 </a>
+                {% if user.is_authenticated %}
                 <a href="{% url 'country_update' country.id %}" class="ms-2 text-decoration-none" title="Upravit">📝</a>
+                {% endif %}
 
                 <ul class="mt-1">
                     <li>
