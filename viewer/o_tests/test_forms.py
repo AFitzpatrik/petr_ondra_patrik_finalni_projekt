@@ -9,26 +9,20 @@ from datetime import timedelta
 
 class ExtendedFormTests(TestCase):
     def setUp(self):
-        self.admin_user = User.objects.create_user(username="adminuser", password="pass")
-        self.admin_user.user_permissions.add(
-            Permission.objects.get(codename="add_type"),
-            Permission.objects.get(codename="add_location"),
-            Permission.objects.get(codename="add_event")
-        )
-        self.client.login(username="adminuser", password="pass")
+        self.user = User.objects.create_user(username='testuser', password='password')
 
-        self.country = Country.objects.create(name="Testland")
-        self.city = City.objects.create(name="Test City", country=self.country)
+        permission = Permission.objects.get(codename='add_event')
+        self.user.user_permissions.add(permission)
 
-        # Založení lokace přes POST (kvůli UNIQUE constraintu)
-        self.client.post(reverse("location_create"), {
-            "name": "Sál A",
-            "address": "Hlavní 123",
-            "city": self.city.id,
-        })
+        self.country = Country.objects.create(name='Česko')
+        self.city = City.objects.create(name='Praha', country=self.country, zip_code='11000')
+        self.location = Location.objects.create(name='Výstaviště', description='Velká hala',
+                                                address='U výstaviště 1', city=self.city)
+        self.event_type = Type.objects.create(name='Koncert')
+        self.client = Client()
 
-        # Získání referencované lokace pro další testy
-        self.location = Location.objects.get(name="Sál A", address="Hlavní 123")
+        self.test_image_path = os.path.join(os.path.dirname(__file__), 'media', 'test_image.jpg')
+        assert os.path.exists(self.test_image_path), "Test image not found!"
 
     def test_add_type_with_permission(self):
         response = self.client.post(reverse("type_create"), {"name": "Výstava"})

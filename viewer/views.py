@@ -1,3 +1,4 @@
+import self
 from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
 from django.contrib import messages
@@ -72,12 +73,14 @@ class LocationsListView(ListView):
     context_object_name = 'locations'
 
 
-class EventCreateView(PermissionRequiredMixin, CreateView):
+class EventCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Event
     form_class = EventForm
     template_name = 'event_form.html'
     success_url = reverse_lazy('events')
     permission_required = 'viewer.add_event'
+    login_url = 'login'
+    raise_exception = False
 
     def form_valid(self, form):
         form.instance.owner_of_event = self.request.user
