@@ -328,3 +328,5 @@ class LocationCreateView(PermissionRequiredMixin, CreateView):
     def form_invalid(self, form):
         messages.error(self.request, 'Místo s tímto názvem a adresou už existuje nebo nejsou vyplněna všechna pole.')
         return super().form_invalid(form)
+
+

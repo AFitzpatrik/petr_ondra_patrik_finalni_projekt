@@ -1,5 +1,17 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<style>
+.navbar-nav .nav-link:hover,
+.navbar-nav .dropdown-item:hover {
+    background-color: #00509e !important;
+    color: #fff !important;
+    border-radius: 4px;
+}
+.navbar-nav .nav-link.active {
+    background-color: #003366;
+    color: #fff;
+}
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #003366;">
     <div class="container fixed">
         <a class="navbar-brand" href="{% url 'home' %}">
             <img src="{% static 'LOGO.png' %}" alt="SuperEvents logo" style="height:48px; width:auto; vertical-align:middle; margin-right:8px;">
@@ -15,7 +27,6 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="{% url 'events' %}">Události</a>
                 <a class="nav-item nav-link active" href="{% url 'cities' %}">Města</a>
-                <a class="nav-item nav-link active" href="{% url 'locations' %}">Místa konání</a>
                 <a class="nav-item nav-link active" href="{% url 'countries' %}">Země</a>
 
             </div>
@@ -47,7 +58,6 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <a class="dropdown-item" href="{% url 'profile_detail' user.id %}">Můj profil</a>
-                            <a class="dropdown-item" href="#">Moje události</a>
                             <a class="dropdown-item" href="{% url 'password_change' %}">Změna hesla</a>
                             <a class="dropdown-item" href="{% url 'logout' %}">Odhlásit</a>
                         </div>
