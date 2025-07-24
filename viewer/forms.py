@@ -8,7 +8,7 @@ class CountryModelForm(forms.ModelForm):
     class Meta:
         model = Country
         fields = '__all__'
-        labels = {'name': 'Název země'}
+        labels = {'name': 'Název země: '}
         help_texts = {'name': 'Zadej název země'}
 
     def clean_name(self):
@@ -21,9 +21,9 @@ class CityModelForm(forms.ModelForm):
         model = City
         fields = ['name', 'country', 'zip_code']
         labels = {
-            'name': 'Město',
-            'country': 'Země',
-            'zip_code': 'PSČ'
+            'name': 'Město: ',
+            'country': 'Země: ',
+            'zip_code': 'PSČ: '
         }
         help_texts = {
             'name': 'Zadej jméno města',

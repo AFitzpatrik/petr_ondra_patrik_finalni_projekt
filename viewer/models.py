@@ -5,7 +5,15 @@ from django.core.exceptions import ValidationError
 
 
 class Country(models.Model):
-    name = models.CharField(max_length=100, unique=True, null=False, blank=False)
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+        null=False,
+        blank=False,
+        error_messages={
+            'unique': 'Stát s tímto názvem již existuje.'
+        }
+    )
     
     class Meta:
         verbose_name_plural = 'Countries'
