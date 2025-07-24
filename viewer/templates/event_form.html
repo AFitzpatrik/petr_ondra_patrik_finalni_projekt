@@ -71,19 +71,3 @@
     </form>
 </div>
 {% endblock %}
-
-{% block extra_js %}
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-    flatpickr("input[name='start_date_time']", {
-        enableTime: true,
-        dateFormat: "d.m.Y H:i",
-        time_24hr: true
-    });
-    flatpickr("input[name='end_date_time']", {
-        enableTime: true,
-        dateFormat: "d.m.Y H:i",
-        time_24hr: true
-    });
-</script>
-{% endblock %}

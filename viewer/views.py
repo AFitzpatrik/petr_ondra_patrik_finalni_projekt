@@ -328,18 +328,3 @@ class LocationCreateView(PermissionRequiredMixin, CreateView):
     def form_invalid(self, form):
         messages.error(self.request, 'Místo s tímto názvem a adresou už existuje nebo nejsou vyplněna všechna pole.')
         return super().form_invalid(form)
-
-class TypeCreateView(PermissionRequiredMixin, CreateView):
-    model = Type
-    form_class = TypeModelForm
-    template_name = 'type_form.html'
-    success_url = reverse_lazy('event_create')
-    permission_required = 'viewer.add_type'
-
-
-class LocationCreateView(PermissionRequiredMixin, CreateView):
-    model = Location
-    form_class = LocationModelForm
-    template_name = 'location_form.html'
-    success_url = reverse_lazy('event_create')
-    permission_required = 'viewer.add_location'
