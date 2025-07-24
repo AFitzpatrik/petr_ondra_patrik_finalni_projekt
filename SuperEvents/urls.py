@@ -42,8 +42,6 @@ urlpatterns = [
     path('event/create/', EventCreateView.as_view(), name='event_create'),
     path('type/create/', TypeCreateView.as_view(), name='type_create'),
     path('location/create/', LocationCreateView.as_view(), name='location_create'),
-    path('type/create/', TypeCreateView.as_view(), name='type_create'),
-    path('location/create/', LocationCreateView.as_view(), name='location_create'),
     path('event/<int:pk>/update/', EventUpdateView.as_view(), name='event_update'),
     path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event_delete'),
     path('cities/', CitiesListView.as_view(), name='cities'),
@@ -70,7 +68,6 @@ urlpatterns = [
 
 
     path('profile/<int:pk>/', ProfileDetailView.as_view(), name='profile_detail'),
-
 
 
     path('api/events/', Events.as_view(), name='api_events'),
