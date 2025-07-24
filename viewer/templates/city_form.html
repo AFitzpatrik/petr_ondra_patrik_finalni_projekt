@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block content %}
+<style>
+.text-danger.small {
+    display: none !important;
+}
+</style>
 <div class="container">
 
     <h2 class="mb-4">Přidat nové město</h2>
@@ -16,10 +21,6 @@
             <label for="{{ form.name.id_for_label }}" class="form-label">{{ form.name.label }}</label>
             <br>
             {{ form.name }}
-            {# help_text je skrytý #}
-            {% for error in form.name.errors %}
-                <div class="text-danger small">{{ error }}</div>
-            {% endfor %}
         </div>
         <div class="mb-3">
             <label for="{{ form.country.id_for_label }}" class="form-label">{{ form.country.label }}</label>
@@ -29,25 +30,17 @@
                     <a href="{% url 'country_create' %}" class="btn btn-outline-primary btn-sm ml-2">➕ Přidat stát</a>
                 </div>
             </div>
-            {# help_text je skrytý #}
-            {% for error in form.country.errors %}
-                <div class="text-danger small">{{ error }}</div>
-            {% endfor %}
         </div>
         <div class="mb-3">
             <label for="{{ form.zip_code.id_for_label }}" class="form-label">{{ form.zip_code.label }}</label>
             <br>
             {{ form.zip_code }}
-            {# help_text je skrytý #}
-            {% for error in form.zip_code.errors %}
-                <div class="text-danger small">{{ error }}</div>
-            {% endfor %}
         </div>
 
         <button type="submit" class="btn btn-primary">Uložit město</button>
     </form>
 
-    {% if messages or form.non_field_errors %}
+    {% if messages or form.non_field_errors or form.name.errors or form.country.errors or form.zip_code.errors %}
         <div class="alert alert-danger mt-4">
             {% for message in messages %}
                 {% if message.tags == 'error' or message.tags == 'warning' %}
@@ -55,6 +48,15 @@
                 {% endif %}
             {% endfor %}
             {% for error in form.non_field_errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+            {% for error in form.name.errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+            {% for error in form.country.errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+            {% for error in form.zip_code.errors %}
                 <div>{{ error }}</div>
             {% endfor %}
         </div>
