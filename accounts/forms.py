@@ -1,9 +1,10 @@
 from datetime import date
 
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 from django.core.exceptions import ValidationError
 from django.db.transaction import atomic
 from django.forms import DateField, NumberInput, CharField, Textarea
+from django.contrib.auth import get_user_model
 
 from accounts.models import Profile
 
@@ -43,13 +44,11 @@ class SignUpForm(UserCreationForm):
             else:
                 field.widget.attrs = {'class': 'form-control'}
 
-    
     date_of_birth = DateField(
         widget=NumberInput(attrs={'type': 'date', 'class': 'form-control'}),
         label='Datum narození: ',
         required=False
     )
-
 
     phone = CharField(
         label='Telefon: ',
@@ -71,7 +70,6 @@ class SignUpForm(UserCreationForm):
 
         # Získání dalších údajů z formuláře
         date_of_birth = self.cleaned_data.get('date_of_birth')
-        biography = self.cleaned_data.get('biography')
         phone = self.cleaned_data.get('phone')
         
         # Vytvoří profil uživatele
@@ -84,3 +82,12 @@ class SignUpForm(UserCreationForm):
         if commit:
             profile.save()
         return user
+
+# Formulář pro resetování hesla, zkontroluje, jestli je email v databázi, jestli není, zobrazí chybu
+class CustomPasswordResetForm(PasswordResetForm):
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        UserModel = get_user_model()
+        if not UserModel.objects.filter(email__iexact=email, is_active=True).exists():
+            raise ValidationError("Tento e-mail není v systému registrován.")
+        return email

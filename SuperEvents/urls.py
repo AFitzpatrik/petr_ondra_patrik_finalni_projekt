@@ -24,6 +24,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 from accounts.views import SignUpView, UserLogoutView, RegistrationSuccessView, LogoutSuccessView, LoginSuccessView
+from accounts.forms import CustomPasswordResetForm
 from api.views import Events, AllEvents, FilteredEvents
 from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, search, \
     EventUpdateView, EventDeleteView, EventCreateView, ProfileDetailView, make_reservation, cancel_reservation, \
@@ -62,7 +63,7 @@ urlpatterns = [
     path('accounts/logout/', UserLogoutView.as_view(), name='logout'),
     path('accounts/logout_success/', LogoutSuccessView.as_view(), name='logout_success'),
     path('accounts/password_change/', PasswordChangeView.as_view(template_name='password_change_form.html'), name='password_change'),
-    path('accounts/password_reset/', PasswordResetView.as_view(template_name='password_reset_form.html'), name='password_reset'),
+    path('accounts/password_reset/', PasswordResetView.as_view(template_name='password_reset_form.html', form_class=CustomPasswordResetForm), name='password_reset'),
     path('accounts/password_reset/done/', PasswordResetDoneView.as_view(template_name='password_reset_done.html'), name='password_reset_done'),
     path('accounts/', include('django.contrib.auth.urls')),
 
