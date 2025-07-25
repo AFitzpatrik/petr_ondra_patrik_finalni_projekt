@@ -14,116 +14,94 @@
                 <div class="card-body">
                     <form method="post">
                         {% csrf_token %}
-                        
-                        {% if form.errors %}
-                            <div class="alert alert-danger">
-                                <h5>Opravte následující chyby:</h5>
-                                {{ form.errors }}
-                            </div>
-                        {% endif %}
-                        
+                        {# --- Vstupní pole formuláře --- #}
                         <div class="form-group">
                             <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
                             {{ form.username }}
-                            {% if form.username.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {{ form.username.errors }}
-                                </div>
-                            {% endif %}
                         </div>
-                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
                                     {{ form.first_name }}
-                                    {% if form.first_name.errors %}
-                                        <div class="invalid-feedback d-block">
-                                            {{ form.first_name.errors }}
-                                        </div>
-                                    {% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
                                     {{ form.last_name }}
-                                    {% if form.last_name.errors %}
-                                        <div class="invalid-feedback d-block">
-                                            {{ form.last_name.errors }}
-                                        </div>
-                                    {% endif %}
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="form-group">
                             <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
                             {{ form.email }}
-                            {% if form.email.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {{ form.email.errors }}
-                                </div>
-                            {% endif %}
                         </div>
-                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="{{ form.date_of_birth.id_for_label }}">{{ form.date_of_birth.label }}</label>
                                     {{ form.date_of_birth }}
-                                    {% if form.date_of_birth.errors %}
-                                        <div class="invalid-feedback d-block">
-                                            {{ form.date_of_birth.errors }}
-                                        </div>
-                                    {% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
                                     {{ form.phone }}
-                                    {% if form.phone.errors %}
-                                        <div class="invalid-feedback d-block">
-                                            {{ form.phone.errors }}
-                                        </div>
-                                    {% endif %}
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="form-group">
-                            <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+                            <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}:</label>
                             {{ form.password1 }}
-                            {% if form.password1.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {{ form.password1.errors }}
-                                </div>
-                            {% endif %}
                             {% if form.password1.help_text %}
                                 <small class="form-text text-muted">
                                     {{ form.password1.help_text|safe }}
                                 </small>
                             {% endif %}
                         </div>
-                        
                         <div class="form-group">
-                            <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+                            <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}:</label>
                             {{ form.password2 }}
-                            {% if form.password2.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {{ form.password2.errors }}
-                                </div>
-                            {% endif %}
                         </div>
-                        
+                        {% if form.errors %}
+                        <div class="alert alert-danger mb-3">
+                            <h5>Opravte následující chyby:</h5>
+                            <ul class="mb-0">
+                                {% for field, errors in form.errors.items %}
+                                    {% if field == 'password2' %}
+                                        <li><strong>Heslo:</strong> {{ errors|join:', ' }}</li>
+                                    {% elif field == 'email' %}
+                                        <li><strong>Email:</strong> {{ errors|join:', ' }}</li>
+                                    {% elif field == 'password1' %}
+                                        <li><strong>Heslo:</strong> {{ errors|join:', ' }}</li>
+                                    {% elif field == 'username' %}
+                                        <li><strong>Uživatelské jméno:</strong> {{ errors|join:', ' }}</li>
+                                    {% elif field == 'first_name' %}
+                                        <li><strong>Jméno:</strong> {{ errors|join:', ' }}</li>
+                                    {% elif field == 'last_name' %}
+                                        <li><strong>Příjmení:</strong> {{ errors|join:', ' }}</li>
+                                    {% elif field == 'date_of_birth' %}
+                                        <li><strong>Datum narození:</strong> {{ errors|join:', ' }}</li>
+                                    {% elif field == 'phone' %}
+                                        <li><strong>Telefon:</strong> {{ errors|join:', ' }}</li>
+                                    {% else %}
+                                        <li><strong>{{ field|capfirst }}:</strong> {{ errors|join:', ' }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if form.non_field_errors %}
+                                    {% for error in form.non_field_errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                        {% endif %}
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary btn-lg">Registrovat se</button>
                         </div>
                     </form>
-                    
                     <hr class="my-4">
-                    
                     <div class="text-center">
                         <p class="mb-0">Již máte účet? <a href="{% url 'login' %}" class="text-primary">Přihlašte se zde</a></p>
                     </div>
