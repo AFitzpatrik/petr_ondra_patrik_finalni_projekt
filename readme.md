@@ -105,8 +105,8 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 
 
 - [x] 18.0 Země - PETR
-  - [ ] Události v zemi
-  - [ ] Údaje o zemi z API
+  - [x] Události v zemi
+  - [x] Údaje o zemi z API
 
 
 

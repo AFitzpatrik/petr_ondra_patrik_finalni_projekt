@@ -153,3 +153,9 @@ LOGIN_URL = '/accounts/login/'
 
 LOGOUT_REDIRECT_URL = '/'
 LOGOUT_URL = '/accounts/logout/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
