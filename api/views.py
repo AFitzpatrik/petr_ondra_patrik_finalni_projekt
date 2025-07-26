@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import now
 from rest_framework.generics import GenericAPIView
@@ -6,7 +7,7 @@ from api.serializers import EventsSerializer
 from viewer.models import Event
 
 
-class Events(ListModelMixin, GenericAPIView):
+class Events(LoginRequiredMixin, ListModelMixin, GenericAPIView):
     serializer_class = EventsSerializer
 
     def get_queryset(self):
@@ -16,7 +17,7 @@ class Events(ListModelMixin, GenericAPIView):
         return self.list(request, *args, **kwargs)
 
 
-class AllEvents(ListModelMixin, GenericAPIView):
+class AllEvents(LoginRequiredMixin, ListModelMixin, GenericAPIView):
     queryset = Event.objects.all().order_by('start_date_time')
     serializer_class = EventsSerializer
 
@@ -24,7 +25,7 @@ class AllEvents(ListModelMixin, GenericAPIView):
         return self.list(request, *args, **kwargs)
 
 
-class FilteredEvents(ListModelMixin, GenericAPIView):
+class FilteredEvents(LoginRequiredMixin, ListModelMixin, GenericAPIView):
     serializer_class = EventsSerializer
 
     def get_queryset(self):

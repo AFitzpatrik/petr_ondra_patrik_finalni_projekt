@@ -1,21 +1,22 @@
 {% load static %}
 <style>
-.navbar-nav .nav-link:hover,
-.navbar-nav .dropdown-item:hover {
-    background-color: #00509e !important;
-    color: #fff !important;
-    border-radius: 4px;
-}
-.navbar-nav .nav-link.active {
-    background-color: #003366;
-    color: #fff;
-}
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .dropdown-item:hover {
+        background-color: #00509e !important;
+        color: #fff !important;
+        border-radius: 4px;
+    }
+
+    .navbar-nav .nav-link.active {
+        background-color: #003366;
+        color: #fff;
+    }
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #003366;">
     <div class="container fixed">
         <a class="navbar-brand" href="{% url 'home' %}">
-            <img src="{% static 'LOGO.png' %}" alt="SuperEvents logo" style="height:48px; width:auto; vertical-align:middle; margin-right:8px;">
-           
+            <img src="{% static 'LOGO.png' %}" alt="SuperEvents logo"
+                 style="height:48px; width:auto; vertical-align:middle; margin-right:8px;">
         </a>
         <button
                 class="navbar-toggler" type="button"
@@ -31,18 +32,27 @@
 
             </div>
 
+        {% if user.is_authenticated %}
             <div class="navbar-nav">
                 <div class="nav-item dropdown">
                     <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown">API</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Počasí</a>
-                        <a class="dropdown-item" href="#">Mapa</a>
+                        <a class="dropdown-item" href="{% url 'api_events' %}">Nadcházející akce</a>
+                        <a class="dropdown-item" href="{% url 'all_events' %}">Všechny události</a>
+                        <a class="dropdown-item"
+                           href="{% url 'filtered_events' %}?start=2025-01-01T00:00:00&end=2025-12-31T23:59:59"
+                           title="Tvar URL: ?start=YYYY-MM-DDTHH:MM:SS&end=YYYY-MM-DDTHH:MM:SS">
+                           Filtrování událostí
+                        </a>
+
                     </div>
                 </div>
             </div>
+        {% endif %}
 
-             <form class="d-flex mx-auto" style="width: 40%;" method="get" action="{% url 'search' %}">
-                <input class="form-control mr-2" style="flex:1; min-width:0;" type="search" name="search" placeholder="Hledat..." aria-label="Hledat">
+            <form class="d-flex" method="get" action="{% url 'search' %}">
+                <input class="form-control me-2" type="search" name="search" placeholder="Hledat..."
+                       aria-label="Hledat">
                 <button class="btn btn-outline-success" type="submit">🔍</button>
             </form>
 
@@ -50,7 +60,7 @@
             <div class="navbar-nav ml-auto text-white d-flex align-items-center">
                 {% if user.is_authenticated %}
                     {% if perms.viewer.add_event %}
-                    <a class="btn btn-success mx-1" href="{% url 'event_create' %}">➕ Přidat událost</a>
+                        <a class="btn btn-success mx-1" href="{% url 'event_create' %}">➕ Přidat událost</a>
                     {% endif %}
                     <div class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown">
@@ -67,9 +77,6 @@
                     <a class="nav-item btn btn-success mx-1" href="{% url 'login' %}">Přihlášení</a>
                 {% endif %}
             </div>
-
-
-
         </div>
     </div>
 </nav>
