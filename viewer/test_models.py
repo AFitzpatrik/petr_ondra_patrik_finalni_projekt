@@ -17,7 +17,7 @@ class EventModelTest(TestCase):
             name="Hala lokomotivy",
             description="Sportovní hala Lokomotiva Plzeň",
             address="Úslavská 2357",
-            city=city
+            city=city,
         )
         event_type = Type.objects.create(name="Sportovní")
         user = User.objects.create_user(username="testuser", password="testpassword")
@@ -31,13 +31,12 @@ class EventModelTest(TestCase):
             description="Mistrovství ČR v judu kategorie U18",
             start_date_time=start_time,
             end_date_time=end_time,
-            owner_of_event = user,
-            location = location
+            owner_of_event=user,
+            location=location,
         )
 
     def setUp(self):
         print("-" * 80)
-
 
     def test_country_str(self):
         country = Country.objects.get(id=1)
@@ -45,29 +44,35 @@ class EventModelTest(TestCase):
         self.assertEqual(str(country), "Česká republika")
 
     def test_country_unique_constraint(self):
-        print(f"test_country_unique_constraint: trying to insert duplicate 'Česká republika'")
+        print(
+            f"test_country_unique_constraint: trying to insert duplicate 'Česká republika'"
+        )
         with self.assertRaises(IntegrityError):
             Country.objects.create(name="Česká republika")
 
     def test_city_str(self):
-        city =City.objects.get(id=1)
+        city = City.objects.get(id=1)
         print(f"test_city_str: {city.__str__()}")
         self.assertEqual(str(city), "Plzeň")
 
     def test_city_country_relationship(self):
         city = City.objects.get(id=1)
-        print(f"test_city_country_relationship: '{city.name}' is in '{city.country.name}'")
+        print(
+            f"test_city_country_relationship: '{city.name}' is in '{city.country.name}'"
+        )
         self.assertEqual(city.country.name, "Česká republika")
 
     def test_location_repr(self):
-        location = Location .objects.get(id=1)
+        location = Location.objects.get(id=1)
         expected = f"Location(name=Hala lokomotivy, city=Plzeň, address=Úslavská 2357)"
         print(f"test_location_repr: {repr(location)}")
         self.assertEqual(repr(location), expected)
 
     def test_location_city_relationship(self):
         location = Location.objects.get(id=1)
-        print(f"test_location_city_relationship: '{location.name}' is in '{location.city.name}'")
+        print(
+            f"test_location_city_relationship: '{location.name}' is in '{location.city.name}'"
+        )
         self.assertEqual(location.city.name, "Plzeň")
 
     def test_type_str(self):
@@ -88,37 +93,21 @@ class EventModelTest(TestCase):
 
     def test_event_type_relationship(self):
         event = Event.objects.get(id=1)
-        print(f"test_event_type_relationship: '{event.type.name}' is in '{event.type.name}'")
+        print(
+            f"test_event_type_relationship: '{event.type.name}' is in '{event.type.name}'"
+        )
         self.assertEqual(event.type.name, "Sportovní")
 
     def test_event_get_start_date_cz_format(self):
         event = Event.objects.get(id=1)
-        expected = event.start_date_time.strftime('%d.%m.%Y, %H:%M')
-        print(f"test_event_get_start_date_cz_format: {event.get_start_date_cz_format()}")
+        expected = event.start_date_time.strftime("%d.%m.%Y, %H:%M")
+        print(
+            f"test_event_get_start_date_cz_format: {event.get_start_date_cz_format()}"
+        )
         self.assertEqual(event.get_start_date_cz_format(), expected)
 
     def test_event_get_end_date_cz_format(self):
         event = Event.objects.get(id=1)
-        expected = event.end_date_time.strftime('%d.%m.%Y, %H:%M')
+        expected = event.end_date_time.strftime("%d.%m.%Y, %H:%M")
         print(f"test_event_get_start_date_cz_format: {event.get_end_date_cz_format()}")
         self.assertEqual(event.get_end_date_cz_format(), expected)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

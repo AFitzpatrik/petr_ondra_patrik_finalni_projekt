@@ -5,11 +5,14 @@ from django.utils import timezone
 from datetime import timedelta
 from django.core.exceptions import ValidationError
 
+
 class EventCapacityTests(TestCase):
     def setUp(self):
         self.country = Country.objects.create(name="Test Country")
         self.city = City.objects.create(name="Test City", country=self.country)
-        self.location = Location.objects.create(name="Test Location", address="Ulice 1", city=self.city)
+        self.location = Location.objects.create(
+            name="Test Location", address="Ulice 1", city=self.city
+        )
         self.type = Type.objects.create(name="Workshop")
         self.owner = User.objects.create_user(username="owner", password="pass")
         self.user1 = User.objects.create_user(username="user1", password="pass")
@@ -22,7 +25,7 @@ class EventCapacityTests(TestCase):
             start_date_time=timezone.now() + timedelta(days=1),
             end_date_time=timezone.now() + timedelta(days=1, hours=2),
             owner_of_event=self.owner,
-            capacity=1
+            capacity=1,
         )
 
     def test_event_accepts_reservation_up_to_capacity(self):

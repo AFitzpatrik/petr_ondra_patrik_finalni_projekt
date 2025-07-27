@@ -3,9 +3,11 @@ from viewer.models import Event
 
 register = template.Library()
 
+
 @register.filter
 def event_count_for_city(city):
     return Event.objects.filter(location__city=city).count()
+
 
 @register.filter
 def sklonuj_udalost(pocet):
