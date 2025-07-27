@@ -1,8 +1,9 @@
 from django.contrib.auth import logout
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.shortcuts import redirect
+
 from django.views.generic import CreateView, View, TemplateView
 from django.contrib.messages import success
+from django.conf import settings
 
 from accounts.forms import SignUpForm
 
@@ -10,8 +11,8 @@ from accounts.forms import SignUpForm
 class UserLogoutView(View):
     def get(self, request):
         logout(request)
-        return redirect('logout_success')
-        #return redirect(request.META.get('HTTP_REFERER', '/'))  #zůstat na stejné stránce
+        return redirect(settings.LOGOUT_REDIRECT_URL)
+        #return redirect(request.META.get('HTTP_REFERER', '/'))  #Pokud chceme zůstat na stejné stránce
 
 class LogoutSuccessView(TemplateView):
     template_name = 'logout_success.html'
