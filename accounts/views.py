@@ -12,32 +12,29 @@ class UserLogoutView(View):
     def get(self, request):
         logout(request)
         return redirect(settings.LOGOUT_REDIRECT_URL)
-        #return redirect(request.META.get('HTTP_REFERER', '/'))  #Pokud chceme zůstat na stejné stránce
+        # return redirect(request.META.get('HTTP_REFERER', '/'))  #Pokud chceme zůstat na stejné stránce
+
 
 class LogoutSuccessView(TemplateView):
-    template_name = 'logout_success.html'
+    template_name = "logout_success.html"
 
 
 class SignUpView(CreateView):
-    template_name = 'registration.html'
+    template_name = "registration.html"
     form_class = SignUpForm
 
     def form_valid(self, form):
         self.object = form.save()
-        success(self.request, f'Účet pro uživatele {form.instance.username} byl úspěšně vytvořen!')
-        return redirect('registration_success')
+        success(
+            self.request,
+            f"Účet pro uživatele {form.instance.username} byl úspěšně vytvořen!",
+        )
+        return redirect("registration_success")
+
 
 class RegistrationSuccessView(TemplateView):
-    template_name = 'registration_success.html'
+    template_name = "registration_success.html"
 
 
 class LoginSuccessView(TemplateView):
-    template_name = 'login_success.html'
-
-
-
-
-
-
-
-
+    template_name = "login_success.html"
