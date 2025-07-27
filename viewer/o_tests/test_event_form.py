@@ -8,6 +8,9 @@ from viewer.models import Event, Type, Location, City, Country
 
 class EventCreateViewTest(TestCase):
     def setUp(self):
+        print("-" * 80)
+        print(f"Spouští se test: {self._testMethodName}")
+
         self.client = Client()
 
         # Vytvoření uživatele + přidání oprávnění

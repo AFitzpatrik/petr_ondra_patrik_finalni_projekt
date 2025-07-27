@@ -5,6 +5,9 @@ from viewer.models import Country, City
 
 class CitiesListViewTest(TestCase):
     def setUp(self):
+        print("-" * 80)
+        print(f"Spouští se test: {self._testMethodName}")
+
         self.country = Country.objects.create(name="Česko")
         self.city = City.objects.create(
             name="Ostrava", country=self.country, zip_code="70030"

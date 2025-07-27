@@ -6,6 +6,9 @@ from viewer.models import Event, Type, Location, City, Country, Comment
 
 class CommentTests(TestCase):
     def setUp(self):
+        print("-" * 80)
+        print(f"Spouští se test: {self._testMethodName}")
+
         self.client = Client()
         self.user = User.objects.create_user(username="testuser", password="password")
         self.country = Country.objects.create(name="Česko")

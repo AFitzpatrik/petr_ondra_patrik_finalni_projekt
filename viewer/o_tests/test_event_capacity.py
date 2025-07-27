@@ -8,6 +8,9 @@ from django.core.exceptions import ValidationError
 
 class EventCapacityTests(TestCase):
     def setUp(self):
+        print("-" * 80)
+        print(f"Spouští se test: {self._testMethodName}")
+
         self.country = Country.objects.create(name="Test Country")
         self.city = City.objects.create(name="Test City", country=self.country)
         self.location = Location.objects.create(
