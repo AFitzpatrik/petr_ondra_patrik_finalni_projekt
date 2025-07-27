@@ -148,5 +148,4 @@ class CommentForm(forms.ModelForm):
             'content': '',
         }
 
-from .forms import TypeModelForm, LocationModelForm
 
