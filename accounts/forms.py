@@ -3,7 +3,7 @@ from datetime import date
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 from django.core.exceptions import ValidationError
 from django.db.transaction import atomic
-from django.forms import DateField, NumberInput, CharField, Textarea
+from django.forms import DateField, NumberInput, CharField
 from django.contrib.auth import get_user_model
 
 from accounts.models import Profile
@@ -24,17 +24,7 @@ class SignUpForm(UserCreationForm):
             'password1': 'Heslo: ',
             'password2': 'Heslo znovu: '
         }
-        
-        # Pro určení vzhledu v bootstrapu 
-        widgets = {
-            'username': CharField().widget,
-            'first_name': CharField().widget,
-            'last_name': CharField().widget,
-            'email': CharField().widget,
-            'password1': CharField().widget,
-            'password2': CharField().widget,
-        }
-        
+
     # Po spuštení formuláře bude vše v bootstrapu
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -76,7 +66,6 @@ class SignUpForm(UserCreationForm):
         profile = Profile(
             user=user,
             date_of_birth=date_of_birth,
-            biography=biography,
             phone=phone
         )
         if commit:

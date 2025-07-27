@@ -12,12 +12,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
-from django.conf.global_settings import LOGOUT_REDIRECT_URL
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -123,10 +121,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-LANGUAGES = [
-    ('cs', 'Czech'),
-    ('en', 'English'),
-]
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -157,5 +152,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/accounts/login_success/'
 LOGIN_URL = '/accounts/login/'
 
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/logout_success/'
 LOGOUT_URL = '/accounts/logout/'
