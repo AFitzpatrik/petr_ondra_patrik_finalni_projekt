@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 
-<html lang="{{ LANGUAGE_CODE|default:'en' }}">
+<html lang="{{ LANGUAGE_CODE }}">
 
 <head>
     <meta charset="utf-8">
@@ -19,6 +19,22 @@
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> <!-- Flatpickr pro zadávání data a času u události -->
+    
+    <!-- Navbar styles -->
+    <style>
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .dropdown-item:hover {
+        background-color: #00509e !important;
+        color: #fff !important;
+        border-radius: 4px;
+    }
+    .navbar-nav .nav-link.active {
+        background-color: #003366;
+        color: #fff;
+    }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
 
 </head>
 
