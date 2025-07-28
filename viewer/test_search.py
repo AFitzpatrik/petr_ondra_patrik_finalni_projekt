@@ -19,7 +19,7 @@ class SearchViewTest(TestCase):
             name = 'Koncert zítra',
             start_date_time = now() + timedelta(days=1),
             end_date_time = now() + timedelta(days=1, hours=2),
-            description='Koncert, který se koná.',
+            description='Koncert, který se bude konat.',
             owner_of_event=cls.user,
             location=cls.location,
             type = cls.event_type
