@@ -19,15 +19,22 @@
 
             </div>
 
+            {% if user.is_authenticated %}
             <div class="navbar-nav">
                 <div class="nav-item dropdown">
                     <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown">API</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Počasí</a>
-                        <a class="dropdown-item" href="#">Mapa</a>
+                        <a class="dropdown-item" href="{% url 'api_events' %}">Nadcházející akce</a>
+                        <a class="dropdown-item" href="{% url 'all_events' %}">Všechny události</a>
+                        <a class="dropdown-item"
+                           href="{% url 'filtered_events' %}?start=2025-01-01T00:00:00&end=2025-12-31T23:59:59"
+                           title="Tvar URL: ?start=YYYY-MM-DDTHH:MM:SS&end=YYYY-MM-DDTHH:MM:SS">
+                           Filtrování událostí
+                        </a>
                     </div>
                 </div>
             </div>
+        {% endif %}
 
              <form class="d-flex mx-auto" style="width: 40%;" method="get" action="{% url 'search' %}">
                 <input class="form-control mr-2" style="flex:1; min-width:0;" type="search" name="search" placeholder="Hledat..." aria-label="Hledat">
