@@ -16,7 +16,11 @@
     <ul>
         {% for city in cities %}
             <li>
-                <strong>{{ city.name }}</strong> <!-- Statický název města, bez odkazu -->
+                <!-- Odkaz na Wikipedii pro město -->
+                <a href="https://cs.wikipedia.org/wiki/{{ city.name|urlencode }}" target="_blank">
+                    <strong>{{ city.name }}</strong>  <!-- Klikací název města -->
+                </a>
+
                 {% if user.is_authenticated %}
                 <a href="{% url 'city_update' city.id %}" class="ms-2 text-decoration-none" title="Upravit">📝</a>
                 {% endif %}
