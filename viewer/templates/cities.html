@@ -7,7 +7,7 @@
 
 {% block content %}
 
-        <h1>Seznam měst</h1>
+    <h1>Seznam měst</h1>
     <div class="mb-3">
         {% if user.is_authenticated %}
         <a href="{% url 'city_create' %}" class="btn btn-primary">Přidat město</a>
@@ -16,16 +16,16 @@
     <ul>
         {% for city in cities %}
             <li>
-                <a href="#">
-                    <strong>{{ city.name }}</strong>
-                </a>
+                <strong>{{ city.name }}</strong> <!-- Statický název města, bez odkazu -->
                 {% if user.is_authenticated %}
                 <a href="{% url 'city_update' city.id %}" class="ms-2 text-decoration-none" title="Upravit">📝</a>
                 {% endif %}
 
                 <ul class="mt-1">
                     <li>
-                        Počet událostí: {{ city|event_count_for_city }} {{ city|event_count_for_city|sklonuj_udalost }}
+                        <a href="{% url 'events' %}?city={{ city.name|urlencode }}">
+                            Počet událostí v {{ city.name }}: {{ city|event_count_for_city }} {{ city|event_count_for_city|sklonuj_udalost }}
+                        </a>
                     </li>
                 </ul>
             </li>
