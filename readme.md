@@ -1,3 +1,144 @@
+# 🗓️ SuperEvents
+
+SuperEvents je webová aplikace vytvořená v Django frameworku pro správu a vytváření událostí.  
+Umožňuje uživatelům vyhledávat události, registrovat se na ně a zobrazovat jejich podrobnosti.
+
+### 👥 Tým
+- [AFitzpatrik](https://github.com/AFitzpatrik)
+- [Nunu8888](https://github.com/Nunu8888)  
+- [OndZii](https://github.com/OndZii)  
+
+
+---
+
+## ✨ Funkce aplikace
+
+### 👤 Uživatelské účty
+- Registrace a ověření nových uživatelů
+- Možnost přidání speciálních rolí (např. organizátor)
+- Obnova zapomenutého hesla a změna stávajícího hesla
+- Uživatelský panel:
+  - Zobrazení svých osobních údajů
+  - Seznam organizovaných a rezervovaných událostí
+
+### 📅 Události
+- Přidávání, mazání a úprava událostí
+- Oprávnění podle role (kdo může co spravovat)
+- Možnost registrace na konkrétní událost
+- Zobrazení obsazenosti události
+- Komentáře:
+  - Možnost přidávání komentářů pro přihlášené uživatele
+  - Zobrazení komentářů pro nepřihlášené uživatele
+
+### 🔍 Ostatní funkce
+- Vyhledávání událostí podle konkrétního slova
+- Filtrování událostí podle místa a času
+
+### 🌐 API
+- Zobrazení aktuálního **počasí** v místě události pomocí API
+- Zobrazení základních informací o **státech** pomocí API
+
+---
+
+## 🧾 Struktura projektu
+**(DOPLNIT!!!!!)**  
+
+---
+
+## 🗺️ ER Diagram
+**(DOPLNIT!!!!!)**  
+
+---
+
+## 📸 Screenshoty
+**(DOPLNIT!!!!!)** 
+
+---
+
+## 🛠️ Instalace
+
+1. **Naklonuj repozitář**
+```bash
+git clone https://github.com/AFitzpatrik/petr_ondra_patrik_finalni_projekt
+cd project_name
+```
+
+2. **Vytvoř a aktivuj virtuální prostředí**
+```bash
+python -m venv venv
+```
+
+**Windows:**
+```bash
+venv\Scripts\activate
+```
+
+**macOS / Linux:**
+```bash
+source venv/bin/activate
+```
+
+3. **Nainstaluj potřebné knihovny**
+```bash
+pip install -r requirements.txt
+```
+
+4. **Spusť a proveď migrace**
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+5. **Spusť vývojový server**
+```bash
+python manage.py runserver
+```
+
+
+
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44239
 
 - [x] 1.0 Seznam událostí - ONDRA/PATRIK
