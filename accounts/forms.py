@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 from accounts.models import Profile
 
 
-# Registrační formulář, rozšiřuje vestavěný UserCreationForm
+#Registrační formulář, rozšiřuje vestavěný UserCreationForm
 class SignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         # Fieldy, které chci zobrazit ve formuláři
@@ -22,7 +22,7 @@ class SignUpForm(UserCreationForm):
             "password2",
         ]
 
-        # Popisky pro jednotlivá pole na stránce
+        #Popisky pro jednotlivá pole na stránce
         labels = {
             "username": "Uživatelské jméno: ",
             "first_name": "Jméno: ",
@@ -32,7 +32,7 @@ class SignUpForm(UserCreationForm):
             "password2": "Heslo znovu: ",
         }
 
-    # Po spuštení formuláře bude vše v bootstrapu
+    #Po spuštení formuláře bude vše v bootstrapu
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
@@ -56,7 +56,7 @@ class SignUpForm(UserCreationForm):
             raise ValidationError("Datum narození nesmí být v budoucnosti.")
         return initial
 
-    #Clean metoda pro email, zadaný email už je v databázi u jiného uživatele, rozšíření Django modelu
+    #Clean metoda pro email, zadaný email už je v databázi u jiného uživatele, rozšíření Django modelu(UserCreationForm)
     def clean_email(self):
         email = self.cleaned_data.get("email")
         if email:
@@ -65,7 +65,7 @@ class SignUpForm(UserCreationForm):
                 raise ValidationError("Tento e-mail je již registrován.")
         return email
 
-    #Clean metoda pro telefon, jako u emailu, rozšíření Django modelu
+    #Clean metoda pro telefon, jako u emailu, rozšíření Django modelu(UserCreationForm)
     def clean_phone(self):
         phone = self.cleaned_data.get("phone")
         if phone:
