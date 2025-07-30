@@ -19,7 +19,7 @@ def random_number(length=11):
 
 
 @pytest.mark.asyncio  #Boilerplate, standartní nastavení playwright testu
-async def test_user_registration_success():
+async def test_user_registration_and_login():
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=False) #NUTNO NAINSTALOVAT CHROMIUM (playwright install chromium)
         page = await browser.new_page()
@@ -62,9 +62,21 @@ async def test_user_registration_success():
 
             #Čekání na přesměrování na success stránku
             await page.wait_for_url("**/accounts/registration_success/")
+            print("Registrace uživatele byla úspěšná!")
             await page.wait_for_timeout(5000)
 
-            print("Registrace uživatele byla úspěšná!")
+            await page.click('text="Přihlásit se"')
+            await page.wait_for_url("**/accounts/login/")
+
+            await page.fill("#id_username", username)
+            await page.fill("#id_password", password)
+            await page.click('text="Přihlásit se"')
+            await page.wait_for_url("**/accounts/login_success/")
+            print("Přihlášení bylo úspěšné!")
+            await page.wait_for_timeout(5000)
+
+
+
 
         except Exception as e:
             print(f"Chyba v testu: {e}")
