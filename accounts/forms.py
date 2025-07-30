@@ -49,14 +49,31 @@ class SignUpForm(UserCreationForm):
 
     phone = CharField(label="Telefon: ", required=False)
 
-    # Clean metoda pro datum narození - nesmí být v budoucnosti
+    #Clean metoda pro datum narození - nesmí být v budoucnosti
     def clean_date_of_birth(self):
         initial = self.cleaned_data["date_of_birth"]
         if initial and initial > date.today():
             raise ValidationError("Datum narození nesmí být v budoucnosti.")
         return initial
 
-    # Uloží uživatele
+    #Clean metoda pro email, zadaný email už je v databázi u jiného uživatele, rozšíření Django modelu
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if email:
+            UserModel = get_user_model()
+            if UserModel.objects.filter(email__iexact=email).exists():
+                raise ValidationError("Tento e-mail je již registrován.")
+        return email
+
+    #Clean metoda pro telefon, jako u emailu, rozšíření Django modelu
+    def clean_phone(self):
+        phone = self.cleaned_data.get("phone")
+        if phone:
+            if Profile.objects.filter(phone=phone).exists():
+                raise ValidationError("Tento telefon je již registrován.")
+        return phone
+
+    #Uloží uživatele
     @atomic
     def save(self, commit=True):
         self.instance.is_active = True  # uživatel je po registraci aktivní
