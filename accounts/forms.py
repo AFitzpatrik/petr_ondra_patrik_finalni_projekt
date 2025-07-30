@@ -76,14 +76,14 @@ class SignUpForm(UserCreationForm):
     #Uloží uživatele
     @atomic
     def save(self, commit=True):
-        self.instance.is_active = True  # uživatel je po registraci aktivní
+        self.instance.is_active = True  #uživatel je po registraci aktivní
         user = super().save(commit)
 
-        # Získání dalších údajů z formuláře
+        #Získání dalších údajů z formuláře
         date_of_birth = self.cleaned_data.get("date_of_birth")
         phone = self.cleaned_data.get("phone")
 
-        # Vytvoří profil uživatele
+        #Vytvoří profil uživatele
         profile = Profile(user=user, date_of_birth=date_of_birth, phone=phone)
         if commit:
             profile.save()
