@@ -216,7 +216,7 @@ class CountryListView(ListView):
     def get_queryset(self):
         return Country.objects.annotate(
             event_count=Count("cities__locations__events", distinct=True)
-        )
+        ).order_by("name")
 
 
 class CountryDetailView(DetailView):

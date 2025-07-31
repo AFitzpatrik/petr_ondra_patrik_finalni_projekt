@@ -2,6 +2,7 @@ import re
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import Event, Country, City, Comment, Type, Location
+from viewer.utils import format_country_name
 
 
 class CountryModelForm(forms.ModelForm):
@@ -12,8 +13,17 @@ class CountryModelForm(forms.ModelForm):
         help_texts = {"name": "Zadej název země"}
 
     def clean_name(self):
-        initial = self.cleaned_data["name"]
-        return initial.capitalize()
+        name = self.cleaned_data["name"].strip()
+
+        if not re.fullmatch(r"[A-Za-z ]+", name):
+            raise ValidationError("Název smí obsahovat pouze anglická písmena a mezery(bez diakritiky, čísel a speciálních znaků).")
+
+        formatted_name = format_country_name(name)
+
+        if Country.objects.filter(name__iexact=formatted_name).exists():
+            raise ValidationError("Země s tímto názvem již existuje.")
+
+        return formatted_name
 
 
 class CityModelForm(forms.ModelForm):
