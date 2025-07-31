@@ -12,7 +12,7 @@ class UserLogoutView(View):
     def get(self, request):
         logout(request)
         return redirect(settings.LOGOUT_REDIRECT_URL)
-        # return redirect(request.META.get('HTTP_REFERER', '/'))  #Pokud chceme zůstat na stejné stránce
+        # return redirect(request.META.get('HTTP_REFERER', '/'))#Nechat pro případ že chceme zůstat na stejné stránce
 
 
 class LogoutSuccessView(TemplateView):

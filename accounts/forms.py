@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 from accounts.models import Profile
 
 
-# Registrační formulář, rozšiřuje vestavěný UserCreationForm
+#Registrační formulář, rozšiřuje vestavěný UserCreationForm
 class SignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         # Fieldy, které chci zobrazit ve formuláři
@@ -22,7 +22,7 @@ class SignUpForm(UserCreationForm):
             "password2",
         ]
 
-        # Popisky pro jednotlivá pole na stránce
+        #Popisky pro jednotlivá pole na stránce
         labels = {
             "username": "Uživatelské jméno: ",
             "first_name": "Jméno: ",
@@ -32,7 +32,7 @@ class SignUpForm(UserCreationForm):
             "password2": "Heslo znovu: ",
         }
 
-    # Po spuštení formuláře bude vše v bootstrapu
+    #Po spuštení formuláře bude vše v bootstrapu
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
@@ -49,24 +49,41 @@ class SignUpForm(UserCreationForm):
 
     phone = CharField(label="Telefon: ", required=False)
 
-    # Clean metoda pro datum narození - nesmí být v budoucnosti
+    #Clean metoda pro datum narození - nesmí být v budoucnosti
     def clean_date_of_birth(self):
         initial = self.cleaned_data["date_of_birth"]
         if initial and initial > date.today():
             raise ValidationError("Datum narození nesmí být v budoucnosti.")
         return initial
 
-    # Uloží uživatele
+    #Clean metoda pro email, zadaný email už je v databázi u jiného uživatele, rozšíření Django modelu(UserCreationForm)
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if email:
+            UserModel = get_user_model()
+            if UserModel.objects.filter(email__iexact=email).exists():
+                raise ValidationError("Tento e-mail je již registrován.")
+        return email
+
+    #Clean metoda pro telefon, jako u emailu, rozšíření Django modelu(UserCreationForm)
+    def clean_phone(self):
+        phone = self.cleaned_data.get("phone")
+        if phone:
+            if Profile.objects.filter(phone=phone).exists():
+                raise ValidationError("Tento telefon je již registrován.")
+        return phone
+
+    #Uloží uživatele
     @atomic
     def save(self, commit=True):
-        self.instance.is_active = True  # uživatel je po registraci aktivní
+        self.instance.is_active = True  #uživatel je po registraci aktivní
         user = super().save(commit)
 
-        # Získání dalších údajů z formuláře
+        #Získání dalších údajů z formuláře
         date_of_birth = self.cleaned_data.get("date_of_birth")
         phone = self.cleaned_data.get("phone")
 
-        # Vytvoří profil uživatele
+        #Vytvoří profil uživatele
         profile = Profile(user=user, date_of_birth=date_of_birth, phone=phone)
         if commit:
             profile.save()
