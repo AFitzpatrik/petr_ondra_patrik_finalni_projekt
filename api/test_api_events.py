@@ -1,6 +1,5 @@
 from datetime import timedelta
-from urllib.parse import quote
-
+from urllib.parse import urlencode
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.timezone import now
@@ -91,10 +90,11 @@ class APIEventsTest(APITestCase):
 
     def test_api_events_returns_filtered_events(self):
         self.client.login(username='Nunu', password='test123')
+        start = (self.now_time - timedelta(hours=3)).isoformat(timespec='seconds')
+        end = (self.now_time + timedelta(days=2)).isoformat(timespec='seconds')
 
-        start = (self.now_time - timedelta(hours=1)).isoformat(timespec='seconds') + 'Z'
-        end = (self.now_time + timedelta(hours=4)).isoformat(timespec='seconds') + 'Z'
-        url = reverse('filtered_events') + f'?start={start}&end={end}'
+        params = urlencode({'start': start, 'end': end})
+        url = reverse('filtered_events') + '?' + params
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -102,10 +102,32 @@ class APIEventsTest(APITestCase):
         names = [event['name'] for event in response.data]
 
         self.assertIn(self.active.name, names)
-        self.assertNotIn(self.future.name, names)
+        self.assertIn(self.future.name, names)
         self.assertNotIn(self.past.name, names)
 
+    def test_api_filtered_events_empty_result(self):
+        self.client.login(username='Nunu', password='test123')
 
+        start = (self.now_time + timedelta(days=365)).isoformat(timespec='seconds')
+        end = (self.now_time + timedelta(days=400)).isoformat(timespec='seconds')
+        params = urlencode({'start': start, 'end': end})
+        url = reverse('filtered_events') + '?' + params
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, [])
+
+    def test_api_filtered_events_missing(self):
+        self.client.login(username='Nunu', password='test123')
+        response = self.client.get(reverse('filtered_events'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_api_filtered_events_invalid_params(self):
+        self.client.login(username='Nunu', password='test123')
+        url = reverse('filtered_events') + '?start=blbost&end=blbost'
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
 
 
 

@@ -1,6 +1,4 @@
 from datetime import timezone
-
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import now, make_aware
 from rest_framework.generics import GenericAPIView
@@ -38,8 +36,8 @@ class FilteredEvents(ListModelMixin, GenericAPIView):
     def get_queryset(self):
         start_param = self.request.query_params.get('start')
         end_param = self.request.query_params.get('end')
-        start = parse_datetime(start_param)
-        end = parse_datetime(end_param)
+        start = parse_datetime(start_param) if start_param else None
+        end = parse_datetime(end_param) if end_param else None
 
         if start and start.tzinfo is None:
             start = make_aware(start, timezone=timezone.utc)
@@ -48,11 +46,15 @@ class FilteredEvents(ListModelMixin, GenericAPIView):
 
         queryset = Event.objects.all().order_by('start_date_time')
 
-        if start:
-            queryset = queryset.filter(start_date_time__gte=start)
-        if end:
+        if start and end:
+            queryset = queryset.filter(
+                end_date_time__gte=start,
+                start_date_time__lte=end
+            )
+        elif start:
+            queryset = queryset.filter(end_date_time__gte=start)
+        elif end:
             queryset = queryset.filter(start_date_time__lte=end)
-
         return queryset
 
     def get(self, request, *args, **kwargs):
