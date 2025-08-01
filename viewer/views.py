@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, JsonResponse
 from django.contrib import messages
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -14,6 +14,7 @@ from django.utils.timezone import now
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
+from django.template.loader import render_to_string
 from .forms import (
     CommentForm,
     CityModelForm,
@@ -95,6 +96,12 @@ class EventCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = "viewer.add_event"
     login_url = "login"
     raise_exception = False
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Přidáme města pro modal lokace
+        context['cities'] = City.objects.all()
+        return context
 
     def form_valid(self, form):
         form.instance.owner_of_event = self.request.user
@@ -339,7 +346,30 @@ class TypeCreateView(PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy("event_create")
     permission_required = "viewer.add_type"
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        
+        # Kontrola, zda je to AJAX požadavek
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({
+                'success': True,
+                'message': 'Typ byl úspěšně vytvořen!'
+            })
+        
+        return response
+
     def form_invalid(self, form):
+        # Kontrola, zda je to AJAX požadavek
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            # Vrátit HTML s chybami pro modal
+            html = render_to_string('type_form.html', {
+                'form': form
+            }, request=self.request)
+            return JsonResponse({
+                'success': False,
+                'html': html
+            })
+        
         messages.error(self.request, "Název typu je neplatný nebo již existuje.")
         return super().form_invalid(form)
 
@@ -351,7 +381,30 @@ class LocationCreateView(PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy("event_create")
     permission_required = "viewer.add_location"
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        
+        # Kontrola, zda je to AJAX požadavek
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({
+                'success': True,
+                'message': 'Lokace byla úspěšně vytvořena!'
+            })
+        
+        return response
+
     def form_invalid(self, form):
+        # Kontrola, zda je to AJAX požadavek
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            # Vrátit HTML s chybami pro modal
+            html = render_to_string('location_form.html', {
+                'form': form
+            }, request=self.request)
+            return JsonResponse({
+                'success': False,
+                'html': html
+            })
+        
         messages.error(
             self.request,
             "Místo s tímto názvem a adresou už existuje nebo nejsou vyplněna všechna pole.",
