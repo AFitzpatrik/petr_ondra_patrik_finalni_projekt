@@ -149,8 +149,6 @@ class EventUpdateView(PermissionRequiredMixin, UpdateView):
             return HttpResponseForbidden("Nemáte oprávnění upravovat tuto událost.")
         return super().dispatch(request, *args, **kwargs)
 
-    # pouze vlastník události nebo admin může upravovat událost
-
     def get_success_url(self):
         return reverse("event_detail", kwargs={"pk": self.object.pk})
 
@@ -170,8 +168,6 @@ class EventDeleteView(PermissionRequiredMixin, DeleteView):
         if obj.owner_of_event != request.user and not request.user.is_superuser:
             return HttpResponseForbidden("Nemáte oprávnění mazat tuto událost.")
         return super().dispatch(request, *args, **kwargs)
-
-    # pouze vlastník události nebo admin může mazat událost
 
 
 class EventDetailView(DetailView):
@@ -328,6 +324,14 @@ class ProfileDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         user = self.get_object()
         context["reservations"] = Reservation.objects.filter(user=user)
+
+        # Zobrazení vytvořených událostí pro administrátora
+        if user.is_superuser:
+            context["created_events"] = Event.objects.filter(owner_of_event=user)
+
+        # Zobrazení rezervovaných událostí pro uživatele
+        context["my_events"] = Event.objects.filter(reservations__user=user)
+
         return context
 
 

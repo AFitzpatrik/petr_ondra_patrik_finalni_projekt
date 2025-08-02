@@ -59,18 +59,35 @@
                         <p class="text-center">Nemáš žádné rezervace.</p>
                     {% endif %}
 
+                    <hr class="my-4">
+
+                    {% if perms.viewer.add_event %}
+                    <h3 class="text-center text-secondary mb-3">Moje vytvořené události</h3>
+                    {% if profile.is_superuser %}
+                        <ul class="list-group">
+                            {% for event in created_events %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="{% url 'event_detail' event.pk %}">
+                                        {{ event.name }} ({{ event.get_start_date_cz_format }})
+                                    </a>
+                                    <span class="text-muted small">Vytvořeno: {{ event.created_at|date:"d.m.Y H:i" }}</span>
+                                </li>
+                            {% empty %}
+                                <li class="list-group-item text-center">Nemáš žádné vytvořené události.</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-center">Nemáš žádné vytvořené události.</p>
+                    {% endif %}
+                    {% endif %}
                 </div>
 
-                {% if perms.viewer.add_event %}
-                <div class="text-center mt-4">
-                    <a href="{% url 'events' %}" class="btn btn-primary">Organizované události</a>
-                    <a href="{% url 'events' %}" class="btn btn-primary">Přihlášené události</a>
-                </div>
-                {% else %}
                 <div class="text-center mt-4">
                     <a href="{% url 'events' %}" class="btn btn-primary">Přihlášené události</a>
+                    {% if perms.viewer.add_event %}
+                        <a href="{% url 'event_create' %}" class="btn btn-primary">Vytvořit událost</a>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
         </div>
     </div>

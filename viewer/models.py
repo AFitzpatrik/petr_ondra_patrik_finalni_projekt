@@ -3,7 +3,6 @@ from django.db import models
 from django.db.models import ForeignKey, DateTimeField
 from django.core.exceptions import ValidationError
 
-
 class Country(models.Model):
     name = models.CharField(
         max_length=100,
@@ -90,6 +89,7 @@ class Event(models.Model):
         Location, on_delete=models.CASCADE, related_name="events"
     )
     capacity = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)  # Přidání pole pro datum vytvoření
 
     class Meta:
         ordering = ["start_date_time", "name"]
