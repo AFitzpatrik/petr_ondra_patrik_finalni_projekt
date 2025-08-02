@@ -41,6 +41,7 @@
                     <p><strong>Kapacita:</strong> {{ event.capacity }}</p>
                     <p><strong>Volných míst:</strong> {{ event.available_spots }}</p>
                     <p><small class="text-muted">Vlastník události: {{ event.owner_of_event.username }}</small></p>
+                    <p><small class="text-muted">Vytvořeno: {{ event.created_at|date:"d.m.Y H:i" }}</small></p>  <!-- Přidané zobrazení data vytvoření -->
                     {% if user.is_authenticated %}
                         {% if has_reservation %}
                             <form method="post" action="{% url 'cancel_reservation' event.id %}">
