@@ -70,4 +70,23 @@
         <button type="submit" class="btn btn-primary mt-3">Uložit</button>
     </form>
 </div>
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/cs.js"></script> <!-- Načtení češtiny -->
+<script>
+    flatpickr("input[name='start_date_time']", {
+        enableTime: true,
+        dateFormat: "d.m.Y H:i",
+        time_24hr: true,
+        locale: "cs"  <!-- Nastavení jazyka na češtinu -->
+    });
+    flatpickr("input[name='end_date_time']", {
+        enableTime: true,
+        dateFormat: "d.m.Y H:i",
+        time_24hr: true,
+        locale: "cs"  <!-- Nastavení jazyka na češtinu -->
+    });
+</script>
+{% endblock %}
 {% endblock %}
