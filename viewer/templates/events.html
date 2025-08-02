@@ -11,7 +11,7 @@
             Události{% if country_name %} ve státě <span class="text-primary">{{ country_name }}</span>{% endif %}
         </h1>
 
-        <form method="get" class="row mb-4 g-1 align-items-end">
+        <form method="get" class="row mb-4 g-1 align-items-end" id="event-filter-form">
             <div class="col">
                 <label for="filter-city" class="form-label mb-1">Město</label>
                 <input type="text" id="filter-city" name="city" class="form-control form-control-sm" placeholder="Město" value="{{ city }}">
@@ -22,11 +22,11 @@
             </div>
             <div class="col">
                 <label for="filter-start-date" class="form-label mb-1">Od</label>
-                <input type="text" id="filter-start-date" name="start_date" class="form-control form-control-sm" value="{{ start_date }}">
+                <input type="date" id="filter-start-date" name="start_date" class="form-control form-control-sm" value="{{ start_date }}">
             </div>
             <div class="col">
                 <label for="filter-end-date" class="form-label mb-1">Do</label>
-                <input type="text" id="filter-end-date" name="end_date" class="form-control form-control-sm" value="{{ end_date }}">
+                <input type="date" id="filter-end-date" name="end_date" class="form-control form-control-sm" value="{{ end_date }}">
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-primary btn-sm">Filtrovat</button>
@@ -112,17 +112,17 @@
 {% endblock %}
 
 {% block extra_js %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> <!-- Načtení CSS pro flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"></script> <!-- Načtení CSS pro flatpickr -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/cs.js"></script> <!-- Načtení češtiny -->
 <script>
     flatpickr("input[name='start_date']", {
-        dateFormat: "d.m.Y",
-        locale: "cs"  <!-- Nastavení jazyka na češtinu -->
+        dateFormat: "Y-m-d",  // Opravený formát pro server (YYYY-MM-DD)
+        locale: "cs",  // Nastavení jazyka na češtinu
     });
     flatpickr("input[name='end_date']", {
-        dateFormat: "d.m.Y",
-        locale: "cs"  <!-- Nastavení jazyka na češtinu -->
+        dateFormat: "Y-m-d",  // Opravený formát pro server (YYYY-MM-DD)
+        locale: "cs",  // Nastavení jazyka na češtinu
     });
 </script>
 {% endblock %}

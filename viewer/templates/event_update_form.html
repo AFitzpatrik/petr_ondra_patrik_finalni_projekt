@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Upravit událost
@@ -35,12 +36,12 @@
             <div class="col-md-6">
                 <label for="{{ form.start_date_time.id_for_label }}">Začátek události:</label>
                 <br>
-                {{ form.start_date_time }}
+                <input type="date" id="start_date_time" name="start_date_time" class="form-control" value="{{ form.start_date_time.value|date:'Y-m-d' }}">
             </div>
             <div class="col-md-6">
                 <label for="{{ form.end_date_time.id_for_label }}">Konec události:</label>
                 <br>
-                {{ form.end_date_time }}
+                <input type="date" id="end_date_time" name="end_date_time" class="form-control" value="{{ form.end_date_time.value|date:'Y-m-d' }}">
             </div>
         </div>
         <div class="form-row mb-3">
@@ -78,15 +79,16 @@
 <script>
     flatpickr("input[name='start_date_time']", {
         enableTime: true,
-        dateFormat: "d.m.Y H:i",
+        dateFormat: "Y-m-d",  // Zobrazení datumu jako YYYY-MM-DD
         time_24hr: true,
-        locale: "cs"  <!-- Nastavení jazyka na češtinu -->
+        locale: "cs",  // Nastavení jazyka na češtinu
     });
+
     flatpickr("input[name='end_date_time']", {
         enableTime: true,
-        dateFormat: "d.m.Y H:i",
+        dateFormat: "Y-m-d",  // Zobrazení datumu jako YYYY-MM-DD
         time_24hr: true,
-        locale: "cs"  <!-- Nastavení jazyka na češtinu -->
+        locale: "cs",  // Nastavení jazyka na češtinu
     });
 </script>
 {% endblock %}

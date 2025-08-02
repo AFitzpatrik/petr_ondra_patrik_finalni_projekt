@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Přidat novou událost
@@ -35,12 +36,12 @@
             <div class="col-md-6">
                 <label for="start_date_time">Začátek události:</label>
                 <br>
-                <input type="text" id="start_date_time" name="start_date_time" class="form-control" value="{{ form.start_date_time.value|date:"d.m.Y H:i" }}">
+                <input type="text" id="start_date_time" name="start_date_time" class="form-control" value="{{ form.start_date_time.value|date:'Y.m.d' }}">
             </div>
             <div class="col-md-6">
                 <label for="end_date_time">Konec události:</label>
                 <br>
-                <input type="text" id="end_date_time" name="end_date_time" class="form-control" value="{{ form.end_date_time.value|date:"d.m.Y H:i" }}">
+                <input type="text" id="end_date_time" name="end_date_time" class="form-control" value="{{ form.end_date_time.value|date:'Y.m.d' }}">
             </div>
         </div>
         <div class="form-row mb-3">
@@ -67,27 +68,23 @@
             <label for="{{ form.capacity.id_for_label }}">Počet míst:</label><br>
             {{ form.capacity }}
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Uložit</button>
+        <button type="submit" class="btn btn-primary mt-3">Uložit změny</button>
     </form>
 </div>
+
+{% endblock %}
 
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/cs.js"></script> <!-- Načtení češtiny -->
 <script>
     flatpickr("input[name='start_date_time']", {
-        enableTime: true,
-        dateFormat: "d.m.Y H:i",
-        time_24hr: true,
-        locale: "cs"  <!-- Nastavení jazyka na češtinu -->
+        dateFormat: "Y.m.d",  // Nastavený formát na YYYY.MM.DD
+        locale: "cs",  // Nastavení jazyka na češtinu
     });
     flatpickr("input[name='end_date_time']", {
-        enableTime: true,
-        dateFormat: "d.m.Y H:i",
-        time_24hr: true,
-        locale: "cs"  <!-- Nastavení jazyka na češtinu -->
+        dateFormat: "Y.m.d",  // Nastavený formát na YYYY.MM.DD
+        locale: "cs",  // Nastavení jazyka na češtinu
     });
-</script>
-{% endblock %}
 </script>
 {% endblock %}
