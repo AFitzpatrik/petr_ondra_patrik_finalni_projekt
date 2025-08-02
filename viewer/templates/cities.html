@@ -6,33 +6,37 @@
 {% endblock %}
 
 {% block content %}
-
     <h1>Seznam měst</h1>
     <div class="mb-3">
         {% if user.is_authenticated %}
         <a href="{% url 'city_create' %}" class="btn btn-primary">Přidat město</a>
         {% endif %}
     </div>
-    <ul>
+
+    <div class="row g-4">
         {% for city in cities %}
-            <li>
-                <!-- Odkaz na Wikipedii pro město -->
-                <a href="https://cs.wikipedia.org/wiki/{{ city.name|urlencode }}" target="_blank">
-                    <strong>{{ city.name }}</strong>  <!-- Klikací název města -->
-                </a>
+        <div class="col-md-4">
+            <div class="p-3 border rounded bg-light shadow-sm h-100">
+                <div class="d-flex justify-content-between align-items-start">
+                    <!-- Odkaz na Wikipedii pro město -->
+                    <a href="https://cs.wikipedia.org/wiki/{{ city.name|urlencode }}" target="_blank" class="fw-bold text-primary">
+                        <strong>{{ city.name }}</strong>
+                    </a>
+                    {% if user.is_authenticated %}
+                    <span>
+                        <a href="{% url 'city_update' city.id %}" class="text-decoration-none ms-2" title="Upravit">📝</a>
+                        <a href="{% url 'city_delete' city.id %}" class="text-decoration-none ms-2" title="Smazat">🗑️</a>
+                    </span>
+                    {% endif %}
+                </div>
 
-                {% if user.is_authenticated %}
-                <a href="{% url 'city_update' city.id %}" class="ms-2 text-decoration-none" title="Upravit">📝</a>
-                {% endif %}
-
-                <ul class="mt-1">
-                    <li>
-                        <a href="{% url 'events' %}?city={{ city.name|urlencode }}">
-                            Počet událostí v {{ city.name }}: {{ city|event_count_for_city }} {{ city|event_count_for_city|sklonuj_udalost }}
-                        </a>
-                    </li>
-                </ul>
-            </li>
+                <div class="mt-2">
+                    <a href="{% url 'events' %}?city={{ city.name|urlencode }}" class="link-primary text-decoration-none">
+                        Počet akcí ve městě: {{ city|event_count_for_city }} {{ city|event_count_for_city|sklonuj_udalost }}
+                    </a>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

@@ -10,7 +10,7 @@ class CountryModelForm(forms.ModelForm):
         model = Country
         fields = "__all__"
         labels = {"name": "Název země: "}
-        help_texts = {"name": "Zadej název země"}
+        help_texts = {"name": "Zadej oficiální anglický název státu"}
 
     def clean_name(self):
         name = self.cleaned_data["name"].strip()

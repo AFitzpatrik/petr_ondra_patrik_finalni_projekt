@@ -28,7 +28,7 @@ from accounts.forms import CustomPasswordResetForm
 from api.views import Events, AllEvents, FilteredEvents
 from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, search, \
     EventUpdateView, EventDeleteView, EventCreateView, ProfileDetailView, make_reservation, cancel_reservation, \
-    TypeCreateView, LocationCreateView, CountryDetailView
+    TypeCreateView, LocationCreateView, CountryDetailView, CountryDeleteView, CityDeleteView
 from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, EventCreateView, \
     search, CityCreateView, CountryCreateView, CountryListView, CountryUpdateView, CityUpdateView, TypeCreateView, \
     LocationCreateView
@@ -47,11 +47,13 @@ urlpatterns = [
     path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event_delete'),
     path('cities/', CitiesListView.as_view(), name='cities'),
     path('city/create/', CityCreateView.as_view(), name='city_create'),
-    path('city/<int:pk>/update/', CityUpdateView.as_view(), name='city_update'),
+    path('city/update/<int:pk>/', CityUpdateView.as_view(), name='city_update'),
+    path('city/delete/<int:pk>/', CityDeleteView.as_view(), name='city_delete'),
     path('countries/', CountryListView.as_view(), name='countries'),
     path('country/<int:pk>/', CountryDetailView.as_view(), name='country_detail'),
     path('country/create/', CountryCreateView.as_view(), name='country_create'),
-    path('country/<int:pk>/update/', CountryUpdateView.as_view(), name='country_update'),
+    path('country/update/<int:pk>/', CountryUpdateView.as_view(), name='country_update'),
+    path('country/delete/<int:pk>/', CountryDeleteView.as_view(), name='country_delete'),
     path('locations/', LocationsListView.as_view(), name='locations'),
     path('search/', search, name='search'),
 

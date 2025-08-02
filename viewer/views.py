@@ -241,14 +241,26 @@ class CountryCreateView(CreateView):
         return super().form_invalid(form)
 
 
-class CountryUpdateView(UpdateView):
+class CountryUpdateView(LoginRequiredMixin, UpdateView):
     model = Country
     form_class = CountryModelForm
     template_name = "country_form.html"
     success_url = reverse_lazy("countries")
 
 
-class CityCreateView(CreateView):
+class CountryDeleteView(LoginRequiredMixin, DeleteView):
+    model = Country
+    template_name = 'confirm_delete.html'
+    success_url = reverse_lazy("countries")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["model_label"] = "stát"
+        context["cancel_url"] = reverse("countries")
+        return context
+
+
+class CityCreateView(LoginRequiredMixin, CreateView):
     model = City
     form_class = CityModelForm
     template_name = "city_form.html"
@@ -264,6 +276,18 @@ class CityUpdateView(UpdateView):
     form_class = CityModelForm
     template_name = "city_form.html"
     success_url = reverse_lazy("cities")
+
+
+class CityDeleteView(LoginRequiredMixin, DeleteView):
+    model = City
+    template_name = 'confirm_delete.html'
+    success_url = reverse_lazy("cities")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["model_label"] = "město"
+        context["cancel_url"] = reverse("cities")
+        return context
 
 
 def search(request):

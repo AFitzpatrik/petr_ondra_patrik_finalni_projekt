@@ -129,8 +129,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),   # přidáno kvůli gui testu city
     BASE_DIR / 'viewer' / 'static',
 ]
+STATIC_ROOT = BASE_DIR / 'staticfiles_test' # přidáno kvůli gui testu city
 
 # Media files (User uploaded files)
 MEDIA_URL = '/media/'

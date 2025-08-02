@@ -1,15 +1,24 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Přidat město
+    {% if form.instance.id %}
+        Upravit město
+    {% else %}
+        Přidat město
+    {% endif %}
 {% endblock %}
 
 {% block content %}
 <div class="container">
+    <h2 class="mb-4">
+        {% if form.instance.id %}
+            Upravit město
+        {% else %}
+            Přidat město
+        {% endif %}
+    </h2>
 
-    <h2 class="mb-4">Přidat nové město</h2>
-
-    <form method="post">
+    <form method="post" id="city-form"> {% comment %} přidáno id kvuli gui testu{% endcomment %}
         {% csrf_token %}
 
         <div class="mb-3">
