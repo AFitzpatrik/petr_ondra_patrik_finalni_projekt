@@ -5,8 +5,6 @@
     Seznam akcí
 {% endblock %}
 
-
-
 {% block content %}
     <div class="container">
         <h1 class="mb-4">
@@ -24,11 +22,11 @@
             </div>
             <div class="col">
                 <label for="filter-start-date" class="form-label mb-1">Od</label>
-                <input type="date" id="filter-start-date" name="start_date" class="form-control form-control-sm" value="{{ start_date }}">
+                <input type="text" id="filter-start-date" name="start_date" class="form-control form-control-sm" value="{{ start_date }}">
             </div>
             <div class="col">
                 <label for="filter-end-date" class="form-label mb-1">Do</label>
-                <input type="date" id="filter-end-date" name="end_date" class="form-control form-control-sm" value="{{ end_date }}">
+                <input type="text" id="filter-end-date" name="end_date" class="form-control form-control-sm" value="{{ end_date }}">
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-primary btn-sm">Filtrovat</button>
@@ -111,4 +109,20 @@
             </div>
         {% endif %}
     </div>
+{% endblock %}
+
+{% block extra_js %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> <!-- Načtení CSS pro flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/cs.js"></script> <!-- Načtení češtiny -->
+<script>
+    flatpickr("input[name='start_date']", {
+        dateFormat: "d.m.Y",
+        locale: "cs"  <!-- Nastavení jazyka na češtinu -->
+    });
+    flatpickr("input[name='end_date']", {
+        dateFormat: "d.m.Y",
+        locale: "cs"  <!-- Nastavení jazyka na češtinu -->
+    });
+</script>
 {% endblock %}

@@ -33,14 +33,14 @@
         </div>
         <div class="form-row mb-3">
             <div class="col-md-6">
-                <label for="{{ form.start_date_time.id_for_label }}">Začátek události:</label>
+                <label for="start_date_time">Začátek události:</label>
                 <br>
-                {{ form.start_date_time }}
+                <input type="text" id="start_date_time" name="start_date_time" class="form-control" value="{{ form.start_date_time.value|date:"d.m.Y H:i" }}">
             </div>
             <div class="col-md-6">
-                <label for="{{ form.end_date_time.id_for_label }}">Konec události:</label>
+                <label for="end_date_time">Konec události:</label>
                 <br>
-                {{ form.end_date_time }}
+                <input type="text" id="end_date_time" name="end_date_time" class="form-control" value="{{ form.end_date_time.value|date:"d.m.Y H:i" }}">
             </div>
         </div>
         <div class="form-row mb-3">
@@ -89,4 +89,5 @@
     });
 </script>
 {% endblock %}
+</script>
 {% endblock %}
