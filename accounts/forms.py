@@ -52,8 +52,8 @@ class SignUpForm(UserCreationForm):
     #Clean metoda pro datum narození - nesmí být v budoucnosti
     def clean_date_of_birth(self):
         initial = self.cleaned_data["date_of_birth"]
-        if initial and initial > date.today():
-            raise ValidationError("Datum narození nesmí být v budoucnosti.")
+        if initial and initial >= date.today():
+            raise ValidationError("Datum narození nesmí být v budoucnosti, nebo dnes.")
         return initial
 
     #Clean metoda pro email, zadaný email už je v databázi u jiného uživatele, rozšíření Django modelu(UserCreationForm)
