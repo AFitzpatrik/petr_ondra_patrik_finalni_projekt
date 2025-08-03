@@ -22,6 +22,15 @@ class Country(models.Model):
     def __repr__(self):
         return f"Country(name={self.name})"
 
+    def clean(self):
+        # Kontrola, zda existují události v této zemi
+        if self.cities.filter(locations__events__isnull=False).exists():
+            raise ValidationError("Tento stát nelze smazat, protože obsahuje události.")
+
+    def delete(self, *args, **kwargs):
+        self.clean()  # Provádíme kontrolu před smazáním
+        super().delete(*args, **kwargs)
+
 
 class City(models.Model):
     name = models.CharField(max_length=100, unique=False, null=False, blank=False)

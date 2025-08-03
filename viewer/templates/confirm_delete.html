@@ -9,6 +9,16 @@
     <div class="col-12 col-md-8 col-lg-5">
         <div class="card shadow rounded text-center p-4">
             <div class="card-body">
+
+                <!-- Zobrazení chybových zpráv, pokud existují -->
+                {% if messages %}
+                    <div class="alert alert-danger">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
                 <h2 class="card-title text-danger mb-3">
                     Opravdu chcete smazat {{ model_label }} <span class="text-dark">({{ object }})</span> z databáze?
                     Tato akce je nevratná.

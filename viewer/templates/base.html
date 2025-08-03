@@ -6,7 +6,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" content="Stránka pro správu událostí.">
+    <meta name="author" content="Váš jméno">
     <title>{% block title %}{% endblock %}</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -20,31 +24,30 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> <!-- Flatpickr pro zadávání data a času u události -->
     <link rel="icon" type="image/png" href="{% static 'favicon.png' %}">
-    
+
     <!-- Navbar styles -->
     <style>
-    .navbar-nav .nav-link:hover,
-    .navbar-nav .dropdown-item:hover {
-        background-color: #00509e !important;
-        color: #fff !important;
-        border-radius: 4px;
-    }
-    .navbar-nav .nav-link.active {
-        background-color: #003366;
-        color: #fff;
-    }
-    .jumbotron {
-        padding-top: 1.5rem;
-        padding-bottom: 1rem;
-        margin-bottom: 0;
-    }
-    html {
-        overflow-y: scroll;
-    }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .dropdown-item:hover {
+            background-color: #00509e !important;
+            color: #fff !important;
+            border-radius: 4px;
+        }
+        .navbar-nav .nav-link.active {
+            background-color: #003366;
+            color: #fff;
+        }
+        .jumbotron {
+            padding-top: 1.5rem;
+            padding-bottom: 1rem;
+            margin-bottom: 0;
+        }
+        html {
+            overflow-y: scroll;
+        }
     </style>
-    
-    {% block extra_css %}{% endblock %}
 
+    {% block extra_css %}{% endblock %}
 </head>
 
 <body>
@@ -59,7 +62,9 @@
 
 {% include 'footer.html' %}
 
-{% block extra_js %}{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'js/custom.js' %}"></script>
+{% endblock %}
 
 </body>
 

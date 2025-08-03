@@ -27,6 +27,7 @@ from viewer.models import Event, Comment, Country, City, Location, Reservation, 
 from viewer.api_weather import get_weather_for_city
 from viewer.api_country import get_country_info
 from django.db.models import Count
+from django.http import Http404
 
 
 def home(request):
@@ -256,12 +257,20 @@ class CountryDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'confirm_delete.html'
     success_url = reverse_lazy("countries")
 
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+
+        if obj.cities.filter(locations__events__isnull=False).exists():
+            messages.error(self.request, "Nelze smazat stát, protože obsahuje události.")
+            raise Http404("Nelze smazat stát s událostmi.")
+
+        return obj
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["model_label"] = "stát"
         context["cancel_url"] = reverse("countries")
         return context
-
 
 class CityCreateView(LoginRequiredMixin, CreateView):
     model = City
@@ -376,14 +385,14 @@ class TypeCreateView(PermissionRequiredMixin, CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        
+
         # Kontrola, zda je to AJAX požadavek
         if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return JsonResponse({
                 'success': True,
                 'message': 'Typ byl úspěšně vytvořen!'
             })
-        
+
         return response
 
     def form_invalid(self, form):
@@ -397,7 +406,7 @@ class TypeCreateView(PermissionRequiredMixin, CreateView):
                 'success': False,
                 'html': html
             })
-        
+
         messages.error(self.request, "Název typu je neplatný nebo již existuje.")
         return super().form_invalid(form)
 
@@ -411,14 +420,14 @@ class LocationCreateView(PermissionRequiredMixin, CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        
+
         # Kontrola, zda je to AJAX požadavek
         if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return JsonResponse({
                 'success': True,
                 'message': 'Lokace byla úspěšně vytvořena!'
             })
-        
+
         return response
 
     def form_invalid(self, form):
@@ -432,7 +441,7 @@ class LocationCreateView(PermissionRequiredMixin, CreateView):
                 'success': False,
                 'html': html
             })
-        
+
         messages.error(
             self.request,
             "Místo s tímto názvem a adresou už existuje nebo nejsou vyplněna všechna pole.",
