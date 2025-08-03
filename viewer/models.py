@@ -39,9 +39,7 @@ class City(models.Model):
 
     def __repr__(self):
         country_name = self.country.name if self.country else None
-        return (
-            f"City(name={self.name}, country={country_name}, zip_code={self.zip_code})"
-        )
+        return f"City(name={self.name}, country={country_name}, zip_code={self.zip_code})"
 
 
 class Location(models.Model):
@@ -126,6 +124,11 @@ class Event(models.Model):
     @property
     def available_spots(self):
         return self.capacity - self.reservations.count()
+
+    @property
+    def registered_users_count(self):
+        # Počet registrovaných uživatelů (rezervací)
+        return self.reservations.count()
 
 
 class Comment(models.Model):

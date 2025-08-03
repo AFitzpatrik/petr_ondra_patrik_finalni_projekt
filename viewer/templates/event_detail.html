@@ -42,6 +42,18 @@
                     <p><strong>Volných míst:</strong> {{ event.available_spots }}</p>
                     <p><small class="text-muted">Vlastník události: {{ event.owner_of_event.username }}</small></p>
                     <p><small class="text-muted">Vytvořeno: {{ event.created_at|date:"d.m.Y H:i" }}</small></p>  <!-- Přidané zobrazení data vytvoření -->
+
+                    <!-- Zobrazení počtu registrovaných uživatelů -->
+                    {% if user == event.owner_of_event %}
+                        <p><strong>Počet registrovaných uživatelů:</strong> {{ event.reservations.count }}</p>
+                        <h5>Seznam registrovaných uživatelů:</h5>
+                        <ul class="list-group">
+                            {% for reservation in event.reservations.all %}
+                                <li class="list-group-item">{{ reservation.user.username }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
                     {% if user.is_authenticated %}
                         {% if has_reservation %}
                             <form method="post" action="{% url 'cancel_reservation' event.id %}">

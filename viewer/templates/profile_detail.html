@@ -71,6 +71,7 @@
                                         {{ event.name }} ({{ event.get_start_date_cz_format }})
                                     </a>
                                     <span class="text-muted small">Vytvořeno: {{ event.created_at|date:"d.m.Y H:i" }}</span>
+                                    <span class="text-muted small">Počet registrovaných: {{ event.reservations.count }}</span>  <!-- Počet rezervovaných uživatelů -->
                                 </li>
                             {% empty %}
                                 <li class="list-group-item text-center">Nemáš žádné vytvořené události.</li>
