@@ -69,8 +69,11 @@ class SignUpForm(UserCreationForm):
     def clean_phone(self):
         phone = self.cleaned_data.get("phone")
         if phone:
-            if Profile.objects.filter(phone=phone).exists():
+            #Odstranění mezer z telefonního čísla
+            phone_clean = phone.replace(" ", "")
+            if Profile.objects.filter(phone=phone_clean).exists():
                 raise ValidationError("Tento telefon je již registrován.")
+            return phone_clean
         return phone
 
     #Uloží uživatele
