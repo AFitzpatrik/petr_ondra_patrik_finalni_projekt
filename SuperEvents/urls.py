@@ -8,11 +8,10 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from accounts.views import SignUpView, UserLogoutView, RegistrationSuccessView, LogoutSuccessView, LoginSuccessView
 from accounts.forms import CustomPasswordResetForm
-from api.views import Events, AllEvents, FilteredEvents
-from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, search, \
-    EventUpdateView, EventDeleteView, EventCreateView, ProfileDetailView, make_reservation, cancel_reservation, \
-    TypeCreateView, LocationCreateView, CountryDetailView, CountryDeleteView, CityDeleteView
-from viewer.views import home, EventsListView, EventDetailView, CitiesListView, LocationsListView, EventCreateView, \
+from api.views import EventsAPI, AllEventsAPI, FilteredEventsAPI
+from viewer.views import EventUpdateView, EventDeleteView, ProfileDetailView, make_reservation, cancel_reservation, \
+    CountryDetailView, CountryDeleteView, CityDeleteView
+from viewer.views import EventsListView, EventDetailView, CitiesListView, LocationsListView, EventCreateView, \
     search, CityCreateView, CountryCreateView, CountryListView, CountryUpdateView, CityUpdateView, TypeCreateView, \
     LocationCreateView
 
@@ -71,9 +70,11 @@ urlpatterns = [
     path('profile/<int:pk>/', ProfileDetailView.as_view(), name='profile_detail'),
 
     # API Endpoints
-    path('api/events/', Events.as_view(), name='api_events'),
-    path('api/all_events/', AllEvents.as_view(), name='all_events'),
-    path('api/filtered_events/', FilteredEvents.as_view(), name='filtered_events'),
+    path('api/events/', EventsAPI.as_view(), name='api_events'),
+    path('api/all_events/', AllEventsAPI.as_view(), name='all_events'),
+    path('api/filtered_events/', FilteredEventsAPI.as_view(), name='filtered_events'),
+
+
 ]
 
 # Serve static and media files in development mode

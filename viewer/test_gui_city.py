@@ -62,10 +62,10 @@ class CityFormGUITest(LiveServerTestCase):
         print("-" * 80)
         print(f"Spouští se test: test_submit_city_twice_show_validation_error")
 
-        self.fill_and_submit_form("Plzeň", "30100")
+        self.fill_and_submit_form("hluBoká NAD vLtavou", "44444")
         self.assertNotIn("Město s tímhle názvem a PSČ již v tomto státě existuje.", self.browser.page_source)
 
-        self.fill_and_submit_form("Plzeň", 30100)
+        self.fill_and_submit_form("HluboKá nad VLtavou", "44444")
         self.assertIn("Město s tímhle názvem a PSČ již v tomto státě existuje.", self.browser.page_source)
 
 
