@@ -1,5 +1,9 @@
 # 🗓️ SuperEvents
 
+Projekt SuperEvents je webová aplikace sloužící k přehledné správě, organizaci
+a prezentaci událostí. Uživatelé si mohou události zobrazovat, přihlašovat se na
+ně, komentovat je a v případě organizátorů, je také vytvářet a spravovat.
+
 SuperEvents je webová aplikace vytvořená v Django frameworku pro správu a vytváření událostí.  
 Umožňuje uživatelům vyhledávat události, registrovat se na ně a zobrazovat jejich podrobnosti.
 
@@ -15,7 +19,7 @@ Umožňuje uživatelům vyhledávat události, registrovat se na ně a zobrazova
 
 ### 👤 Uživatelské účty
 - Registrace a ověření nových uživatelů
-- Možnost přidání speciálních rolí (např. organizátor)
+- Možnost přidání speciálních rolí (např. organizátor, admin, staff...)
 - Obnova zapomenutého hesla a změna stávajícího hesla
 - Uživatelský panel:
   - Zobrazení svých osobních údajů
@@ -23,6 +27,7 @@ Umožňuje uživatelům vyhledávat události, registrovat se na ně a zobrazova
 
 ### 📅 Události
 - Přidávání, mazání a úprava událostí
+- Přehledný seznam událostí a zobrazení podrobností v detailu události
 - Oprávnění podle role (kdo může co spravovat)
 - Možnost registrace na konkrétní událost
 - Zobrazení obsazenosti události
@@ -35,6 +40,7 @@ Umožňuje uživatelům vyhledávat události, registrovat se na ně a zobrazova
 - Filtrování událostí podle místa a času
 
 ### 🌐 API
+- REST API pro zpracování dat
 - Zobrazení aktuálního **počasí** v místě události pomocí API
 - Zobrazení základních informací o **státech** pomocí API
 
