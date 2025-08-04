@@ -28,7 +28,7 @@ class Country(models.Model):
             raise ValidationError("Tento stát nelze smazat, protože obsahuje události.")
 
     def delete(self, *args, **kwargs):
-        self.clean()  # Provádíme kontrolu před smazáním
+        self.clean()  #Provádíme kontrolu před smazáním
         super().delete(*args, **kwargs)
 
 
