@@ -272,6 +272,7 @@ class CountryDeleteView(LoginRequiredMixin, DeleteView):
         context["cancel_url"] = reverse("countries")
         return context
 
+
 class CityCreateView(LoginRequiredMixin, CreateView):
     model = City
     form_class = CityModelForm

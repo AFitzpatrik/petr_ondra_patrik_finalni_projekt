@@ -34,9 +34,7 @@ class Country(models.Model):
 
 class City(models.Model):
     name = models.CharField(max_length=100, unique=False, null=False, blank=False)
-    country = models.ForeignKey(
-        Country, on_delete=models.CASCADE, related_name="cities"
-    )
+    country = models.ForeignKey(Country, on_delete=models.PROTECT, related_name="cities")
     zip_code = models.CharField(max_length=10, null=False, blank=False)
 
     class Meta:
@@ -55,7 +53,7 @@ class Location(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
     description = models.TextField(null=False, blank=False)
     address = models.TextField(null=False, blank=False)
-    city = ForeignKey(City, on_delete=models.CASCADE, related_name="locations")
+    city = ForeignKey(City, on_delete=models.PROTECT, related_name="locations")
 
     class Meta:
         ordering = ["city__name", "name"]
@@ -84,19 +82,15 @@ class Type(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=100, unique=True, null=False, blank=False)
-    type = models.ForeignKey(Type, on_delete=models.CASCADE, related_name="events")
+    type = models.ForeignKey(Type, on_delete=models.PROTECT, related_name="events")
     description = models.TextField(null=True, blank=True)
     start_date_time = DateTimeField(null=False, blank=False)
     end_date_time = DateTimeField(null=False, blank=False)
     event_image = models.ImageField(upload_to="event_images/", null=True, blank=True)
-    owner_of_event = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="owned_events"
-    )
-    location = models.ForeignKey(
-        Location, on_delete=models.CASCADE, related_name="events"
-    )
+    owner_of_event = models.ForeignKey(User, on_delete=models.PROTECT, related_name="owned_events")
+    location = models.ForeignKey(Location, on_delete=models.PROTECT, related_name="events")
     capacity = models.PositiveIntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)  # Přidání pole pro datum vytvoření
+    created_at = models.DateTimeField(auto_now_add=True) #Přidání pole pro datum vytvoření
 
     class Meta:
         ordering = ["start_date_time", "name"]
@@ -161,12 +155,8 @@ class Comment(models.Model):
 
 
 class Reservation(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="reservations"
-    )
-    event = models.ForeignKey(
-        Event, on_delete=models.CASCADE, related_name="reservations"
-    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reservations")
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="reservations")
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -189,3 +179,4 @@ class Reservation(models.Model):
     def save(self, *args, **kwargs):
         self.full_clean()  # spustí clean() před uložením
         super().save(*args, **kwargs)
+
