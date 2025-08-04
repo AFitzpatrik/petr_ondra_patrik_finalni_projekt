@@ -23,7 +23,6 @@ class Country(models.Model):
         return f"Country(name={self.name})"
 
     def clean(self):
-        # Kontrola, zda existují události v této zemi
         if self.cities.filter(locations__events__isnull=False).exists():
             raise ValidationError("Tento stát nelze smazat, protože obsahuje události.")
 
