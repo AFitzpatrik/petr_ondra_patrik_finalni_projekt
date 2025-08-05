@@ -1,15 +1,15 @@
 from datetime import timezone
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import now, make_aware
-from rest_framework.generics import GenericAPIView
-from rest_framework.mixins import ListModelMixin
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import GenericAPIView, CreateAPIView, RetrieveDestroyAPIView
+from rest_framework.mixins import ListModelMixin, DestroyModelMixin
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from api.serializers import EventsSerializer
 from viewer.models import Event
 
 
-class Events(ListModelMixin, GenericAPIView):
+class EventsAPI(ListModelMixin, GenericAPIView):
     serializer_class = EventsSerializer
     permission_classes = [IsAuthenticated]
 
@@ -20,7 +20,7 @@ class Events(ListModelMixin, GenericAPIView):
         return self.list(request, *args, **kwargs)
 
 
-class AllEvents(ListModelMixin, GenericAPIView):
+class AllEventsAPI(ListModelMixin, GenericAPIView):
     queryset = Event.objects.all().order_by('start_date_time')
     serializer_class = EventsSerializer
     permission_classes = [IsAuthenticated]
@@ -29,7 +29,7 @@ class AllEvents(ListModelMixin, GenericAPIView):
         return self.list(request, *args, **kwargs)
 
 
-class FilteredEvents(ListModelMixin, GenericAPIView):
+class FilteredEventsAPI(ListModelMixin, GenericAPIView):
     serializer_class = EventsSerializer
     permission_classes = [IsAuthenticated]
 

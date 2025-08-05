@@ -2,7 +2,7 @@ import re
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import Event, Country, City, Comment, Type, Location
-from viewer.utils import format_country_name
+from viewer.utils import format_country_name, format_city_name
 
 
 class CountryModelForm(forms.ModelForm):
@@ -41,6 +41,11 @@ class CityModelForm(forms.ModelForm):
             "country": forms.Select(attrs={"class": "form-select"}),
             "zip_code": forms.TextInput(attrs={"class": "form-control"}),
         }
+
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        formatted_name = format_city_name(name)
+        return formatted_name
 
     def clean_zip_code(self):
         zip_code = self.cleaned_data.get("zip_code", "").replace(" ", "").strip()

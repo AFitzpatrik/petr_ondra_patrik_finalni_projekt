@@ -26,7 +26,7 @@ from .forms import (
 from viewer.models import Event, Comment, Country, City, Location, Reservation, Type
 from viewer.api_weather import get_weather_for_city
 from viewer.api_country import get_country_info
-from django.db.models import Count
+from django.db.models import Count, ProtectedError
 from django.http import Http404
 
 
@@ -257,14 +257,12 @@ class CountryDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'confirm_delete.html'
     success_url = reverse_lazy("countries")
 
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset)
-
-        if obj.cities.filter(locations__events__isnull=False).exists():
-            messages.error(self.request, "Nelze smazat stát, protože obsahuje události.")
-            raise Http404("Nelze smazat stát s událostmi.")
-
-        return obj
+    def post(self, request, *args, **kwargs):
+        try:
+            return super().post(request, *args, **kwargs)
+        except ProtectedError:
+            messages.error(self.request, "Mazání bylo zablokováno. Ke státu jsou navázané další záznamy.")
+            return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -295,6 +293,13 @@ class CityDeleteView(LoginRequiredMixin, DeleteView):
     model = City
     template_name = 'confirm_delete.html'
     success_url = reverse_lazy("cities")
+
+    def post(self, request, *args, **kwargs):
+        try:
+            return super().post(request, *args, **kwargs)
+        except ProtectedError:
+            messages.error(self.request,"Mazání bylo zablokováno. K městu jsou navázané další záznamy.")
+            return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
