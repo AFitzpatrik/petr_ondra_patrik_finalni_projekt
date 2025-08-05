@@ -25,12 +25,16 @@ class CityFormGUITest(LiveServerTestCase):
     def setUp(self):
         self.country = Country.objects.create(name = "Czech Republic")
 
-        self.user = User.objects.create_user(username="Nunu", password="test123")
+        self.user = User.objects.create_superuser(username="Nunu", password="test123")
         self.client = Client()
         self.client.login(username="Nunu", password="test123")
         sessionid = self.client.cookies["sessionid"].value
 
-        self.browser.get(self.live_server_url)
+        self.browser.get(f"{self.live_server_url}/404/")
+        WebDriverWait(self.browser, 5).until(
+            EC.presence_of_element_located((By.TAG_NAME, "body"))
+        )
+
         self.browser.add_cookie({
             "name": "sessionid",
             "value": sessionid,
@@ -56,11 +60,14 @@ class CityFormGUITest(LiveServerTestCase):
         time.sleep(3)
 
         self.browser.find_element(By.ID, "city-form").submit()
-        time.sleep(10)
+        time.sleep(5)
 
     def test_submit_city_twice_show_validation_error(self):
         print("-" * 80)
         print(f"Spouští se test: test_submit_city_twice_show_validation_error")
+
+        self.fill_and_submit_form("hluBoká NAD vLtavou", "444444")
+        self.assertIn("PSČ musí obsahovat 4 nebo 5 čísel bez mezer a pomlček.", self.browser.page_source)
 
         self.fill_and_submit_form("hluBoká NAD vLtavou", "44444")
         self.assertNotIn("Město s tímhle názvem a PSČ již v tomto státě existuje.", self.browser.page_source)

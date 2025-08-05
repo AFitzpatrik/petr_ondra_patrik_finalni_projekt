@@ -51,7 +51,7 @@ class CityModelForm(forms.ModelForm):
         zip_code = self.cleaned_data.get("zip_code", "").replace(" ", "").strip()
         if not re.fullmatch(r"\d{4,5}", zip_code):
             raise ValidationError(
-                "PSČ musí obsahovat 4 nebo pět čísel bez mezer a pomlček."
+                "PSČ musí obsahovat 4 nebo 5 čísel bez mezer a pomlček."
             )
         return zip_code
 

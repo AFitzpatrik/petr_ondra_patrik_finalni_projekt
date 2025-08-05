@@ -8,7 +8,7 @@
 {% block content %}
     <h1>Seznam měst</h1>
     <div class="mb-3">
-        {% if user.is_authenticated %}
+        {% if perms.viewer.add_city %}
         <a href="{% url 'city_create' %}" class="btn btn-primary">Přidat město</a>
         {% endif %}
     </div>
@@ -22,12 +22,15 @@
                     <a href="https://cs.wikipedia.org/wiki/{{ city.name|urlencode }}" target="_blank" class="fw-bold text-primary">
                         <strong>{{ city.name }}</strong>
                     </a>
-                    {% if user.is_authenticated %}
                     <span>
-                        <a href="{% url 'city_update' city.id %}" class="text-decoration-none ms-2" title="Upravit">📝</a>
-                        <a href="{% url 'city_delete' city.id %}" class="text-decoration-none ms-2" title="Smazat">🗑️</a>
+                        {% if perms.viewer.add_city %}
+                            <a href="{% url 'city_update' city.id %}" class="text-decoration-none ms-2" title="Upravit">📝</a>
+                        {% endif %}
+
+                        {% if user.is_superuser %}
+                            <a href="{% url 'city_delete' city.id %}" class="text-decoration-none ms-2" title="Smazat">🗑️</a>
+                        {% endif %}
                     </span>
-                    {% endif %}
                 </div>
 
                 <div class="mt-2">
