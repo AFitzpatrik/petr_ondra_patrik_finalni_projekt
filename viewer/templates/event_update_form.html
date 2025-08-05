@@ -36,12 +36,12 @@
             <div class="col-md-6">
                 <label for="{{ form.start_date_time.id_for_label }}">Začátek události:</label>
                 <br>
-                <input type="date" id="start_date_time" name="start_date_time" class="form-control" value="{{ form.start_date_time.value|date:'Y-m-d' }}">
+                <input type="datetime-local" id="start_date_time" name="start_date_time" class="form-control" value="{{ form.start_date_time.value|date:'Y-m-d\TH:i' }}">
             </div>
             <div class="col-md-6">
                 <label for="{{ form.end_date_time.id_for_label }}">Konec události:</label>
                 <br>
-                <input type="date" id="end_date_time" name="end_date_time" class="form-control" value="{{ form.end_date_time.value|date:'Y-m-d' }}">
+                <input type="datetime-local" id="end_date_time" name="end_date_time" class="form-control" value="{{ form.end_date_time.value|date:'Y-m-d\TH:i' }}">
             </div>
         </div>
         <div class="form-row mb-3">

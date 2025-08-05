@@ -40,8 +40,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="{{ form.date_of_birth.id_for_label }}">{{ form.date_of_birth.label }}</label>
-                                    {{ form.date_of_birth }}
+                                    <label for="date_of_birth">Datum narození:</label>
+                                    <input type="text" id="date_of_birth" name="date_of_birth" class="form-control" value="{{ form.date_of_birth.value|date:'Y-m-d' }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -109,4 +109,15 @@
             </div>
         </div>
     </div>
-{% endblock %} 
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/cs.js"></script> <!-- Načtení češtiny -->
+<script>
+    flatpickr("input[name='date_of_birth']", {
+        dateFormat: "Y-m-d",  // Nastavený formát na YYYY-MM-DD
+        locale: "cs",  // Nastavení jazyka na češtinu
+    });
+</script>
+{% endblock %}
