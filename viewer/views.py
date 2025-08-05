@@ -58,7 +58,7 @@ class EventsListView(ListView):
             queryset = queryset.filter(start_date_time__date__gte=start_date)
 
         if end_date:
-            queryset = queryset.filter(end_date_time__date__lte=end_date)
+            queryset = queryset.filter(start_date_time__date__lte=end_date)
 
         if country_name:
             queryset = queryset.filter(
