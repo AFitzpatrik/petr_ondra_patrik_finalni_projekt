@@ -234,28 +234,31 @@ class CountryDetailView(DetailView):
         return context
 
 
-class CountryCreateView(CreateView):
+class CountryCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Country
     form_class = CountryModelForm
     template_name = "country_form.html"
     success_url = reverse_lazy("countries")
+    permission_required = "viewer.add_country"
 
     def form_invalid(self, form):
         messages.error(self.request, "Formulář nebyl správně vyplněn.")
         return super().form_invalid(form)
 
 
-class CountryUpdateView(LoginRequiredMixin, UpdateView):
+class CountryUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Country
     form_class = CountryModelForm
     template_name = "country_form.html"
     success_url = reverse_lazy("countries")
+    permission_required = "viewer.change_country"
 
 
-class CountryDeleteView(LoginRequiredMixin, DeleteView):
+class CountryDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Country
     template_name = 'confirm_delete.html'
     success_url = reverse_lazy("countries")
+    permission_required = "viewer.delete_country"
 
     def post(self, request, *args, **kwargs):
         try:
