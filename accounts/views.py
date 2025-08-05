@@ -2,7 +2,6 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 
 from django.views.generic import CreateView, View, TemplateView
-from django.contrib.messages import success
 from django.conf import settings
 
 from accounts.forms import SignUpForm
@@ -25,10 +24,6 @@ class SignUpView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        success(
-            self.request,
-            f"Účet pro uživatele {form.instance.username} byl úspěšně vytvořen!",
-        )
         return redirect("registration_success")
 
 
