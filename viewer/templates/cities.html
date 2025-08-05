@@ -8,7 +8,7 @@
 {% block content %}
     <h1>Seznam měst</h1>
     <div class="mb-3">
-        {% if perms.viewer.create_city %}
+        {% if perms.viewer.add_city %}
         <a href="{% url 'city_create' %}" class="btn btn-primary">Přidat město</a>
         {% endif %}
     </div>
@@ -23,7 +23,7 @@
                         <strong>{{ city.name }}</strong>
                     </a>
                     <span>
-                        {% if perms.viewer.change_city %}
+                        {% if perms.viewer.add_city %}
                             <a href="{% url 'city_update' city.id %}" class="text-decoration-none ms-2" title="Upravit">📝</a>
                         {% endif %}
 
