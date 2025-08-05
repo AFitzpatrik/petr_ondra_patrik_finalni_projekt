@@ -101,3 +101,17 @@ class CustomPasswordResetForm(PasswordResetForm):
         if not UserModel.objects.filter(email__iexact=email, is_active=True).exists():
             raise ValidationError("Tento e-mail není v systému registrován.")
         return email
+
+
+# Custom formulář pro změnu hesla s validací
+from django.contrib.auth.forms import PasswordChangeForm
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    def clean_new_password1(self):
+        old_password = self.cleaned_data.get("old_password")
+        new_password1 = self.cleaned_data.get("new_password1")
+        
+        if old_password and new_password1 and old_password == new_password1:
+            raise ValidationError("Nové heslo nemůže být stejné jako staré heslo.")
+        
+        return new_password1
