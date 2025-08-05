@@ -39,6 +39,7 @@ class CityFormGUITest(LiveServerTestCase):
             "name": "sessionid",
             "value": sessionid,
             "path": "/",
+            "domain": "localhost",
         })
 
 
