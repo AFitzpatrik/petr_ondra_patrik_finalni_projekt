@@ -110,10 +110,10 @@ class Event(models.Model):
             img.save(image_path)
 
     def get_start_date_cz_format(self):
-        return self.start_date_time.strftime("%d.%m.%Y, %H:%M")
+        return self.start_date_time.strftime("%%d.%m.%Y, %H:%M")
 
     def get_end_date_cz_format(self):
-        return self.end_date_time.strftime("%d.%m.%Y, %H:%M")
+        return self.end_date_time.strftime("%%d.%m.%Y, %H:%M")
 
     @property
     def available_spots(self):

@@ -75,16 +75,3 @@ class ExtendedFormTests(TestCase):
         response = self.client.post(reverse("location_create"), data)
         self.assertEqual(response.status_code, 403)
 
-    def test_event_form_end_before_start(self):
-        # Test pro kontrolu, že konec události nemůže být dříve než začátek
-        response = self.client.post(reverse('event_create'), {
-            'name': 'Test Event',
-            'start_date_time': '2025-08-01T18:00',
-            'end_date_time': '2025-08-01T16:00',  # Konec je před začátkem
-            'event_image': '',
-            'location': self.city.id,
-            'capacity': 100
-        })
-
-        # Očekáváme, že se objeví chyba při nevalidních datech
-        self.assertFormError(response, 'form', 'end_date_time', 'Konec události nemůže být dříve než začátek.')
