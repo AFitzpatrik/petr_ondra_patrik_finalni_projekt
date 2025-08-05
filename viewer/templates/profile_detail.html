@@ -84,7 +84,6 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <a href="{% url 'events' %}" class="btn btn-primary">Přihlášené události</a>
                     {% if perms.viewer.add_event %}
                         <a href="{% url 'event_create' %}" class="btn btn-primary">Vytvořit událost</a>
                     {% endif %}
