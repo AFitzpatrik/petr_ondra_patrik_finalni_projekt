@@ -63,7 +63,7 @@
 
                     {% if perms.viewer.add_event %}
                     <h3 class="text-center text-secondary mb-3">Moje vytvořené události</h3>
-                    {% if profile.is_superuser %}
+                    {% if profile.is_superuser or perms.viewer.add_event %}
                         <ul class="list-group">
                             {% for event in created_events %}
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
