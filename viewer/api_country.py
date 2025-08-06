@@ -4,7 +4,8 @@ import requests
 def get_country_info(country_name):
     """
     Provede dotaz na restcountries API na informace o zadaném státě.
-    Vrací slovník:{'capital': ... , 'population': ..., 'language': ..., 'flag': ..., 'currency': ..., 'region': ..., 'area': ...}.
+    Vrací slovník:{'capital': ... , 'population': ..., 'language': ...,
+    'flag': ..., 'currency': ..., 'region': ..., 'area': ..., capital_latlng:....}.
     Při chybě vrací None.
     """
 
@@ -23,7 +24,6 @@ def get_country_info(country_name):
                 languages = ", ".join(country_data["languages"].values())
             else:
                 languages = "Neznámé"
-            # language = '. '.join(country_data.get('languages', {}).values()) if 'languages' in country_data else 'Neznámé'
 
             if "flags" in country_data and "svg" in country_data["flags"]:
                 flag = country_data["flags"]["svg"]
@@ -46,6 +46,11 @@ def get_country_info(country_name):
             else:
                 area = "Neznámá"
 
+            capital_latlng = country_data.get("capitalInfo", {}).get("latlng", None)
+
+            capital_lat = f"{capital_latlng[0]:.2f}" if capital_latlng else None
+            capital_lng = f"{capital_latlng[1]:.2f}" if capital_latlng else None
+
             return {
                 "capital": capital,
                 "population": population,
@@ -54,6 +59,8 @@ def get_country_info(country_name):
                 "currency": currency,
                 "region": region,
                 "area": area,
+                "capital_lat": capital_lat,
+                "capital_lng": capital_lng,
             }
 
     except Exception as e:

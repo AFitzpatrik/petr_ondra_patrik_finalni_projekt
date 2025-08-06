@@ -49,7 +49,7 @@
                     {% endif %}
                     <div class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown">
-                            Ahoj, {{ user.first_name|default:user.username }}!
+                            {{user.username }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <a class="dropdown-item" href="{% url 'profile_detail' user.id %}">Můj profil</a>

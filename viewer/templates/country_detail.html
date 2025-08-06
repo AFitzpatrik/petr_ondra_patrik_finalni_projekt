@@ -15,7 +15,8 @@
                 <div class="row">
                     {% if api_data.flag %}
                         <div class="col-md-4 mb-3">
-                            <img src="{{ api_data.flag }}" class="img-fluid rounded border border-secondary" alt="Vlajka {{ country.name }}">
+                            <img src="{{ api_data.flag }}" class="img-fluid rounded border border-secondary"
+                                 alt="Vlajka {{ country.name }}">
                         </div>
                     {% endif %}
                     <div class="col-md-8">
@@ -25,6 +26,15 @@
                         <p><strong>Měna:</strong> {{ api_data.currency }}</p>
                         <p><strong>Region:</strong> {{ api_data.region }}</p>
                         <p><strong>Rozloha:</strong> {{ api_data.area }} km²</p>
+
+                        {% if api_data.capital_lat and api_data.capital_lng %}
+                            <a href="https://www.openstreetmap.org/?mlat={{ api_data.capital_lat }}&mlon={{ api_data.capital_lng }}#map=7/{{ api_data.capital_lat }}/{{ api_data.capital_lng }}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="btn btn-primary btn-sm">
+                                Zobrazit hlavní město ({{ api_data.capital }}) na OpenStreetMap
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             {% else %}
