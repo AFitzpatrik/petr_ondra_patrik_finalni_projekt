@@ -47,11 +47,11 @@
                     {% if reservations %}
                         <ul class="list-group">
                             {% for reservation in reservations %}
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a href="{% url 'event_detail' reservation.event.pk %}">
+                                <li class="list-group-item d-flex justify-content-between align-items-center text-wrap">
+                                    <a href="{% url 'event_detail' reservation.event.pk %}" class="text-truncate">
                                         {{ reservation.event.name }} ({{ reservation.event.get_start_date_cz_format }})
                                     </a>
-                                    <span class="text-muted small">Rezervováno: {{ reservation.created_at|date:"d.m.Y H:i" }}</span>
+                                    <span class="text-muted small text-truncate">Rezervováno: {{ reservation.created_at|date:"d.m.Y H:i" }}</span>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -66,12 +66,12 @@
                     {% if profile.is_superuser or perms.viewer.add_event %}
                         <ul class="list-group">
                             {% for event in created_events %}
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a href="{% url 'event_detail' event.pk %}">
+                                <li class="list-group-item d-flex justify-content-between align-items-center text-wrap">
+                                    <a href="{% url 'event_detail' event.pk %}" class="text-truncate">
                                         {{ event.name }} ({{ event.get_start_date_cz_format }})
                                     </a>
-                                    <span class="text-muted small">Vytvořeno: {{ event.created_at|date:"d.m.Y H:i" }}</span>
-                                    <span class="text-muted small">Počet registrovaných: {{ event.reservations.count }}</span>  <!-- Počet rezervovaných uživatelů -->
+                                    <span class="text-muted small text-truncate">Vytvořeno: {{ event.created_at|date:"d.m.Y H:i" }}</span>
+                                    <span class="text-muted small text-truncate">Počet registrovaných: {{ event.reservations.count }}</span>  <!-- Počet rezervovaných uživatelů -->
                                 </li>
                             {% empty %}
                                 <li class="list-group-item text-center">Nemáš žádné vytvořené události.</li>
