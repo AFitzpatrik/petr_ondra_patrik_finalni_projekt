@@ -39,7 +39,7 @@
                 <div class="input-group">
                     {{ form.type }}
                     <div class="input-group-append">
-                        <a href="{% url 'type_create' %}" class="btn btn-outline-primary btn-sm ml-2">➕ Přidat typ</a>
+                        <button type="button" class="btn btn-outline-primary btn-sm ml-2" data-toggle="modal" data-target="#typeModal">➕ Přidat typ</button>
                     </div>
                 </div>
             </div>
@@ -84,24 +84,96 @@
     </form>
 </div>
 
+<!-- Modal pro vytváření typu -->
+<div class="modal fade" id="typeModal" tabindex="-1" role="dialog" aria-labelledby="typeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="typeModalLabel">Přidat nový typ události</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="typeForm" method="post" action="{% url 'type_create' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="type_name">Název typu:</label>
+                        <input type="text" class="form-control" id="type_name" name="name" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zrušit</button>
+                <button type="button" class="btn btn-primary" id="saveTypeBtn">Uložit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/cs.js"></script> <!-- Načtení češtiny -->
 <script>
-    flatpickr("input[name='start_date_time']", {
-        enableTime: true,
-        dateFormat: "Y-m-d H:i",  // Nastavený formát na YYYY-MM-DD HH:MM
-        time_24hr: true,
-        locale: "cs",  // Nastavení jazyka na češtinu
-    });
+    $(document).ready(function() {
+        console.log('DOM je připravený!');
+        console.log('jQuery verze:', $.fn.jquery);
+        
+        // Kontrola, zda existuje tlačítko
+        if ($('#saveTypeBtn').length) {
+            console.log('Tlačítko saveTypeBtn bylo nalezeno!');
+        } else {
+            console.log('Tlačítko saveTypeBtn NEBYLO nalezeno!');
+        }
+        
+        flatpickr("input[name='start_date_time']", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",  // Nastavený formát na YYYY-MM-DD HH:MM
+            time_24hr: true,
+            locale: "cs",  // Nastavení jazyka na češtinu
+        });
 
-    flatpickr("input[name='end_date_time']", {
-        enableTime: true,
-        dateFormat: "Y-m-d H:i",  // Nastavený formát na YYYY-MM-DD HH:MM
-        time_24hr: true,
-        locale: "cs",  // Nastavení jazyka na češtinu
+        flatpickr("input[name='end_date_time']", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",  // Nastavený formát na YYYY-MM-DD HH:MM
+            time_24hr: true,
+            locale: "cs",  // Nastavení jazyka na češtinu
+        });
+
+        // AJAX pro vytváření typu
+        $('#saveTypeBtn').click(function() {
+            console.log('Tlačítko Uložit bylo kliknuto!');
+            var formData = $('#typeForm').serialize();
+            console.log('Formulářová data:', formData);
+            
+            $.ajax({
+                url: "{% url 'type_create' %}",
+                type: 'POST',
+                data: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    console.log('Úspěšná odpověď:', response);
+                    if (response.success) {
+                        // Přidat nový typ do selectu
+                        var newOption = new Option(response.message, response.id, true, true);
+                        $('#id_type').append(newOption);
+                        $('#typeModal').modal('hide');
+                        $('#typeForm')[0].reset();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Chyba AJAX:', xhr, status, error);
+                    if (xhr.responseJSON) {
+                        // Zobrazit chyby v modalu
+                        $('#typeModal .modal-body').html(xhr.responseJSON.html);
+                    }
+                }
+            });
+        });
     });
 </script>
 {% endblock %}

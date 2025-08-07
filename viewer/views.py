@@ -399,11 +399,12 @@ class TypeCreateView(PermissionRequiredMixin, CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
 
-        # Kontrola, zda je to AJAX požadavek
+        #Kontrola, zda je to AJAX požadavek
         if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return JsonResponse({
                 'success': True,
-                'message': 'Typ byl úspěšně vytvořen!'
+                'message': self.object.name,
+                'id': self.object.id
             })
 
         return response
@@ -438,7 +439,8 @@ class LocationCreateView(PermissionRequiredMixin, CreateView):
         if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return JsonResponse({
                 'success': True,
-                'message': 'Lokace byla úspěšně vytvořena!'
+                'message': self.object.name,
+                'id': self.object.id
             })
 
         return response
