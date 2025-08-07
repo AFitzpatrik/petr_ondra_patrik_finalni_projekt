@@ -121,6 +121,9 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Nastavení pro správné kódování UTF-8
+DEFAULT_CHARSET = 'utf-8'
+
 
 
 

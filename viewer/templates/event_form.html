@@ -62,7 +62,7 @@
                 <div class="input-group">
                     {{ form.location }}
                     <div class="input-group-append">
-                        <a href="{% url 'location_create' %}" class="btn btn-outline-primary btn-sm ml-2">➕ Přidat lokaci</a>
+                        <button type="button" class="btn btn-outline-primary btn-sm ml-2" data-toggle="modal" data-target="#locationModal">➕ Přidat lokaci</button>
                     </div>
                 </div>
             </div>
@@ -111,6 +111,124 @@
     </div>
 </div>
 
+<!-- Modal pro vytváření lokace -->
+<div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="locationModalLabel">Přidat novou lokaci</h5>
+                <button type="button" class="close" onclick="$('#locationModal').modal('hide')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="locationForm" method="post" action="{% url 'location_create' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="location_name">Název lokace:</label>
+                        <input type="text" class="form-control" id="location_name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location_address">Adresa:</label>
+                        <textarea class="form-control" id="location_address" name="address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="location_city">Město:</label>
+                        <div class="input-group">
+                            <select class="form-control" id="location_city" name="city" required>
+                                <option value="">Vyberte město</option>
+                                {% for city in cities %}
+                                    <option value="{{ city.id }}">{{ city.name }}, {{ city.country.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-primary btn-sm" id="addCityBtn">➕ Přidat město</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="$('#locationModal').modal('hide')">Zrušit</button>
+                <button type="button" class="btn btn-primary" id="saveLocationBtn">Uložit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal pro vytváření města -->
+<div class="modal fade" id="cityModal" tabindex="-1" role="dialog" aria-labelledby="cityModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cityModalLabel">Přidat nové město</h5>
+                <button type="button" class="close" onclick="$('#cityModal').modal('hide')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="cityForm" method="post" action="{% url 'city_create' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="city_name">Název města:</label>
+                        <input type="text" class="form-control" id="city_name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city_zip_code">PSČ:</label>
+                        <input type="text" class="form-control" id="city_zip_code" name="zip_code" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city_country">Stát:</label>
+                        <div class="input-group">
+                            <select class="form-control" id="city_country" name="country" required>
+                                <option value="">Vyberte stát</option>
+                                {% for country in countries %}
+                                    <option value="{{ country.id }}">{{ country.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-primary btn-sm" id="addCountryBtn">➕ Přidat stát</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="$('#cityModal').modal('hide')">Zrušit</button>
+                <button type="button" class="btn btn-primary" id="saveCityBtn">Uložit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal pro vytváření státu -->
+<div class="modal fade" id="countryModal" tabindex="-1" role="dialog" aria-labelledby="countryModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="countryModalLabel">Přidat nový stát</h5>
+                <button type="button" class="close" onclick="$('#countryModal').modal('hide')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="countryForm" method="post" action="{% url 'country_create' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="country_name">Název státu:</label>
+                        <input type="text" class="form-control" id="country_name" name="name" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="$('#countryModal').modal('hide')">Zrušit</button>
+                <button type="button" class="btn btn-primary" id="saveCountryBtn">Uložit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block extra_js %}
@@ -128,6 +246,20 @@
             console.log('Tlačítko saveTypeBtn NEBYLO nalezeno!');
         }
         
+        // Kontrola, zda existuje tlačítko pro stát
+        if ($('#saveCountryBtn').length) {
+            console.log('Tlačítko saveCountryBtn bylo nalezeno!');
+        } else {
+            console.log('Tlačítko saveCountryBtn NEBYLO nalezeno!');
+        }
+        
+        // Kontrola, zda existuje tlačítko pro město
+        if ($('#saveCityBtn').length) {
+            console.log('Tlačítko saveCityBtn bylo nalezeno!');
+        } else {
+            console.log('Tlačítko saveCityBtn NEBYLO nalezeno!');
+        }
+        
         flatpickr("input[name='start_date_time']", {
             enableTime: true,
             dateFormat: "Y-m-d H:i",  // Nastavený formát na YYYY-MM-DD HH:MM
@@ -142,8 +274,8 @@
             locale: "cs",  // Nastavení jazyka na češtinu
         });
 
-        // AJAX pro vytváření typu
-        $('#saveTypeBtn').click(function() {
+        // AJAX pro vytváření typu - používáme event delegation
+        $(document).on('click', '#saveTypeBtn', function() {
             console.log('Tlačítko Uložit bylo kliknuto!');
             var formData = $('#typeForm').serialize();
             console.log('Formulářová data:', formData);
@@ -173,6 +305,127 @@
                     }
                 }
             });
+        });
+
+        // AJAX pro vytváření státu - používáme event delegation
+        $(document).on('click', '#saveCountryBtn', function() {
+            console.log('Tlačítko Uložit stát bylo kliknuto!');
+            console.log('Formulář existuje:', $('#countryForm').length);
+            console.log('Input pole existuje:', $('#country_name').length);
+            console.log('Hodnota input pole:', $('#country_name').val());
+            
+            var formData = $('#countryForm').serialize();
+            console.log('Formulářová data státu:', formData);
+            
+            $.ajax({
+                url: "{% url 'country_create' %}",
+                type: 'POST',
+                data: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    console.log('Úspěšná odpověď státu:', response);
+                    if (response.success) {
+                        // Přidat nový stát do selectu města
+                        var newOption = new Option(response.message, response.id, true, true);
+                        $('#city_country').append(newOption);
+                        $('#countryModal').modal('hide');
+                        $('#countryForm')[0].reset();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Chyba AJAX státu:', xhr, status, error);
+                    console.log('Status kód:', xhr.status);
+                    console.log('Response text:', xhr.responseText);
+                    if (xhr.responseJSON) {
+                        console.log('Response JSON:', xhr.responseJSON);
+                        $('#countryModal .modal-body').html(xhr.responseJSON.html);
+                    }
+                }
+            });
+        });
+
+        // AJAX pro vytváření města - používáme event delegation
+        $(document).on('click', '#saveCityBtn', function() {
+            console.log('Tlačítko Uložit město bylo kliknuto!');
+            console.log('Formulář existuje:', $('#cityForm').length);
+            console.log('Input pole existuje:', $('#city_name').length);
+            console.log('Hodnota input pole:', $('#city_name').val());
+            console.log('Select pole existuje:', $('#city_country').length);
+            console.log('Hodnota select pole:', $('#city_country').val());
+            
+            var formData = $('#cityForm').serialize();
+            console.log('Formulářová data města:', formData);
+            
+            $.ajax({
+                url: "{% url 'city_create' %}",
+                type: 'POST',
+                data: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    console.log('Úspěšná odpověď města:', response);
+                    if (response.success) {
+                        // Přidat nové město do selectu lokace
+                        var newOption = new Option(response.message, response.id, true, true);
+                        $('#location_city').append(newOption);
+                        $('#cityModal').modal('hide');
+                        $('#cityForm')[0].reset();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Chyba AJAX města:', xhr, status, error);
+                    console.log('Status kód:', xhr.status);
+                    console.log('Response text:', xhr.responseText);
+                    if (xhr.responseJSON) {
+                        console.log('Response JSON:', xhr.responseJSON);
+                        $('#cityModal .modal-body').html(xhr.responseJSON.html);
+                    }
+                }
+            });
+        });
+
+        // AJAX pro vytváření lokace - používáme event delegation
+        $(document).on('click', '#saveLocationBtn', function() {
+            console.log('Tlačítko Uložit lokaci bylo kliknuto!');
+            var formData = $('#locationForm').serialize();
+            console.log('Formulářová data lokace:', formData);
+            
+            $.ajax({
+                url: "{% url 'location_create' %}",
+                type: 'POST',
+                data: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    console.log('Úspěšná odpověď lokace:', response);
+                    if (response.success) {
+                        // Přidat novou lokaci do selectu
+                        var newOption = new Option(response.message, response.id, true, true);
+                        $('#id_location').append(newOption);
+                        $('#locationModal').modal('hide');
+                        $('#locationForm')[0].reset();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Chyba AJAX lokace:', xhr, status, error);
+                    if (xhr.responseJSON) {
+                        $('#locationModal .modal-body').html(xhr.responseJSON.html);
+                    }
+                }
+            });
+        });
+
+        // Otevírání modalu přes sebe - používáme event delegation
+        $(document).on('click', '#addCityBtn', function() {
+            $('#cityModal').modal('show');
+        });
+
+        $(document).on('click', '#addCountryBtn', function() {
+            $('#countryModal').modal('show');
         });
     });
 </script>

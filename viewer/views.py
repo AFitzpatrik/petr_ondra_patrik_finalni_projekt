@@ -100,8 +100,9 @@ class EventCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Přidáme města pro modal lokace
+        # Přidáme města a státy pro modaly
         context['cities'] = City.objects.all()
+        context['countries'] = Country.objects.all()
         return context
 
     def form_valid(self, form):
@@ -143,6 +144,13 @@ class EventUpdateView(PermissionRequiredMixin, UpdateView):
     model = Event
     form_class = EventForm
     permission_required = "viewer.change_event"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Přidáme města a státy pro modaly
+        context['cities'] = City.objects.all()
+        context['countries'] = Country.objects.all()
+        return context
 
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
@@ -241,7 +249,42 @@ class CountryCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
     success_url = reverse_lazy("countries")
     permission_required = "viewer.add_country"
 
+    def form_valid(self, form):
+        print("CountryCreateView form_valid called")
+        print("Request headers:", dict(self.request.headers))
+        print("Request method:", self.request.method)
+        print("Form data:", self.request.POST)
+        
+        response = super().form_valid(form)
+        
+        # Kontrola, zda je to AJAX požadavek
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            print("Returning JsonResponse for AJAX request")
+            return JsonResponse({
+                'success': True,
+                'message': self.object.name,
+                'id': self.object.id
+            })
+        
+        print("Returning regular response")
+        return response
+
     def form_invalid(self, form):
+        print("CountryCreateView form_invalid called")
+        print("Form errors:", form.errors)
+        
+        # Kontrola, zda je to AJAX požadavek
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            print("Returning JsonResponse for AJAX invalid form")
+            # Vrátit HTML s chybami pro modal
+            html = render_to_string('country_form.html', {
+                'form': form
+            }, request=self.request)
+            return JsonResponse({
+                'success': False,
+                'html': html
+            })
+        
         messages.error(self.request, "Formulář nebyl správně vyplněn.")
         return super().form_invalid(form)
 
@@ -281,7 +324,42 @@ class CityCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy("cities")
     permission_required = "viewer.add_city"
 
+    def form_valid(self, form):
+        print("CityCreateView form_valid called")
+        print("Request headers:", dict(self.request.headers))
+        print("Request method:", self.request.method)
+        print("Form data:", self.request.POST)
+        
+        response = super().form_valid(form)
+        
+        # Kontrola, zda je to AJAX požadavek
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            print("Returning JsonResponse for AJAX request")
+            return JsonResponse({
+                'success': True,
+                'message': self.object.name + ', ' + self.object.country.name,
+                'id': self.object.id
+            })
+        
+        print("Returning regular response")
+        return response
+
     def form_invalid(self, form):
+        print("CityCreateView form_invalid called")
+        print("Form errors:", form.errors)
+        
+        # Kontrola, zda je to AJAX požadavek
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            print("Returning JsonResponse for AJAX invalid form")
+            # Vrátit HTML s chybami pro modal
+            html = render_to_string('city_form.html', {
+                'form': form
+            }, request=self.request)
+            return JsonResponse({
+                'success': False,
+                'html': html
+            })
+        
         messages.error(self.request, "Formulář nebyl správně vyplněn.")
         return super().form_invalid(form)
 

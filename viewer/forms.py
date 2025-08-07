@@ -14,15 +14,21 @@ class CountryModelForm(forms.ModelForm):
 
     def clean_name(self):
         name = self.cleaned_data["name"].strip()
+        print(f"CountryModelForm clean_name called with: '{name}'")
 
-        if not re.fullmatch(r"[A-Za-z ]+", name):
-            raise ValidationError("Název smí obsahovat pouze anglická písmena a mezery(bez diakritiky, čísel a speciálních znaků).")
+        # Povolujeme české znaky, čísla a běžné znaky
+        if not re.fullmatch(r"[A-Za-zÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž0-9\-\.\(\) ]+", name):
+            print(f"Validation failed for: '{name}'")
+            raise ValidationError("Název smí obsahovat pouze písmena, čísla, mezery a běžné znaky (-.()).")
 
         formatted_name = format_country_name(name)
+        print(f"Formatted name: '{formatted_name}'")
 
         if Country.objects.filter(name__iexact=formatted_name).exists():
+            print(f"Country already exists: '{formatted_name}'")
             raise ValidationError("Země s tímto názvem již existuje.")
 
+        print(f"Returning formatted name: '{formatted_name}'")
         return formatted_name
 
 
@@ -44,15 +50,25 @@ class CityModelForm(forms.ModelForm):
 
     def clean_name(self):
         name = self.cleaned_data['name']
+        print(f"CityModelForm clean_name called with: '{name}'")
+        
+        # Povolujeme české znaky, čísla a běžné znaky
+        if not re.fullmatch(r"[A-Za-zÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž0-9\-\.\(\) ]+", name):
+            raise ValidationError("Název smí obsahovat pouze písmena, čísla, mezery a běžné znaky (-.()).")
+        
         formatted_name = format_city_name(name)
+        print(f"Formatted city name: '{formatted_name}'")
         return formatted_name
 
     def clean_zip_code(self):
         zip_code = self.cleaned_data.get("zip_code", "").replace(" ", "").strip()
+        print(f"CityModelForm clean_zip_code called with: '{zip_code}'")
         if not re.fullmatch(r"\d{4,5}", zip_code):
+            print(f"Zip code validation failed for: '{zip_code}'")
             raise ValidationError(
                 "PSČ musí obsahovat 4 nebo 5 čísel bez mezer a pomlček."
             )
+        print(f"Zip code validation passed for: '{zip_code}'")
         return zip_code
 
     def clean(self):
@@ -86,6 +102,11 @@ class TypeModelForm(forms.ModelForm):
 
     def clean_name(self):
         name = self.cleaned_data["name"].strip()
+        
+        # Povolujeme české znaky, čísla a běžné znaky
+        if not re.fullmatch(r"[A-Za-zÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž0-9\-\.\(\) ]+", name):
+            raise ValidationError("Název smí obsahovat pouze písmena, čísla, mezery a běžné znaky (-.()).")
+        
         if Type.objects.filter(name__iexact=name).exclude(pk=self.instance.pk).exists():
             raise ValidationError("Type with this Name already exists.")
         return name
@@ -96,6 +117,15 @@ class LocationModelForm(forms.ModelForm):
         model = Location
         fields = ["name", "address", "city"]
         labels = {"name": "Název místa", "address": "Adresa", "city": "Město"}
+
+    def clean_name(self):
+        name = self.cleaned_data["name"].strip()
+        
+        # Povolujeme české znaky, čísla a běžné znaky
+        if not re.fullmatch(r"[A-Za-zÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž0-9\-\.\(\) ]+", name):
+            raise ValidationError("Název smí obsahovat pouze písmena, čísla, mezery a běžné znaky (-.()).")
+        
+        return name
 
     def clean(self):
         cleaned_data = super().clean()
