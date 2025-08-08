@@ -190,7 +190,15 @@ class EventDetailView(DetailView):
         else:
             has_reservation = False
 
+        is_past = self.object.end_date_time <= now()
+        context["is_past"] = is_past
         context["has_reservation"] = has_reservation
+        context["can_reserve"] = (
+                self.request.user.is_authenticated
+                and not has_reservation
+                and self.object.available_spots > 0
+                and not is_past
+        )
 
         return context
 
@@ -360,6 +368,10 @@ class ProfileDetailView(DetailView):
 @login_required
 def make_reservation(request, event_id):
     event = get_object_or_404(Event, id=event_id)
+
+    if event.end_date_time <= now():
+        messages.error(request, "Událost již proběhla, nelze se registrovat.")
+        return redirect("event_detail", pk=event_id)
 
     if event.available_spots <= 0:
         messages.error(request, "Událost je plně obsazena.")

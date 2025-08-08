@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-
 {% block title %}
     Detail události: {{ event.name }}
 {% endblock %}
-
 {% block content %}
     {% if messages %}
         {% for message in messages %}
@@ -30,20 +28,16 @@
                     <p><strong>Typ události:</strong> {{ event.type.name }}</p>
                     <p><strong>Začátek:</strong> {{ event.get_start_date_cz_format }}</p>
                     <p><strong>Konec:</strong> {{ event.get_end_date_cz_format }}</p>
-
                     <p><strong>Místo konání:</strong> {{ event.location.name }}</p>
                     <p><strong>Adresa:</strong> {{ event.location.address }}</p>
                     <p><strong>Město:</strong> {{ event.location.city.name }}</p>
                     <p><strong>Stát:</strong> {{ event.location.city.country.name }}</p>
                     <p><strong>Popis:</strong> {{ event.description }} </p>
-
                     <hr>
                     <p><strong>Kapacita:</strong> {{ event.capacity }}</p>
                     <p><strong>Volných míst:</strong> {{ event.available_spots }}</p>
                     <p><small class="text-muted">Vlastník události: {{ event.owner_of_event.username }}</small></p>
-                    <p><small class="text-muted">Vytvořeno: {{ event.created_at|date:"d.m.Y H:i" }}</small></p>  <!-- Přidané zobrazení data vytvoření -->
-
-                    <!-- Zobrazení počtu registrovaných uživatelů -->
+                    <p><small class="text-muted">Vytvořeno: {{ event.created_at|date:"d.m.Y H:i" }}</small></p>
                     {% if user == event.owner_of_event %}
                         <p><strong>Počet registrovaných uživatelů:</strong> {{ event.reservations.count }}</p>
                         <h5>Seznam registrovaných uživatelů:</h5>
@@ -53,20 +47,29 @@
                             {% endfor %}
                         </ul>
                     {% endif %}
-
-                    {% if user.is_authenticated %}
-                        {% if has_reservation %}
+                                       {% if user.is_authenticated %}
+                        {% if is_past %}
+                            <p class="text-danger"><strong>Událost již proběhla, nelze se registrovat.</strong></p>
+                            {% if has_reservation %}
+                                <form method="post" action="{% url 'cancel_reservation' event.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-warning mt-2">Zrušit rezervaci</button>
+                                </form>
+                            {% endif %}
+                        {% elif has_reservation %}
                             <form method="post" action="{% url 'cancel_reservation' event.id %}">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-warning mt-2">Zrušit rezervaci</button>
                             </form>
-                        {% elif event.available_spots > 0 %}
+                        {% elif can_reserve %}
                             <form method="post" action="{% url 'make_reservation' event.id %}">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-success mt-2">Rezervovat místo</button>
                             </form>
                         {% else %}
-                            <p class="text-danger"><strong>Událost je plně obsazena.</strong></p>
+                            {% if event.available_spots <= 0 %}
+                                <p class="text-danger"><strong>Událost je plně obsazena.</strong></p>
+                            {% endif %}
                         {% endif %}
                     {% else %}
                         <p><a href="{% url 'login' %}">Přihlas se</a>, abys mohl rezervovat nebo zrušit rezervaci.</p>
@@ -75,7 +78,6 @@
             </div>
         </div>
     </div>
-
     <div class="d-flex justify-content-end mb-4">
         {% if user.is_authenticated and event.owner_of_event == user %}
             {% if perms.viewer.change_event %}
@@ -86,7 +88,6 @@
             {% endif %}
         {% endif %}
     </div>
-
     <div class="card">
         <div class="card-header">
             <h4 class="mb-0">Komentáře</h4>
@@ -106,13 +107,13 @@
             {% endif %}
         </div>
     </div>
-
     {% if user.is_authenticated %}
         <div class="card mt-4">
             <div class="card-header">
                 <h5>Přidat komentář</h5>
             </div>
             <div class="card-body">
+                {{ comment_form.non_field_errors }}
                 <form method="post">
                     {% csrf_token %}
                     {{ comment_form.as_p }}
@@ -123,5 +124,4 @@
     {% else %}
         <p class="mt-4"><a href="{% url 'login' %}">Přihlas se</a>, pokud chceš přidat komentář.</p>
     {% endif %}
-
 {% endblock %}
