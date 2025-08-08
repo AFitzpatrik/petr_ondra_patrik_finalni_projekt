@@ -113,11 +113,11 @@
 
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/cs.js"></script> <!-- Načtení češtiny -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/cs.js"></script>
 <script>
     flatpickr("input[name='date_of_birth']", {
-        dateFormat: "Y-m-d",  // Nastavený formát na YYYY-MM-DD
-        locale: "cs",  // Nastavení jazyka na češtinu
+        dateFormat: "Y-m-d",
+        locale: "cs",
     });
 </script>
 {% endblock %}

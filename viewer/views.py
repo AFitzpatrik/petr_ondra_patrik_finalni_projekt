@@ -353,13 +353,11 @@ class ProfileDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         user = self.get_object()
 
-        # Zobrazení rezervací uživatele
         context["reservations"] = Reservation.objects.filter(user=user)
 
         if user.has_perm("viewer.add_event") or user.is_superuser:
             context["created_events"] = Event.objects.filter(owner_of_event=user)
 
-        # Zobrazení rezervovaných událostí pro uživatele
         context["my_events"] = Event.objects.filter(reservations__user=user)
 
         return context

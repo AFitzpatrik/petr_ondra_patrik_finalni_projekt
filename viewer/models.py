@@ -96,7 +96,7 @@ class Event(models.Model):
             f"location={self.location}, owner_of_event={self.owner_of_event})"
         )
 
-    def save(self, *args, **kwargs):  # metoda pro zmenšení obrázku
+    def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
         if self.event_image:
@@ -105,7 +105,7 @@ class Event(models.Model):
             image_path = self.event_image.path
             img = Image.open(image_path)
 
-            max_size = (1200, 800)  # max velikost v pixelech
+            max_size = (1200, 800)
             img.thumbnail(max_size)
             img.save(image_path)
 
@@ -121,7 +121,6 @@ class Event(models.Model):
 
     @property
     def registered_users_count(self):
-        # Počet registrovaných uživatelů (rezervací)
         return self.reservations.count()
 
 
@@ -154,7 +153,7 @@ class Reservation(models.Model):
         unique_together = (
             "user",
             "event",
-        )  # pouze jedna rezervace na událost pro jednoho uživatele
+        )
         ordering = ["created_at"]
 
     def __str__(self):
@@ -168,6 +167,6 @@ class Reservation(models.Model):
             raise ValidationError("Událost je plně obsazena.")
 
     def save(self, *args, **kwargs):
-        self.full_clean()  # spustí clean() před uložením
+        self.full_clean()
         super().save(*args, **kwargs)
 

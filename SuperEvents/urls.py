@@ -42,7 +42,7 @@ urlpatterns = [
     path('country/<int:pk>/', CountryDetailView.as_view(), name='country_detail'),
     path('country/create/', CountryCreateView.as_view(), name='country_create'),
     path('country/update/<int:pk>/', CountryUpdateView.as_view(), name='country_update'),
-    path('country/delete/<int:pk>/', CountryDeleteView.as_view(), name='country_delete'),  # URL pro smazání státu
+    path('country/delete/<int:pk>/', CountryDeleteView.as_view(), name='country_delete'),
 
     # Locations
     path('locations/', LocationsListView.as_view(), name='locations'),

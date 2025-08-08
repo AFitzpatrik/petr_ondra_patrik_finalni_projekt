@@ -112,17 +112,17 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"></script> <!-- Načtení CSS pro flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/cs.js"></script> <!-- Načtení češtiny -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/cs.js"></script>
 <script>
     flatpickr("input[name='start_date']", {
-        dateFormat: "Y-m-d",  // Opravený formát pro server (YYYY-MM-DD)
-        locale: "cs",  // Nastavení jazyka na češtinu
+        dateFormat: "Y-m-d",
+        locale: "cs",
     });
     flatpickr("input[name='end_date']", {
-        dateFormat: "Y-m-d",  // Opravený formát pro server (YYYY-MM-DD)
-        locale: "cs",  // Nastavení jazyka na češtinu
+        dateFormat: "Y-m-d",
+        locale: "cs",
     });
 </script>
 {% endblock %}
