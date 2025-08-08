@@ -173,3 +173,12 @@ class CommentForm(forms.ModelForm):
         labels = {
             "content": "",
         }
+
+    def clean_content(self):
+        cleaned_data = super().clean()
+        content = cleaned_data.get("content")
+
+        if content and len(content) > 500:
+            self.add_error('content', 'Komentář nesmí být delší než 500 znaků.')
+
+        return cleaned_data
