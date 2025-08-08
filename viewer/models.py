@@ -133,7 +133,7 @@ class Comment(models.Model):
     date_time_updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["date_time_posted"]
+        ordering = ["-date_time_posted"]
 
     def __str__(self):
         return f"Comment by {self.user.username} on {self.event.name}"
