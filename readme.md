@@ -287,13 +287,17 @@ STRUKTURA DATABÁZE
   - [x] 5.2 event (FK -> Event)
   - [x] 5.3 content
   - [x] 5.4 date/time posted
-  - [x] 5.5 date/time updated
-  - 
+
 
 - [x] 6.0 Type
   - [x] name
 
 
+- [x] 7.0 Reservation
+  - [x] 7.1 user (FK -> User)
+  - [x] 7.2 event (FK -> Event)
+  - [x] 7.3 date/time created
+  - [x] 7.4 unique constraint
 
 
 
