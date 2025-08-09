@@ -41,111 +41,112 @@ Umožňuje uživatelům vyhledávat události, registrovat se na ně a zobrazova
 
 ### 🌐 API
 - REST API pro zpracování dat
+- REST API vrací seznam všech budoucích událostí 
+- Možnost filtrování událostí podle časového období
 - Zobrazení aktuálního **počasí** v místě události pomocí API
 - Zobrazení základních informací o **státech** pomocí API
+- 
 
 ---
 
 ## 🧾 Struktura projektu
-**(DOPLNIT!!!!!)**  
+- SuperEvents/
+- │
+- ├── events/               # Hlavní aplikace pro události
+- │   ├── models.py         # Definice modelů Event, Location, City, Country, Type, Comment
+- │   ├── views.py          # Logika zobrazení seznamu, detailu, filtrování, CRUD
+- │   ├── forms.py          # Formuláře pro přidání/úpravu událostí, komentářů
+- │   ├── urls.py           # Směrování událostí
+- │   ├── templates/events/ # HTML šablony pro seznam, detail, formuláře
+- │
+- ├── accounts/             # Správa uživatelů
+- │   ├── models.py         
+- │   ├── views.py          # Registrace, login, logout, profil
+- │   ├── forms.py          # Formuláře pro registraci, login, změnu hesla
+- │   ├── urls.py
+- │   ├── templates/accounts/
+- │
+- ├── api/                  # Django REST Framework API
+- │   ├── serializers.py
+- │   ├── views.py
+- │   ├── urls.py
+- │
+- ├── static/               # CSS, JS, obrázky
+- ├── templates/            
+- ├── manage.py
+- ├── requirements.txt
+- └── README.md
+ 
 
 ---
 
 ## 🗺️ ER Diagram
-**(DOPLNIT!!!!!)**  
+![ER Diagram](docs/screenshots/er-diagram_final.png)
 
 ---
 
 ## 📸 Screenshoty
-**(DOPLNIT!!!!!)** 
+### 🏠 Domovská stránka
+![Domovská stránka](docs/screenshots/events.png)
+
+### 📄 Detail události
+![Detail události](docs/screenshots/event.png)
+
+### ✏️ Vytvoření události
+![Vytvoření události](docs/screenshots/create-event.png)
+
+### 👤 Uživatelský profil
+![Uživatelský profil](docs/screenshots/user-profile.png)
+
+### ⚙️ Admin panel
+![Admin panel](docs/screenshots/admin-panel.png)
 
 ---
 
 ## 🛠️ Instalace
 
+### Požadavky
+- Python 3.13
+- pip, venv
+- git
+
 1. **Naklonuj repozitář**
 ```bash
-git clone https://github.com/AFitzpatrik/petr_ondra_patrik_finalni_projekt
-cd project_name
+  git clone https://github.com/AFitzpatrik/petr_ondra_patrik_finalni_projekt
+  cd petr_ondra_patrik_finalni_projekt
 ```
 
 2. **Vytvoř a aktivuj virtuální prostředí**
 ```bash
-python -m venv venv
+  python -m venv venv
 ```
 
 **Windows:**
 ```bash
-venv\Scripts\activate
+  venv\Scripts\activate
 ```
 
 **macOS / Linux:**
 ```bash
-source venv/bin/activate
+  source venv/bin/activate
 ```
 
 3. **Nainstaluj potřebné knihovny**
 ```bash
-pip install -r requirements.txt
+  pip install -r requirements.txt
 ```
 
 4. **Spusť a proveď migrace**
 ```bash
-python manage.py makemigrations
-python manage.py migrate
+  python manage.py makemigrations
+  python manage.py migrate
 ```
 
 5. **Spusť vývojový server**
 ```bash
-python manage.py runserver
+  python manage.py runserver
 ```
-
-
-
 ---
----
----
----
----
----
----
----
----
----
----
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44239
 
 - [x] 1.0 Seznam událostí - ONDRA/PATRIK
   - [x] 1.1 Řazení podle nejblížšího data
@@ -222,12 +223,11 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 - [x] 11.0 Přihlášení na akci
   - [x] 11.1 Pouze přihlášený uživatel
   - [x] 11.1 Událost se přidá uživateli do MOJE UDÁLOSTI
-      - KDYŽ BUDE ČAS UDĚLAT SÓLO STRÁNKY S FILTREM
-
+     
 
 - [x] 12.0 API cizí - PETR
 -   [x] 12.1.Počasí
--   [ ] 12.2 Mapa
+-   [x] 12.2 Státy
 
 
 - [x] 13.0 Filtr eventů - PETR
@@ -238,18 +238,11 @@ https://journey.study/v2/learn/courses/10302/modules/26102/units/16/materials/44
 - [x] 14.0 Stránkování eventů - PATRIK
 
 
-- [ ] 15.0 Přehled organizátora o události - ONDRA
-  - [ ] účastníci
-
-
-
+- [x] 15.0 Přehled organizátora o události - ONDRA
+  - [x] účastníci
 
 
 - [x] 17.0 Admin panel - PETR
--   [x] 12.1 Počasí
--   [ ] 12.2 Mapa
--   [x] 12.3 Rest API
-
 
 - [x] 18.0 Země - PETR
   - [x] Události v zemi
@@ -296,7 +289,6 @@ STRUKTURA DATABÁZE
   - [x] 5.4 date/time posted
   - [x] 5.5 date/time updated
   - 
-
 
 - [x] 6.0 Type
   - [x] name
