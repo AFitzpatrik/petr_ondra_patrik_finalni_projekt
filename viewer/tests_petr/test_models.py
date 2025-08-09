@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
-from django.utils.timezone import now, timedelta
+from django.utils.timezone import now, timedelta, localtime
 from django.db.utils import IntegrityError
 
 from viewer.models import Event, Country, City, Location, Type
@@ -100,7 +100,7 @@ class EventModelTest(TestCase):
 
     def test_event_get_start_date_cz_format(self):
         event = Event.objects.get(id=1)
-        expected = event.start_date_time.strftime("%d.%m.%Y, %H:%M")
+        expected = localtime(event.start_date_time).strftime("%d.%m.%Y, %H:%M")
         print(
             f"test_event_get_start_date_cz_format: {event.get_start_date_cz_format()}"
         )
@@ -108,6 +108,6 @@ class EventModelTest(TestCase):
 
     def test_event_get_end_date_cz_format(self):
         event = Event.objects.get(id=1)
-        expected = event.end_date_time.strftime("%d.%m.%Y, %H:%M")
+        expected = localtime(event.end_date_time).strftime("%d.%m.%Y, %H:%M")
         print(f"test_event_get_start_date_cz_format: {event.get_end_date_cz_format()}")
         self.assertEqual(event.get_end_date_cz_format(), expected)

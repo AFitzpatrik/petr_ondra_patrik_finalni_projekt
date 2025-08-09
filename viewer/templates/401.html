@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}401 - Neautorizováno{% endblock %}
+{% block content %}
+    <div class="text-center">
+        <h1 class="display-1">401</h1>
+        <h2 class="mb-4">Přístup odepřen</h2>
+        <p class="lead">Pro zobrazení této stránky se prosím přihlaste.</p>
+        <a href="{% url 'login' %}" class="btn btn-primary mt-3">Přihlásit se</a>
+    </div>
+{% endblock %}

@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import ForeignKey, DateTimeField
 from django.core.exceptions import ValidationError
+from django.utils.timezone import localtime
+
 
 class Country(models.Model):
     name = models.CharField(
@@ -110,10 +112,10 @@ class Event(models.Model):
             img.save(image_path)
 
     def get_start_date_cz_format(self):
-        return self.start_date_time.strftime("%d.%m.%Y, %H:%M")
+        return localtime(self.start_date_time).strftime("%d.%m.%Y, %H:%M")
 
     def get_end_date_cz_format(self):
-        return self.end_date_time.strftime("%d.%m.%Y, %H:%M")
+        return localtime(self.end_date_time).strftime("%d.%m.%Y, %H:%M")
 
     @property
     def available_spots(self):

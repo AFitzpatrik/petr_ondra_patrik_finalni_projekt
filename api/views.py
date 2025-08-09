@@ -1,6 +1,6 @@
 from datetime import timezone
 from django.utils.dateparse import parse_datetime
-from django.utils.timezone import now, make_aware
+from django.utils.timezone import now, make_aware, get_current_timezone
 from rest_framework.generics import GenericAPIView, CreateAPIView, RetrieveDestroyAPIView
 from rest_framework.mixins import ListModelMixin, DestroyModelMixin
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -39,10 +39,12 @@ class FilteredEventsAPI(ListModelMixin, GenericAPIView):
         start = parse_datetime(start_param) if start_param else None
         end = parse_datetime(end_param) if end_param else None
 
+        current_tz = get_current_timezone()
+
         if start and start.tzinfo is None:
-            start = make_aware(start, timezone=timezone.utc)
+            start = make_aware(start, timezone=current_tz)
         if end and end.tzinfo is None:
-            end = make_aware(end, timezone=timezone.utc)
+            end = make_aware(end, timezone=current_tz)
 
         queryset = Event.objects.all().order_by('start_date_time')
 
@@ -59,4 +61,3 @@ class FilteredEventsAPI(ListModelMixin, GenericAPIView):
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
-

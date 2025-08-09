@@ -11,6 +11,8 @@ from viewer.models import Country, City
 
 class CityFormGUITest(LiveServerTestCase):
 
+    host = "127.0.0.1"
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -39,9 +41,8 @@ class CityFormGUITest(LiveServerTestCase):
             "name": "sessionid",
             "value": sessionid,
             "path": "/",
-            "domain": "localhost",
         })
-
+        self.browser.refresh()
 
     def fill_and_submit_form(self, name, zip_code):
         self.browser.get(f"{self.live_server_url}/city/create/")

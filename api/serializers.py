@@ -7,7 +7,7 @@ class EventsSerializer(ModelSerializer):
     owner_of_event = serializers.CharField(source='owner_of_event.username')
     location = serializers.CharField(source='location.name')
     address = serializers.CharField(source='location.address')
-    city = serializers.CharField(source='location.city')
+    city = serializers.CharField(source='location.city.name')
     country = serializers.CharField(source='location.city.country.name')
 
     class Meta:

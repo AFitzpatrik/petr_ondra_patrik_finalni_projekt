@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}500 - Chyba serveru{% endblock %}
+{% block content %}
+    <div class="text-center">
+        <h1 class="display-1">500</h1>
+        <h2 class="mb-4">Vnitřní chyba serveru</h2>
+        <p class="lead">Na naší straně se něco pokazilo. Zkuste to prosím znovu později.</p>
+        <a href="{% url 'home' %}" class="btn btn-primary mt-3">Zpět na hlavní stránku</a>
+    </div>
+{% endblock %}

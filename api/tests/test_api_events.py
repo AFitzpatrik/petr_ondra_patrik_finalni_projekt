@@ -3,7 +3,6 @@ from urllib.parse import urlencode
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.timezone import now
-from rest_framework import status
 from rest_framework.test import APITestCase
 
 from viewer.models import Event, Country, City, Location, Type
@@ -55,16 +54,16 @@ class APIEventsTest(APITestCase):
 
     def test_api_events_requires_authentication(self):
         response = self.client.get(reverse('api_events'))
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_api_all_events_requires_authentication(self):
         response = self.client.get(reverse('all_events'))
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_api_filtered_events_requires_authentication(self):
         url = reverse('filtered_events') + '?start=2025-01-01T00:00:00&end=2025-12-31T23:59:59'
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_api_events_returns_future_events(self):
         self.client.login(username='Nunu', password='test123')
@@ -128,13 +127,3 @@ class APIEventsTest(APITestCase):
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-
-
-
-
-
-
-
-
-
-
