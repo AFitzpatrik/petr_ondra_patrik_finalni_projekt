@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.timezone import now
 from rest_framework.test import APITestCase
-
 from viewer.models import Event, Country, City, Location, Type
 
 

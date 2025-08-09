@@ -1,10 +1,9 @@
 from datetime import timezone
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import now, make_aware, get_current_timezone
-from rest_framework.generics import GenericAPIView, CreateAPIView, RetrieveDestroyAPIView
-from rest_framework.mixins import ListModelMixin, DestroyModelMixin
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
-
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin
+from rest_framework.permissions import IsAuthenticated
 from api.serializers import EventsSerializer
 from viewer.models import Event
 

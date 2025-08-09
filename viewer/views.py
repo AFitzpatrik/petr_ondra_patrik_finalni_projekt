@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from django.http import HttpResponseForbidden, JsonResponse
 from django.contrib import messages
 from django.shortcuts import render
@@ -327,6 +328,7 @@ def search(request):
     filter_type = request.GET.get("filter", "all")
 
     events = Event.objects.all()
+
     if search:
         events = events.filter(name__icontains=search)
 
@@ -336,10 +338,19 @@ def search(request):
     elif filter_type == "active_future":
         events = events.filter(end_date_time__gte=now_time)
 
+    events = events.order_by("start_date_time")
+
+    paginator = Paginator(events, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        "events": events.order_by("start_date_time"),
+        "events": page_obj,
         "search": search,
         "filter": filter_type,
+        "is_paginated": page_obj.has_other_pages(),
+        "paginator": paginator,
+        "page_obj": page_obj,
     }
     return render(request, "search.html", context)
 
