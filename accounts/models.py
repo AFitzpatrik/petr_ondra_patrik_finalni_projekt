@@ -10,7 +10,7 @@ class Profile(Model):
                      error_messages={"unique": "Tento telefon je již registrován."})
 
     class Meta:
-        ordering = ["user__username"]
+        ordering = ["user__username"] #ordering
 
     def __repr__(self):
         return f"Profile(user={self.user})"
