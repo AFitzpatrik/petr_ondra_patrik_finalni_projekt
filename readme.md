@@ -4,8 +4,6 @@ Projekt SuperEvents je webová aplikace sloužící k přehledné správě, orga
 a prezentaci událostí. Uživatelé si mohou události zobrazovat, přihlašovat se na
 ně, komentovat je a v případě organizátorů, je také vytvářet a spravovat.
 
-SuperEvents je webová aplikace vytvořená v Django frameworku pro správu a vytváření událostí.  
-Umožňuje uživatelům vyhledávat události, registrovat se na ně a zobrazovat jejich podrobnosti.
 
 ### 👥 Tým
 - [AFitzpatrik](https://github.com/AFitzpatrik)
